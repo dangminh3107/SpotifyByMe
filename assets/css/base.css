@@ -1,0 +1,41 @@
+:root {
+    --white-color: #fff;
+    --text-color: #b2b2b2;
+    --black-color: #000;
+    --navbar-height: 37px;
+    --header-height: 120px;
+    --header-with-search-height: calc(var(--header-height) - var(--navbar-height));
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%; /*10px*/
+    line-height: 1.6rem;
+    font-family: 'Inter', sans-serif;
+    font-family: 'Mitr', sans-serif;
+    box-sizing: border-box;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}

@@ -1,0 +1,24 @@
+.side-bar {
+    width: 100%;
+    height: 100vh;
+    background-color: var(--black-color);
+}
+
+.app-logo {
+    display: flex;
+    align-items: center;
+    padding: 25px 0 0 15px;
+}
+
+.app-icon {
+    width: 130px;
+    height: 40px;
+}
+
+.app-menu {
+    margin-top: 25px;
+}
+
+.app-menu-item {
+    
+}
