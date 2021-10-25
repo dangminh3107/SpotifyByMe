@@ -1,7 +1,12 @@
 :root {
     --white-color: #fff;
+    --primary-color: #5ced4d;
     --text-color: #b2b2b2;
     --black-color: #000;
+    --btn-not-hover-color: #b3b3b3;
+    --active-menu-color: #333;
+    --playbar-color: #222;
+    --grey-color: #555;
     --navbar-height: 37px;
     --header-height: 120px;
     --header-with-search-height: calc(var(--header-height) - var(--navbar-height));
@@ -17,9 +22,22 @@ html {
     font-size: 62.5%; /*10px*/
     line-height: 1.6rem;
     font-family: 'Inter', sans-serif;
-    font-family: 'Mitr', sans-serif;
+    /* font-family: 'Mitr', sans-serif; */
     box-sizing: border-box;
 }
+
+::-webkit-scrollbar{
+    width: 15px;  
+  } 
+  ::-webkit-scrollbar-track {
+      background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+      background: #555; 
+  }
+  ::-webkit-scrollbar-thumb:hover {
+      background: #888; 
+  }
 
 /* Animation */
 @keyframes fadeIn {
@@ -31,6 +49,42 @@ html {
     }
 }
 
+@keyframes fadeInText {
+    from {
+        color: var(--text-color);
+    }
+    to {
+        color: var(--white-color);
+    }
+}
+
+@keyframes fadeInBrightness {
+    from {
+        filter: brightness(1);
+    }
+    to {
+        filter: brightness(1.2);
+    }
+}
+
+@keyframes fadeInBackgroundColor {
+    from {
+        filter: brightness(1);
+    }
+    to {
+        filter: brightness(1.2);
+    }
+}
+
+@keyframes fadeInSVG {
+    from {
+        fill: var(--text-color);
+    }
+    to {
+        fill: var(--white-color);
+    }
+}
+
 @keyframes fadeOut {
     from {
         opacity: 1;
@@ -39,3 +93,30 @@ html {
         opacity: 0;
     }
 }
+
+@keyframes fadeOutText {
+    from {
+        color: var(--white-color);
+    }
+    to {
+        color: var(--text-color);
+    }
+}
+
+@keyframes shake{
+    0%{
+        transform: translateX(0)
+    }
+
+    25% {
+        transform: translateX(-50px)
+    }
+
+    75% {
+        transform: translateX(50px)
+    }
+
+    100%{
+        transform: translateX(0);
+    }
+  }
