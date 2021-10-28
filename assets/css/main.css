@@ -205,6 +205,9 @@
     height: 60px;
     margin: 0 15px;
     border-radius: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .app-play-bar-song-thumb-note {
@@ -272,7 +275,7 @@
 }
 
 .app-play-bar.playing .btn-toggle-play {
-    padding: 10px 10px 9px;
+    padding: 10px 11px 9px;
     background-color: var(--grey-color);
 }
 
@@ -286,7 +289,7 @@
     color: var(--btn-not-hover-color);
     font-size: 1.2rem;
     line-height: 1.2rem;
-    margin: 10px 0;
+    margin-top: 10px;
 }
 
 .btn {
@@ -296,7 +299,7 @@
 }
 
 .btn-toggle-play {
-    padding: 10px 9px 9px 11px;
+    padding: 10px 10px 9px 12px;
     display: flex;
     align-items: center;
     color: var(--playbar-color);
@@ -304,30 +307,62 @@
     border-radius: 50%;
 }
 
-.progress,
-.volume {
+.btn-random.active,
+.btn-repeat.active {
+    color: var(--white-color);
+}
+
+.btn-prev:hover,
+.btn-next:hover,
+.btn-random:hover,
+.btn-repeat:hover {
+    color: var(--white-color);
+}
+
+.progress {
     -webkit-appearance: none;
     height: 3px;
     background: #d3d3d3;
     outline: none;
     opacity: 0.7;
     cursor: pointer;
-    margin-bottom: 10px;
-    /* -webkit-transition: 0.2s;
-    transition: opacity 0.2s; */
+    margin-top: 10px;
+    -webkit-transition: 0.2s;
+    transition: opacity 0.2s;
 }
 
 .progress {
     width: 500px;
 }
 
-.progress::-webkit-slider-thumb {
+.progress.playbar::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 0;
     height: 3px;
     background-color: var(--primary-color);
     cursor: pointer;
+}
+
+.control-time-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.control-time-lapse,
+.control-time-duration {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-top: 10px;
+}
+
+.control-time-lapse {
+    margin-right: 10px;
+}
+
+.control-time-duration {
+    margin-left: 10px;
 }
 
 .app-play-bar-volume {
@@ -339,15 +374,34 @@
     color: var(--white-color);
 }
 
-.volume {
+.progress.volume {
     width: 100px;
-    margin: 15px;
-}
-
-.volume::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
+    margin: 15px;
 }
+ 
+
+.volume:hover {
+    opacity: 0.8;
+    height: 0.4rem;
+    border-radius: 1rem;
+}
+
+
+.volume::-webkit-slider-thumb {
+    display: none;
+    -webkit-appearance: none;
+    border-radius: 50%;
+    height: 1rem;
+    width: var(--base-volume-thumb);
+    background: var(--white-color);
+}
+
+.volume:hover::-webkit-slider-thumb {
+    display: block;
+}
+
 
 .app-content {
     height: calc(100vh - var(--playbar-height));

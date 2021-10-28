@@ -199,7 +199,7 @@
     <div class="app-play-bar">
         <div class="app-play-bar-song">
             <div class="app-play-bar-song-thumb-group">
-                <div class="app-play-bar-song-thumb" style="background-image: url('https://i.scdn.co/image/ab67616d0000485151bbb2aa413f6c6b5c3d17e4')"></div>
+                <div class="app-play-bar-song-thumb"></div>
                 <svg fill="#fff" viewBox="0 0 512 512" class="app-play-bar-song-thumb-note note-1">
                     <path
                         d="M470.38 1.51L150.41 96A32 32 0 0 0 128 126.51v261.41A139 139 0 0 0 96 384c-53 0-96 28.66-96 64s43 64 96 64 96-28.66 96-64V214.32l256-75v184.61a138.4 138.4 0 0 0-32-3.93c-53 0-96 28.66-96 64s43 64 96 64 96-28.65 96-64V32a32 32 0 0 0-41.62-30.49z"
@@ -218,8 +218,8 @@
                 </svg>
             </div>
             <div class="app-play-bar-song-details">
-                <span class="app-play-bar-song-name">Bao lâu ta lại yêu một người</span>
-                <span class="app-play-bar-song-author">Doãn Hiếu, B Entertainment</span>
+                <span class="app-play-bar-song-name">Song Name</span>
+                <span class="app-play-bar-song-author">Song Artist</span>
             </div>
         </div>
         <div class="app-play-bar-control">
@@ -242,13 +242,18 @@
                     </div>
             </div>
             
-            <input id="progress" class="progress" type="range" value="0" step="1" min="0" max="100">
+            <div class="control-time-group">
+                <span class="control-time-lapse">00:00</span>
+                <input id="progress" class="progress playbar" type="range" value="0" step="1" min="0" max="100">
+                <span class="control-time-duration">00:00</span>
+            </div>
             
             <audio id="audio" src=""></audio>
         </div>
         <div class="app-play-bar-volume">
+            <style data="vol" type="text/css"></style>
             <i class="fas fa-volume-up app-play-bar-volume-icon"></i>
-            <input id="volume" class="volume" type="range" value="0" step="1" min="0" max="100">
+            <input id="volume" class="progress volume" type="range" value="0" step="1" min="0" max="100">
         </div>
     </div>
     <script src="./main.js"></script>

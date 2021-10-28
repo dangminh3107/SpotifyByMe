@@ -1,5 +1,7 @@
 :root {
+    --percent: 0;
     --white-color: #fff;
+    --base-volume-thumb: 1rem;
     --primary-color: #5ced4d;
     --text-color: #b2b2b2;
     --black-color: #000;
