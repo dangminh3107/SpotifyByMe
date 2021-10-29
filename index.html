@@ -197,7 +197,7 @@
         </div>
     </div>
     <div class="app-play-bar">
-        <div class="app-play-bar-song">
+        <div class="app-play-bar-song l-4">
             <div class="app-play-bar-song-thumb-group">
                 <div class="app-play-bar-song-thumb"></div>
                 <svg fill="#fff" viewBox="0 0 512 512" class="app-play-bar-song-thumb-note note-1">
@@ -222,7 +222,7 @@
                 <span class="app-play-bar-song-author">Song Artist</span>
             </div>
         </div>
-        <div class="app-play-bar-control">
+        <div class="app-play-bar-control l-4">
             <div class="control">
                 <div class="btn btn-random">
                     <i class="fas fa-random"></i>
@@ -250,9 +250,11 @@
             
             <audio id="audio" src=""></audio>
         </div>
-        <div class="app-play-bar-volume">
-            <style data="vol" type="text/css"></style>
-            <i class="fas fa-volume-up app-play-bar-volume-icon"></i>
+        <div class="app-play-bar-volume l-4">
+            <div class="app-play-bar-volume-group">
+                <i class="fas fa-volume-up app-play-bar-volume-icon"></i>
+                <i class="fas fa-volume-mute app-play-bar-volume-mute-icon"></i>
+            </div>
             <input id="volume" class="progress volume" type="range" value="0" step="1" min="0" max="100">
         </div>
     </div>

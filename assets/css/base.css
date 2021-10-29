@@ -13,6 +13,8 @@
     --content-body-color: #121212;
     --playlist-height: 260px;
     --playbar-height: 100px;
+
+    /* background: linear-gradient(120deg, rgba(18,18,18,1), rgba(18,18,18,1) 90%, rgba(18,18,18,0.9) 100%); */
 }
 
 * {

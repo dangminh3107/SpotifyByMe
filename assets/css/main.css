@@ -187,6 +187,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    padding: 0 15px;
 }
 
 .app-play-bar-song {
@@ -347,6 +349,7 @@
 .control-time-group {
     display: flex;
     align-items: center;
+    justify-content: center;
     margin-bottom: 20px;
 }
 
@@ -368,10 +371,30 @@
 .app-play-bar-volume {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
 }
 
-.app-play-bar-volume-icon {
+.app-play-bar-volume-group {
+    cursor: pointer;
+}
+
+.app-play-bar-volume-icon,
+.app-play-bar-volume-mute-icon {
     color: var(--white-color);
+    font-size: 1.4rem;
+}
+
+.app-play-bar-volume .app-play-bar-volume-mute-icon {
+    display: none;
+}
+
+.app-play-bar-volume.turn-off .app-play-bar-volume-icon {
+    display: none
+}
+
+.app-play-bar-volume.turn-off .app-play-bar-volume-mute-icon {
+    display: block;
+    margin-right: 1.75px;
 }
 
 .progress.volume {
@@ -579,20 +602,6 @@
     top: 0;
 }
 
-.app-content-body-playbar .icon-pause {
-    display: none;
-}
-
-.app-content-body-playbar.playing .icon-pause {
-    display: block;
-    margin-left: -1px;
-    margin-bottom: -1px;
-}
-
-.app-content-body-playbar.playing .icon-play {
-    display: none;
-}
-
 .app-content-body-playbar-control {
 }
 
@@ -611,6 +620,20 @@
     font-size: 1.8rem;
     color: var(--white-color);
     text-shadow: 0 0 5px var(--grey-color);
+}
+
+.btn-content-playbar .icon-pause {
+    display: none;
+}
+
+.btn-content-playbar.playing .icon-pause {
+    display: block;
+    margin-left: -1px;
+    margin-bottom: -1px;
+}
+
+.btn-content-playbar.playing .icon-play {
+    display: none;
 }
 
 .app-content-body-react-album {
