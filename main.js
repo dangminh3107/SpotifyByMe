@@ -31,8 +31,9 @@ const iconViewImgThumbDown = $('.app-play-bar-song-view-icon-down')
 const songItem = $('.app-content-body-list-item')
 const appContent = $('.app-content')
 const headerPlaylist = $('.app-content-body-list')
-const subHeader = $('.app-content-sub-header-top')
+const subHeader = $('.app-content-sub-header')
 const subHeaderOverlay = $('.app-content-sub-header-overlay')
+const subHeaderBottom = $('.app-content-sub-header-bottom')
 const playBoxSubHeader = $('.app-content-sub-header-play')
 const appContentBody = $('.app-content-body')
 const appContentBodyPlaybar = $('.app-content-body .app-content-body-playbar')
@@ -420,6 +421,7 @@ const playList = {
             _this.isPlaying = true;
             playbar.classList.add('playing')
             playBtnPlaylist.classList.add('playing')
+            playBtnHeader.classList.add('playing')
             thumbAnimate.play();
         }
 
@@ -428,6 +430,7 @@ const playList = {
             _this.isPlaying = false;
             playbar.classList.remove('playing');
             playBtnPlaylist.classList.remove('playing');
+            playBtnHeader.classList.remove('playing')
             thumbAnimate.pause();
         }
 
@@ -495,13 +498,8 @@ const playList = {
         appContent.onscroll = function() {
             playBoxSubHeader.style.opacity = appContent.scrollTop >= sticky ? 1 : appContent.scrollTop / sticky;
             subHeaderOverlay.style.opacity = appContent.scrollTop >= sticky ? 1 : appContent.scrollTop / sticky;
-            if (subHeader.classList.contains('sticky')){
-                subHeader.style.setProperty('background', `rgba(80, 152, 168, ${appContent.scrollTop / sticky})`);
-            }
-            subHeader.classList.add('sticky')
-            if (appContent.scrollTop / sticky === 0) {
-                subHeader.classList.remove('sticky')
-            }
+            subHeaderBottom.style.opacity = appContent.scrollTop >= sticky ? 1 : 0;
+            subHeader.style.setProperty('background', `rgba(80, 152, 168, ${appContent.scrollTop >= sticky ? 1 : appContent.scrollTop / sticky})`);
         }
     },
 
