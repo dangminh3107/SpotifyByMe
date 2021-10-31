@@ -11,11 +11,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Mitr:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/fonts/css/all.min.css">
+    <link rel="stylesheet" href="./assets/fonts/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="./assets/fonts/themify/themify-icons.css">
 </head>
 <body>
     <div class="container">
-        <div class="side-bar col m-1 l-2">
+        <div class="side-bar l-2">
             <div class="app-logo">
                 <svg viewBox="0 0 1134 340" class="app-icon">
                     <path
@@ -115,19 +116,33 @@
                     </div>
                     <span class="app-install-link-title">Install App</span>
                 </a>
+                <div class="app-install-image-song">
+                    <img src="" alt="" class="app-install-image">
+                </div>
             </div>
         </div>
         <div class="app-content l-10">
             <div class="app-content-header">
+                <div class="app-content-sub-header">
+                    <div class="app-content-sub-header-top">
+                        <div class="app-content-sub-header-overlay"></div>
+                        <div class="app-content-sub-header-play">
+                            <div class="btn btn-play-header">
+                                <i class="fas fa-play icon-play-header"></i>
+                            </div>
+                            <span class="app-content-sub-header-title">Summer Songs 2021 🍉</span>
+                        </div>
+                        <div class="app-content-header-profile">
+                            <div class="app-content-header-profile-img" style="background-image: url('./assets/img/user-img.jpg');"></div>
+                            <span class="app-content-header-profile-name">Blue</span>
+                            <button class="app-content-header-profile-options">
+                                <i class="fas fa-caret-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 <div class="app-content-header-background"></div>
                 <div class="app-content-header-background-overlay">
-                    <div class="app-content-header-profile">
-                        <div class="app-content-header-profile-img" style="background-image: url('./assets/img/user-img.jpg');"></div>
-                        <span class="app-content-header-profile-name">Blue</span>
-                        <button class="app-content-header-profile-options">
-                            <i class="fas fa-caret-down"></i>
-                        </button>
-                    </div>
                     <div class="app-content-header-group">
                         <div class="app-content-header-image-album">
                             <img src="./assets/img/header.jpg" alt="" class="app-content-header-image">
@@ -200,6 +215,10 @@
         <div class="app-play-bar-song l-4">
             <div class="app-play-bar-song-thumb-group">
                 <div class="app-play-bar-song-thumb"></div>
+                <div class="app-play-bar-song-view">
+                    <i class="ti-angle-up app-play-bar-song-view-icon-up"></i>
+                    <i class="ti-angle-down app-play-bar-song-view-icon-down"></i>
+                </div>
                 <svg fill="#fff" viewBox="0 0 512 512" class="app-play-bar-song-thumb-note note-1">
                     <path
                         d="M470.38 1.51L150.41 96A32 32 0 0 0 128 126.51v261.41A139 139 0 0 0 96 384c-53 0-96 28.66-96 64s43 64 96 64 96-28.66 96-64V214.32l256-75v184.61a138.4 138.4 0 0 0-32-3.93c-53 0-96 28.66-96 64s43 64 96 64 96-28.65 96-64V32a32 32 0 0 0-41.62-30.49z"

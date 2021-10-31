@@ -8,6 +8,7 @@ const playlist = $('.app-content-body-list-songs');
 const thumbImage = $('.app-play-bar-song-thumb');
 const playBtn = $('.btn-toggle-play');
 const playBtnPlaylist = $('.btn-content-playbar')
+const playBtnHeader = $('.btn-play-header')
 const playbar = $('.app-play-bar')
 const playbarSongName = $('.app-play-bar-song-name')
 const playbarAuthor = $('.app-play-bar-song-author')
@@ -19,15 +20,38 @@ const timeStart = $('.control-time-lapse')
 const timeEnd = $('.control-time-duration')
 const prevBtn = $('.btn-prev')
 const nextBtn = $('.btn-next')
+const randomBtn = $('.btn-random')
+const repeatBtn = $('.btn-repeat')
+const reactHeartBtn = $('.app-content-body-react-album')
+const btnViewImgThumb = $('.app-play-bar-song-view')
+const imgViewLarge = $('.app-install')
+const imgViewBox = $('.app-install-image')
+const iconViewImgThumbUp = $('.app-play-bar-song-view-icon-up')
+const iconViewImgThumbDown = $('.app-play-bar-song-view-icon-down')
+const songItem = $('.app-content-body-list-item')
+const appContent = $('.app-content')
+const headerPlaylist = $('.app-content-body-list')
+const subHeader = $('.app-content-sub-header-top')
+const subHeaderOverlay = $('.app-content-sub-header-overlay')
+const playBoxSubHeader = $('.app-content-sub-header-play')
+const appContentBody = $('.app-content-body')
+const appContentBodyPlaybar = $('.app-content-body .app-content-body-playbar')
+const appContentBodyList = $('.app-content-body .app-content-body-list')
 
 
-const songList = {
+const playList = {
     currentIndex: 0,
     isPlaying: false,
     isVolumeOn: false,
+    isRandom: false,
+    isRepeat: false,
+    isReacted: false,
     volume: 0.2,
     durationPlayed: 0,
+    totalDuration: 0,
     idSongPlayed: 0,
+    songsPlayed: [],
+    listSongs: [],
     prevVolume: 0,
     timeTotal: '00:00',
     timeSongPlayed: '00:00',
@@ -40,6 +64,7 @@ const songList = {
             album: 'Bad Habits',
             path: './assets/music/mp3/song_1.mp3',
             image: './assets/music/img/song_1.jpg',
+            imageLarge: './assets/music/img_big/song_1.jpg',
             timeTotal: ''
         },
         {
@@ -49,6 +74,7 @@ const songList = {
             album: 'STAY (with Justin Bieber)',
             path: './assets/music/mp3/song_2.mp3',
             image: './assets/music/img/song_2.jpg',
+            imageLarge: './assets/music/img_big/song_2.jpg',
             timeTotal: ''
         },
         {
@@ -58,6 +84,7 @@ const songList = {
             album: 'Future Nostalgia',
             path: './assets/music/mp3/song_3.mp3',
             image: './assets/music/img/song_3.jpg',
+            imageLarge: './assets/music/img_big/song_3.jpg',
             timeTotal: ''
         },
         {
@@ -67,6 +94,7 @@ const songList = {
             album: 'MONTERO',
             path: './assets/music/mp3/song_4.mp3',
             image: './assets/music/img/song_4.jpg',
+            imageLarge: './assets/music/img_big/song_4.jpg',
             timeTotal: ''
         },
         {
@@ -76,6 +104,7 @@ const songList = {
             album: 'Kiss Me More (feat. SZA)',
             path: './assets/music/mp3/song_5.mp3',
             image: './assets/music/img/song_5.jpg',
+            imageLarge: './assets/music/img_big/song_5.jpg',
             timeTotal: ''
         },
         {
@@ -85,6 +114,97 @@ const songList = {
             album: 'Golden Hour',
             path: './assets/music/mp3/song_6.mp3',
             image: './assets/music/img/song_6.jpg',
+            imageLarge: './assets/music/img_big/song_6.jpg',
+            timeTotal: ''
+        },
+        {
+            id: 6,
+            name: 'Higher Love',
+            artist: 'Kygo, Whitney Houston',
+            album: 'Golden Hour',
+            path: './assets/music/mp3/song_6.mp3',
+            image: './assets/music/img/song_6.jpg',
+            imageLarge: './assets/music/img_big/song_6.jpg',
+            timeTotal: ''
+        },
+        {
+            id: 6,
+            name: 'Higher Love',
+            artist: 'Kygo, Whitney Houston',
+            album: 'Golden Hour',
+            path: './assets/music/mp3/song_6.mp3',
+            image: './assets/music/img/song_6.jpg',
+            imageLarge: './assets/music/img_big/song_6.jpg',
+            timeTotal: ''
+        },
+        {
+            id: 6,
+            name: 'Higher Love',
+            artist: 'Kygo, Whitney Houston',
+            album: 'Golden Hour',
+            path: './assets/music/mp3/song_6.mp3',
+            image: './assets/music/img/song_6.jpg',
+            imageLarge: './assets/music/img_big/song_6.jpg',
+            timeTotal: ''
+        },
+        {
+            id: 6,
+            name: 'Higher Love',
+            artist: 'Kygo, Whitney Houston',
+            album: 'Golden Hour',
+            path: './assets/music/mp3/song_6.mp3',
+            image: './assets/music/img/song_6.jpg',
+            imageLarge: './assets/music/img_big/song_6.jpg',
+            timeTotal: ''
+        },
+        {
+            id: 6,
+            name: 'Higher Love',
+            artist: 'Kygo, Whitney Houston',
+            album: 'Golden Hour',
+            path: './assets/music/mp3/song_6.mp3',
+            image: './assets/music/img/song_6.jpg',
+            imageLarge: './assets/music/img_big/song_6.jpg',
+            timeTotal: ''
+        },
+        {
+            id: 6,
+            name: 'Higher Love',
+            artist: 'Kygo, Whitney Houston',
+            album: 'Golden Hour',
+            path: './assets/music/mp3/song_6.mp3',
+            image: './assets/music/img/song_6.jpg',
+            imageLarge: './assets/music/img_big/song_6.jpg',
+            timeTotal: ''
+        },
+        {
+            id: 6,
+            name: 'Higher Love',
+            artist: 'Kygo, Whitney Houston',
+            album: 'Golden Hour',
+            path: './assets/music/mp3/song_6.mp3',
+            image: './assets/music/img/song_6.jpg',
+            imageLarge: './assets/music/img_big/song_6.jpg',
+            timeTotal: ''
+        },
+        {
+            id: 6,
+            name: 'Higher Love',
+            artist: 'Kygo, Whitney Houston',
+            album: 'Golden Hour',
+            path: './assets/music/mp3/song_6.mp3',
+            image: './assets/music/img/song_6.jpg',
+            imageLarge: './assets/music/img_big/song_6.jpg',
+            timeTotal: ''
+        },
+        {
+            id: 6,
+            name: 'Higher Love',
+            artist: 'Kygo, Whitney Houston',
+            album: 'Golden Hour',
+            path: './assets/music/mp3/song_6.mp3',
+            image: './assets/music/img/song_6.jpg',
+            imageLarge: './assets/music/img_big/song_6.jpg',
             timeTotal: ''
         }
     ],
@@ -119,7 +239,7 @@ const songList = {
             }
             const htmls = this.songs.map((song,index) => {
                 return `
-                    <div class="app-content-body-list-item">
+                    <div class="app-content-body-list-item ${index === this.currentIndex ? 'active' : ''}" data-index="${index}">
                         <span class="app-content-body-list-item-number">${song.id}</span>
                         <div class="app-content-body-list-item-song">
                             <div class="app-content-body-list-item-song-avavtar">
@@ -139,6 +259,7 @@ const songList = {
                 `
             })
             playlist.innerHTML = htmls.join('')
+            this.listSongs = $$('.app-content-body-list-item');
         })
     },
     
@@ -154,6 +275,11 @@ const songList = {
         const _this = this;
 
         function Play() {
+            if (_this.isRandom) {
+                if (_this.songsPlayed.length === 0){ 
+                    _this.songsPlayed.push(_this.currentIndex + 1)
+                }
+            }
             if(_this.isPlaying){
                 audio.pause();
             }
@@ -184,19 +310,44 @@ const songList = {
         //Event when play audio
         playBtn.onclick = Play;
         playBtnPlaylist.onclick = Play;
+        playBtnHeader.onclick = Play;
 
         //Next button
         nextBtn.onclick = function() {
-            _this.nextSong();
+            if (_this.isRandom) {
+                _this.playRandomSong();
+            }
+            else {
+                _this.nextSong();
+            }
             audio.play();
             _this.setConfig('idSongPlayed', _this.currentIndex);
         }
 
         //Previous button
         prevBtn.onclick = function() {
-            _this.previousSong();
+            if (_this.isRandom) {
+                _this.playRandomSong();
+            }
+            else {
+                _this.previousSong();
+            }
             audio.play();
             _this.setConfig('idSongPlayed', _this.currentIndex);
+        }
+
+        //Random button
+        randomBtn.onclick = function() {
+            _this.isRandom = !_this.isRandom;
+            _this.setConfig('isRandom', _this.isRandom);
+            randomBtn.classList.toggle('active', _this.isRandom)
+        }
+
+        //Repeat button
+        repeatBtn.onclick = function() {
+            _this.isRepeat = !_this.isRepeat;
+            _this.setConfig('isRepeat', _this.isRepeat);
+            repeatBtn.classList.toggle('active', _this.isRepeat)
         }
 
         //Update volume when click volume button
@@ -225,12 +376,10 @@ const songList = {
             if (e.target.value === '0') {
                 playBarVolume.classList.add('turn-off')
                 _this.isVolumeOn = false;
-                _this.prevVolume = 0;
-                _this.setConfig('prevVolume', _this.prevVolume);
-                _this.setConfig('isVolumeOn',_this.isVolumeOn)
             }
             else {
                 playBarVolume.classList.remove('turn-off')
+                _this.isVolumeOn = true;
             }
             _this.volume = Number(e.target.value / 100);
             audio.volume = _this.volume;
@@ -240,18 +389,30 @@ const songList = {
 
         //Play song
         audio.onplay = function() {
+            _this.listSongs.forEach(function(value, index){
+                if ((value.classList.contains('active')) && (index !== _this.currentIndex)){
+                    value.classList.remove('active');
+                }
+            })
+            _this.listSongs[_this.currentIndex].classList.add('active');
             audio.volume = _this.volume;
             audio.ontimeupdate = function() {
                 if (audio.duration){
+                    //Save total duration
+                    _this.totalDuration = audio.duration;
+                    _this.setConfig('totalDuration', _this.totalDuration);
+
+                    //Save duration played
                     _this.durationPlayed = audio.currentTime;
                     _this.setConfig('durationPlayed', audio.currentTime);
 
+                    //Save time song played
                     var timePlayed = _this.secondToTime(audio.currentTime)
                     timeStart.innerText = timePlayed;
                     _this.setConfig('timeSongPlayed', timePlayed)
-                    _this.setConfig('timeTotal', _this.timeTotal)
-                    const progressPercent = Math.round(audio.currentTime / audio.duration * 100)
 
+                    //display prgress bar
+                    const progressPercent = Math.round(audio.currentTime / audio.duration * 100)
                     progressBar.value = progressPercent;
                     progressBar.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + progressPercent + '%, #d3d3d3 ' + progressPercent + '%, #d3d3d3 100%)'
                 }
@@ -270,6 +431,16 @@ const songList = {
             thumbAnimate.pause();
         }
 
+        //Check repeat
+        audio.onended = function() {
+            if (_this.isRepeat) {
+                audio.play();
+            }
+            else {
+                nextBtn.click()
+            }
+        }
+
         //Progress bar: When song played
         progressBar.oninput = function(e) {
             //when progress bar changed
@@ -285,6 +456,52 @@ const songList = {
             }, 500)
             const seekTime = e.target.value * audio.duration / 100;
             audio.currentTime = seekTime;
+        }
+
+        //When click on playlist
+        playlist.onclick = function(e) {
+            const songNode = e.target.closest('.app-content-body-list-item:not(.active)');
+            if (songNode) {
+                _this.currentIndex = Number(songNode.dataset.index);
+                _this.setConfig('idSongPlayed', _this.currentIndex)
+                _this.loadCurrentSong();
+                audio.play();
+            }
+        }
+
+        //React playlist
+        reactHeartBtn.onclick = function() {
+            _this.isReacted = !_this.isReacted;
+            _this.setConfig('isReacted', _this.isReacted);
+            reactHeartBtn.classList.toggle('reacted', _this.isReacted);
+        }
+
+        //Button view on image song thumb
+        btnViewImgThumb.onclick = function() {
+            imgViewLarge.classList.toggle('enable');
+            if (imgViewLarge.classList.contains('enable')) {
+                iconViewImgThumbUp.style.display = 'none';
+                iconViewImgThumbDown.style.display = 'block';
+            }
+            else {
+                iconViewImgThumbUp.style.display = 'block';
+                iconViewImgThumbDown.style.display = 'none';
+            }
+        }
+
+        //onscroll display sub header
+        var offsetY = appContentBody.offsetTop + appContentBodyPlaybar.offsetTop + appContentBodyList.offsetTop;
+        var sticky = offsetY - subHeader.offsetHeight;
+        appContent.onscroll = function() {
+            playBoxSubHeader.style.opacity = appContent.scrollTop >= sticky ? 1 : appContent.scrollTop / sticky;
+            subHeaderOverlay.style.opacity = appContent.scrollTop >= sticky ? 1 : appContent.scrollTop / sticky;
+            if (subHeader.classList.contains('sticky')){
+                subHeader.style.setProperty('background', `rgba(80, 152, 168, ${appContent.scrollTop / sticky})`);
+            }
+            subHeader.classList.add('sticky')
+            if (appContent.scrollTop / sticky === 0) {
+                subHeader.classList.remove('sticky')
+            }
         }
     },
 
@@ -306,9 +523,13 @@ const songList = {
         this.isVolumeOn = this.config.isVolumeOn;
         this.prevVolume = this.config.prevVolume;
         this.durationPlayed = this.config.durationPlayed;
+        this.totalDuration = this.config.totalDuration;
         this.idSongPlayed = this.config.idSongPlayed;
         this.timeTotal = this.config.timeTotal
         this.timeSongPlayed = this.config.timeSongPlayed;
+        this.isRandom = this.config.isRandom;
+        this.isRepeat = this.config.isRepeat;
+        this.isReacted = this.config.isReacted;
     },
 
     loadCurrentSong: function() {
@@ -316,6 +537,7 @@ const songList = {
         playbarAuthor.textContent = this.currentSong.artist;
         thumbImage.style.backgroundImage = `url('${this.currentSong.image}')`;
         audio.src = this.currentSong.path;
+        imgViewBox.src = this.currentSong.imageLarge;
         timeEnd.innerText = this.currentSong.timeTotal;
     },
 
@@ -341,8 +563,30 @@ const songList = {
         this.loadCurrentSong();
     },
 
+    playRandomSong: function() {
+        let newIndex, newID, isPlayed = false;
+        if (this.songsPlayed.length === this.songs.length) {
+            this.songsPlayed = [];
+        }
+        do {
+            newIndex = Math.floor(Math.random() * this.songs.length);     
+        } while (newIndex === this.currentIndex)
+
+        newID = this.songs[newIndex].id;
+        isPlayed = this.songsPlayed.find(value => newID === value)
+
+        if (!isPlayed) {
+            this.currentIndex = newIndex;
+            this.songsPlayed.push(newID);
+            this.loadCurrentSong();
+        }
+        else {
+            this.playRandomSong();
+        }
+    },
+
     loadPrevStatus: function() {
-        console.log(this.volume, this.isVolumeOn)
+
         if (this.volume === 0) {
             playBarVolume.classList.add('turn-off')
             this.isVolumeOn = false;
@@ -355,10 +599,21 @@ const songList = {
 
         this.currentIndex = this.idSongPlayed;
         this.loadCurrentSong()
+
+        reactHeartBtn.classList.toggle('reacted', this.isReacted);
+
+        randomBtn.classList.toggle('active', this.isRandom)
+        repeatBtn.classList.toggle('active', this.isRepeat)
+
         timeStart.innerText = this.timeSongPlayed
         timeEnd.innerText = this.timeTotal
+        
         volumeBar.value = this.volume*100;
         volumeBar.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + this.volume*100 + '%, #b3b3b3 ' + this.volume*100 + '%, #b3b3b3 100%)'
+
+        var percent = Math.round(this.durationPlayed / this.totalDuration * 100)
+        progressBar.value = percent;
+        progressBar.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + percent + '%, #d3d3d3 ' + percent + '%, #d3d3d3 100%)'
     },
 
     start: function() {
@@ -371,4 +626,4 @@ const songList = {
     }
 }
 
-songList.start();
+playList.start();

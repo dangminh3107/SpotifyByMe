@@ -11,7 +11,7 @@
     --grey-color: #555;
     --dark-grey: #172b30;
     --content-body-color: #121212;
-    --playlist-height: 260px;
+    --playlist-height: 285px;
     --playbar-height: 100px;
 
     /* background: linear-gradient(120deg, rgba(18,18,18,1), rgba(18,18,18,1) 90%, rgba(18,18,18,0.9) 100%); */
@@ -105,6 +105,15 @@ html {
     }
     to {
         color: var(--text-color);
+    }
+}
+
+@keyframes fadeUpImgView {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-33%);
     }
 }
 
