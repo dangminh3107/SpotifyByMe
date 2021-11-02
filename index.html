@@ -8,15 +8,16 @@
     <link rel="stylesheet" href="./assets/css/base.css">
     <link rel="stylesheet" href="./assets/css/grid.css">
     <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/responsive.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="icon" href="./assets/img/spotify.png" type="image/x-icon" />
+    <link rel="icon" href="./assets/img/spotify.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Mitr:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/fonts/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="./assets/fonts/themify/themify-icons.css">
 </head>
 <body>
-    <div class="container">
+    <div class="grid container">
         <div class="side-bar l-2">
             <div class="app-logo">
                 <svg viewBox="0 0 1134 340" class="app-icon">
@@ -106,26 +107,20 @@
                     <a href="" class="my-playlist-item-link">My Playlist 10</a>
                 </div>
             </div>
-            <div class="app-install-box">
-                <div class="app-install">
-                    <a href="" class="app-install-link">
-                        <div class="app-install-icon">
-                            <svg role="img" fill="var(--text-color)" height="24" width="24" viewBox="0 0 24 24" class="app-install-icon-download">
-                                <path
-                                    d="M11.5 0C5.149 0 0 5.148 0 11.5 0 17.851 5.149 23 11.5 23S23 17.851 23 11.5C23 5.148 17.851 0 11.5 0zm0 22C5.71 22 1 17.29 1 11.5S5.71 1 11.5 1 22 5.71 22 11.5 17.29 22 11.5 22zm.499-6.842V5h-1v10.149l-3.418-3.975-.758.652 4.678 5.44 4.694-5.439-.757-.653-3.439 3.984z"
-                                ></path>
-                            </svg>
-                        </div>
-                        <span class="app-install-link-title">Install App</span>
-                    </a>
-                    <div class="app-install-image-song">
-                        <img src="" alt="" class="app-install-image">
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="app-content l-10">
             <div class="app-content-header">
+                <div class="app-content-header-search-group">
+                    <div class="app-content-header-search">
+                        <div class="app-content-header-search-box-icon">
+                            <i class="ti-search app-content-header-search-icon"></i>
+                        </div>
+                        <input type="text" class="app-content-header-search-box" placeholder="Search in playlist">
+                    </div>
+                    <div class="app-content-header-search-filter">
+                        <span class="app-content-header-search-filter-text">Sort</span>
+                    </div>
+                </div>
                 <div class="app-content-sub-header">
                     <div class="app-content-sub-header-top">
                         <div class="app-content-sub-header-overlay"></div>
@@ -224,8 +219,32 @@
             </div>
         </div>
     </div>
+    <div class="app-install-box l-2">
+        <div class="app-install">
+            <a href="" class="app-install-link">
+                <div class="app-install-icon">
+                    <svg role="img" fill="var(--text-color)" height="24" width="24" viewBox="0 0 24 24" class="app-install-icon-download">
+                        <path
+                            d="M11.5 0C5.149 0 0 5.148 0 11.5 0 17.851 5.149 23 11.5 23S23 17.851 23 11.5C23 5.148 17.851 0 11.5 0zm0 22C5.71 22 1 17.29 1 11.5S5.71 1 11.5 1 22 5.71 22 11.5 17.29 22 11.5 22zm.499-6.842V5h-1v10.149l-3.418-3.975-.758.652 4.678 5.44 4.694-5.439-.757-.653-3.439 3.984z"
+                        ></path>
+                    </svg>
+                </div>
+                <span class="app-install-link-title">Install App</span>
+            </a>
+            <div class="app-install-image-song">
+                <img src="" alt="" class="app-install-image">
+            </div>
+        </div>
+    </div>
     <div class="app-play-bar">
         <div class="app-play-bar-song l-4">
+            <div class="app-play-bar-song-thumb-group-mobile-tablet">
+                <div class="app-play-bar-song-thumb-mobile-tablet"></div>
+                <div class="app-play-bar-song-details">
+                    <span class="app-play-bar-song-name">Song Name</span>
+                    <span class="app-play-bar-song-author">Song Artist</span>
+                </div>
+            </div>
             <div class="app-play-bar-song-thumb-group">
                 <div class="app-play-bar-song-thumb"></div>
                 <div class="app-play-bar-song-view">

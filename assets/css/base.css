@@ -10,7 +10,7 @@
     --playbar-color: #222;
     --grey-color: #555;
     --dark-grey: #172b30;
-    --side-bar-width: 256px;
+    --side-bar-width: 16.65%;
     --content-body-color: #121212;
     --playlist-height: 285px;
     --playbar-height: 100px;
@@ -133,6 +133,15 @@ html {
 
     100%{
         transform: translateX(0);
+    }
+}
+
+@keyframes subHeaderTranslate {
+    from {
+        transform: translateY(-101px)
+    }
+    to {
+        transform: translateY(0)
     }
 }
 

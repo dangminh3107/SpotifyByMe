@@ -6,12 +6,13 @@ const PLAYER_STORAGE_KEY = 'MY_PLAYER'
 const root = $(':root')
 const playlist = $('.app-content-body-list-songs');
 const thumbImage = $('.app-play-bar-song-thumb');
+const thumbImageMobileTablet = $('.app-play-bar-song-thumb-mobile-tablet')
 const playBtn = $('.btn-toggle-play');
 const playBtnPlaylist = $('.btn-content-playbar')
 const playBtnHeader = $('.btn-play-header')
 const playbar = $('.app-play-bar')
-const playbarSongName = $('.app-play-bar-song-name')
-const playbarAuthor = $('.app-play-bar-song-author')
+const playbarSongName = $$('.app-play-bar-song-name')
+const playbarAuthor = $$('.app-play-bar-song-author')
 const progressBar = $('#progress')
 const playBarVolume = $('.app-play-bar-volume')
 const volumeBtn = $('.app-play-bar-volume-group')
@@ -30,10 +31,13 @@ const iconViewImgThumbUp = $('.app-play-bar-song-view-icon-up')
 const iconViewImgThumbDown = $('.app-play-bar-song-view-icon-down')
 const songItem = $('.app-content-body-list-item')
 const appContent = $('.app-content')
+const headerContent = $('.app-content-header')
 const headerPlaylist = $('.app-content-body-list')
 const subHeader = $('.app-content-sub-header')
 const subHeaderOverlay = $('.app-content-sub-header-overlay')
 const subHeaderBottom = $('.app-content-sub-header-bottom')
+const subHeaderTop = $('.app-content-sub-header-top')
+const subHeaderTitle = $('.app-content-sub-header-title')
 const playBoxSubHeader = $('.app-content-sub-header-play')
 const appContentBody = $('.app-content-body')
 const appContentBodyPlaybar = $('.app-content-body .app-content-body-playbar')
@@ -96,6 +100,86 @@ const playList = {
             path: './assets/music/mp3/song_4.mp3',
             image: './assets/music/img/song_4.jpg',
             imageLarge: './assets/music/img_big/song_4.jpg',
+            timeTotal: ''
+        },
+        {
+            id: 5,
+            name: 'Kiss Me More (feat. SZA)',
+            artist: 'Doja Cat, SZA',
+            album: 'Kiss Me More (feat. SZA)',
+            path: './assets/music/mp3/song_5.mp3',
+            image: './assets/music/img/song_5.jpg',
+            imageLarge: './assets/music/img_big/song_5.jpg',
+            timeTotal: ''
+        },
+        {
+            id: 6,
+            name: 'Higher Love',
+            artist: 'Kygo, Whitney Houston',
+            album: 'Golden Hour',
+            path: './assets/music/mp3/song_6.mp3',
+            image: './assets/music/img/song_6.jpg',
+            imageLarge: './assets/music/img_big/song_6.jpg',
+            timeTotal: ''
+        },
+        {
+            id: 5,
+            name: 'Kiss Me More (feat. SZA)',
+            artist: 'Doja Cat, SZA',
+            album: 'Kiss Me More (feat. SZA)',
+            path: './assets/music/mp3/song_5.mp3',
+            image: './assets/music/img/song_5.jpg',
+            imageLarge: './assets/music/img_big/song_5.jpg',
+            timeTotal: ''
+        },
+        {
+            id: 6,
+            name: 'Higher Love',
+            artist: 'Kygo, Whitney Houston',
+            album: 'Golden Hour',
+            path: './assets/music/mp3/song_6.mp3',
+            image: './assets/music/img/song_6.jpg',
+            imageLarge: './assets/music/img_big/song_6.jpg',
+            timeTotal: ''
+        },
+        {
+            id: 5,
+            name: 'Kiss Me More (feat. SZA)',
+            artist: 'Doja Cat, SZA',
+            album: 'Kiss Me More (feat. SZA)',
+            path: './assets/music/mp3/song_5.mp3',
+            image: './assets/music/img/song_5.jpg',
+            imageLarge: './assets/music/img_big/song_5.jpg',
+            timeTotal: ''
+        },
+        {
+            id: 6,
+            name: 'Higher Love',
+            artist: 'Kygo, Whitney Houston',
+            album: 'Golden Hour',
+            path: './assets/music/mp3/song_6.mp3',
+            image: './assets/music/img/song_6.jpg',
+            imageLarge: './assets/music/img_big/song_6.jpg',
+            timeTotal: ''
+        },
+        {
+            id: 5,
+            name: 'Kiss Me More (feat. SZA)',
+            artist: 'Doja Cat, SZA',
+            album: 'Kiss Me More (feat. SZA)',
+            path: './assets/music/mp3/song_5.mp3',
+            image: './assets/music/img/song_5.jpg',
+            imageLarge: './assets/music/img_big/song_5.jpg',
+            timeTotal: ''
+        },
+        {
+            id: 6,
+            name: 'Higher Love',
+            artist: 'Kygo, Whitney Houston',
+            album: 'Golden Hour',
+            path: './assets/music/mp3/song_6.mp3',
+            image: './assets/music/img/song_6.jpg',
+            imageLarge: './assets/music/img_big/song_6.jpg',
             timeTotal: ''
         },
         {
@@ -403,15 +487,52 @@ const playList = {
         }
 
         //onscroll display sub header
-        var offsetY = appContentBody.offsetTop + appContentBodyPlaybar.offsetTop + appContentBodyList.offsetTop;
-        var sticky = offsetY - subHeader.offsetHeight;
+        var offsetYLarge = appContentBody.offsetTop + appContentBodyPlaybar.offsetHeight / 2;
+        var offsetYMedium = headerContent.offsetHeight + 4;
+        window.onresize = function() {
+            if (window.innerWidth >= 1023) {
+                subHeaderTop.style.padding = '0'
+            }
+            else if (window.innerWidth >= 740 && window.innerWidth < 1023) {
+                if (subHeaderTitle.style.display === 'block') {
+                    subHeaderTop.style.padding = '23px 0'
+                }
+                else {
+                    subHeaderTop.style.padding = '33px 0'
+                }
+            }
+            else {
+
+            }
+        }
         appContent.onscroll = function() {
-            playBoxSubHeader.style.opacity = appContent.scrollTop >= sticky ? 1 : appContent.scrollTop / sticky;
-            subHeaderOverlay.style.opacity = appContent.scrollTop >= sticky ? 1 : appContent.scrollTop / sticky;
-            subHeaderBottom.style.opacity = appContent.scrollTop >= sticky ? 1 : 0;
-            subHeader.style.setProperty('background', `rgba(80, 152, 168, ${appContent.scrollTop >= sticky ? 1 : appContent.scrollTop / sticky})`);
+            if (window.innerWidth >= 1023) {
+                subHeaderTop.style.padding = '0'
+                subHeaderTitle.style.display = appContent.scrollTop >= offsetYLarge ? 'block' : 'none';
+                subHeaderOverlay.style.opacity = appContent.scrollTop >= offsetYLarge ? 1 : appContent.scrollTop / offsetYLarge;
+                playBtnHeader.style.display = appContent.scrollTop >= offsetYLarge ? 'flex' : 'none';
+                subHeaderBottom.style.opacity = appContent.scrollTop >= offsetYLarge ? 1 : 0;
+            }
+            else if (window.innerWidth >= 740 && window.innerWidth < 1023) {
+                if (appContent.scrollTop >= offsetYMedium) {
+                    subHeaderTitle.style.display = 'block'
+                    subHeaderTop.style.padding = '23px 0'
+                }
+                else {
+                    subHeaderTitle.style.display = 'none'
+                    subHeaderTop.style.padding = '33px 0'
+                }
+                subHeaderOverlay.style.opacity = appContent.scrollTop >= offsetYMedium ? 1 : appContent.scrollTop / offsetYMedium;
+                playBtnHeader.style.display = appContent.scrollTop >= offsetYMedium ? 'flex' : 'none';
+                subHeaderBottom.style.opacity = appContent.scrollTop >= offsetYMedium ? 1 : 0;
+            }
+            else {
+
+            }
+            
         }
     },
+
 
     secondToTime: function(value) {
         const sec = parseInt(value, 10);
@@ -441,9 +562,14 @@ const playList = {
     },
 
     loadCurrentSong: function() {
-        playbarSongName.textContent = this.currentSong.name;
-        playbarAuthor.textContent = this.currentSong.artist;
+        playbarSongName.forEach((val) => {
+            val.textContent = this.currentSong.name;
+        })
+        playbarAuthor.forEach((val) => {
+            val.textContent = this.currentSong.artist;
+        })
         thumbImage.style.backgroundImage = `url('${this.currentSong.image}')`;
+        thumbImageMobileTablet.style.backgroundImage = `url('${this.currentSong.imageLarge}')`;
         audio.src = this.currentSong.path;
         imgViewBox.src = this.currentSong.imageLarge;
         timeEnd.innerText = this.currentSong.timeTotal;
