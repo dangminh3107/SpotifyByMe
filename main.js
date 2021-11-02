@@ -6,14 +6,18 @@ const PLAYER_STORAGE_KEY = 'MY_PLAYER'
 const root = $(':root')
 const playlist = $('.app-content-body-list-songs');
 const thumbImage = $('.app-play-bar-song-thumb');
+const thumbImageMobile = $('.app-play-bar-song-thumb-mobile')
 const thumbImageMobileTablet = $('.app-play-bar-song-thumb-mobile-tablet')
 const playBtn = $('.btn-toggle-play');
 const playBtnPlaylist = $('.btn-content-playbar')
 const playBtnHeader = $('.btn-play-header')
+const playBtnRandomHeader = $('.btn-play-header-random')
+const playBtnRandomPlaylist = $('.btn-content-playbar-random')
 const playbar = $('.app-play-bar')
 const playbarSongName = $$('.app-play-bar-song-name')
 const playbarAuthor = $$('.app-play-bar-song-author')
 const progressBar = $('#progress')
+const progressBarMobile = $('#progress-mobile')
 const playBarVolume = $('.app-play-bar-volume')
 const volumeBtn = $('.app-play-bar-volume-group')
 const volumeBar = $('#volume')
@@ -123,17 +127,7 @@ const playList = {
             timeTotal: ''
         },
         {
-            id: 5,
-            name: 'Kiss Me More (feat. SZA)',
-            artist: 'Doja Cat, SZA',
-            album: 'Kiss Me More (feat. SZA)',
-            path: './assets/music/mp3/song_5.mp3',
-            image: './assets/music/img/song_5.jpg',
-            imageLarge: './assets/music/img_big/song_5.jpg',
-            timeTotal: ''
-        },
-        {
-            id: 6,
+            id: 7,
             name: 'Higher Love',
             artist: 'Kygo, Whitney Houston',
             album: 'Golden Hour',
@@ -143,17 +137,7 @@ const playList = {
             timeTotal: ''
         },
         {
-            id: 5,
-            name: 'Kiss Me More (feat. SZA)',
-            artist: 'Doja Cat, SZA',
-            album: 'Kiss Me More (feat. SZA)',
-            path: './assets/music/mp3/song_5.mp3',
-            image: './assets/music/img/song_5.jpg',
-            imageLarge: './assets/music/img_big/song_5.jpg',
-            timeTotal: ''
-        },
-        {
-            id: 6,
+            id: 8,
             name: 'Higher Love',
             artist: 'Kygo, Whitney Houston',
             album: 'Golden Hour',
@@ -163,17 +147,7 @@ const playList = {
             timeTotal: ''
         },
         {
-            id: 5,
-            name: 'Kiss Me More (feat. SZA)',
-            artist: 'Doja Cat, SZA',
-            album: 'Kiss Me More (feat. SZA)',
-            path: './assets/music/mp3/song_5.mp3',
-            image: './assets/music/img/song_5.jpg',
-            imageLarge: './assets/music/img_big/song_5.jpg',
-            timeTotal: ''
-        },
-        {
-            id: 6,
+            id: 9,
             name: 'Higher Love',
             artist: 'Kygo, Whitney Houston',
             album: 'Golden Hour',
@@ -183,17 +157,7 @@ const playList = {
             timeTotal: ''
         },
         {
-            id: 5,
-            name: 'Kiss Me More (feat. SZA)',
-            artist: 'Doja Cat, SZA',
-            album: 'Kiss Me More (feat. SZA)',
-            path: './assets/music/mp3/song_5.mp3',
-            image: './assets/music/img/song_5.jpg',
-            imageLarge: './assets/music/img_big/song_5.jpg',
-            timeTotal: ''
-        },
-        {
-            id: 6,
+            id: 10,
             name: 'Higher Love',
             artist: 'Kygo, Whitney Houston',
             album: 'Golden Hour',
@@ -306,6 +270,16 @@ const playList = {
         playBtn.onclick = Play;
         playBtnPlaylist.onclick = Play;
         playBtnHeader.onclick = Play;
+        playBtnRandomHeader.onclick = function() {
+            _this.playRandomSong();
+            audio.play();
+            _this.setConfig('idSongPlayed', _this.currentIndex);
+        };
+        playBtnRandomPlaylist.onclick = function() {
+            _this.playRandomSong();
+            audio.play();
+            _this.setConfig('idSongPlayed', _this.currentIndex);
+        }
 
         //Next button
         nextBtn.onclick = function() {
@@ -410,6 +384,8 @@ const playList = {
                     const progressPercent = Math.round(audio.currentTime / audio.duration * 100)
                     progressBar.value = progressPercent;
                     progressBar.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + progressPercent + '%, #d3d3d3 ' + progressPercent + '%, #d3d3d3 100%)'
+                    progressBarMobile.value = progressPercent;
+                    progressBarMobile.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + progressPercent + '%, #d3d3d3 ' + progressPercent + '%, #d3d3d3 100%)'
                 }
             }
             _this.isPlaying = true;
@@ -445,6 +421,22 @@ const playList = {
                 if (audio.duration){
                     progressBar.value = e.target.value;
                     progressBar.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + e.target.value + '%, #d3d3d3 ' + e.target.value + '%, #d3d3d3 100%)'
+                }
+            }
+            audio.pause();
+            setTimeout(() => {
+                audio.play();
+            }, 500)
+            const seekTime = e.target.value * audio.duration / 100;
+            audio.currentTime = seekTime;
+        }
+
+        progressBarMobile.oninput = function(e) {
+            //when progress bar changed
+            audio.ontimeupdate = function() {
+                if (audio.duration){
+                    progressBarMobile.value = e.target.value;
+                    progressBarMobile.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + e.target.value + '%, #d3d3d3 ' + e.target.value + '%, #d3d3d3 100%)'
                 }
             }
             audio.pause();
@@ -523,7 +515,7 @@ const playList = {
                     subHeaderTop.style.padding = '33px 0'
                 }
                 subHeaderOverlay.style.opacity = appContent.scrollTop >= offsetYMedium ? 1 : appContent.scrollTop / offsetYMedium;
-                playBtnHeader.style.display = appContent.scrollTop >= offsetYMedium ? 'flex' : 'none';
+                playBtnRandomHeader.style.display = appContent.scrollTop >= offsetYMedium ? 'flex' : 'none';
                 subHeaderBottom.style.opacity = appContent.scrollTop >= offsetYMedium ? 1 : 0;
             }
             else {
@@ -570,6 +562,7 @@ const playList = {
         })
         thumbImage.style.backgroundImage = `url('${this.currentSong.image}')`;
         thumbImageMobileTablet.style.backgroundImage = `url('${this.currentSong.imageLarge}')`;
+        thumbImageMobile.style.backgroundImage = `url('${this.currentSong.imageLarge}')`;
         audio.src = this.currentSong.path;
         imgViewBox.src = this.currentSong.imageLarge;
         timeEnd.innerText = this.currentSong.timeTotal;
@@ -648,6 +641,8 @@ const playList = {
         var percent = Math.round(this.durationPlayed / this.totalDuration * 100)
         progressBar.value = percent;
         progressBar.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + percent + '%, #d3d3d3 ' + percent + '%, #d3d3d3 100%)'
+        progressBarMobile.value = percent;
+        progressBarMobile.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + percent + '%, #d3d3d3 ' + percent + '%, #d3d3d3 100%)'
     },
 
     start: function() {

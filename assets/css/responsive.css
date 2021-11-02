@@ -53,6 +53,11 @@
         padding: 0;
     }
 
+    .app-play-bar-group {
+        display: flex;
+        flex-direction: column;
+    }
+
     .app-play-bar-song {
         flex-direction: column;
         width: 100%;
@@ -225,7 +230,7 @@
         justify-content: center;
     }
 
-    .btn-play-header {
+    .btn-play-header-random {
         position: absolute;
         bottom: 0;
         margin: 0;
@@ -246,5 +251,160 @@
 
     .app-content-body-list-item-song {
         width: 100%;
+    }
+
+    .btn-content-playbar {
+        display: none;
+    }
+
+    .btn-content-playbar-random {
+        display: flex;
+    }
+}
+
+@media (max-width: 46.25em) {
+    .app-logo,
+    .app-playlist,
+    .app-my-playlist,
+    .app-play-bar .btn-random,
+    .app-play-bar .btn-prev,
+    .app-play-bar .btn-next,
+    .app-play-bar .btn-repeat,
+    .control-time-group,
+    .app-play-bar-volume,
+    .app-install,
+    .app-install-box,
+    .app-play-bar-song-thumb,
+    .app-play-bar-song-view,
+    .note-1,
+    .note-2,
+    .note-3,
+    .note-4,
+    .app-content::-webkit-scrollbar,
+    .app-content-header-profile,
+    .app-content-body-list-header-album,
+    .app-content-body-list-item-album-link,
+    .app-content-body-list-header-date-added,
+    .app-content-body-list-item-date-added,
+    .app-content-body-list-header-time-added,
+    .app-content-body-list-item-duration,
+    .btn-content-playbar {
+        display: none;
+    }
+
+    .app-content-body-list-item-song {
+        width: 100%;
+    }
+
+    .app-content-sub-header {
+        left: 0;
+    }
+    
+    .side-bar {
+        flex: 0 0 100%;
+        max-width: 100%;
+        bottom: 0;
+        top: 90%;
+        right: 0;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0, rgba(0, 0, 0, 1) 100%);
+        justify-content: center;
+    }
+
+    .app-menu {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin: 0;
+    }
+
+    .app-menu-link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .app-menu-item-title {
+        margin: 5px 0 0 0;
+    }
+
+    .app-menu-item.active {
+        background-color: transparent;
+    }
+
+    .app-content {
+        left: 0;
+        bottom: 0;
+    }
+
+    .app-play-bar {
+        bottom: 60px;
+        height: 70px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #463535;
+        border-radius: 4px;
+        margin: 0 5px;
+    }
+
+    .app-play-bar-group {
+        justify-content: space-between;
+    }
+
+    .app-play-bar.playing .app-play-bar-song {
+        transform: unset;
+        transition: unset;
+    }
+
+    #progress-mobile {
+        display: block;
+        left: 0;
+        width: 100%;
+        right: 0;
+        margin: 0 20px 0 20px;
+    }
+
+    .progress.playbar-mobile {
+        width: unset;
+    }
+
+    .app-play-bar-song-thumb-mobile {
+        display: block;
+        width: 30px;
+        height: 30px;
+        border-radius: 0;
+    }
+
+    .app-play-bar-song-name {
+        font-size: 1.3rem;
+        line-height: 1.3rem;
+    }
+
+    .app-play-bar-song-author {
+        font-size: 1.1rem;
+        line-height: 1.1rem;
+    }
+
+    .btn-toggle-play,
+    .app-play-bar.playing .btn-toggle-play {
+        background-color: transparent;
+        color: var(--white-color);
+    }
+
+    .app-content-body-playbar {
+        position: relative;
+        padding: 5px 25px;
+    }
+
+    .app-content-body-playbar-control {
+        position: absolute;
+        right: 0;
+        top: 0;
+        transform: translateY(-50%);
+        margin-right: 25px;
+    }
+
+    .btn-content-playbar-random {
+        display: flex;
     }
 }
