@@ -288,8 +288,19 @@
     .app-content-body-list-item-date-added,
     .app-content-body-list-header-time-added,
     .app-content-body-list-item-duration,
-    .btn-content-playbar {
+    .btn-content-playbar,
+    .app-content-sub-header-bottom,
+    .app-content-header-type {
         display: none;
+    }
+
+    .container {
+        height: 100%;
+        background-color: red;
+    }
+
+    .app-content-body {
+        background-color: var(--content-body-color);
     }
 
     .app-content-body-list-item-song {
@@ -304,9 +315,10 @@
         flex: 0 0 100%;
         max-width: 100%;
         bottom: 0;
-        top: 90%;
+        top: unset;
         right: 0;
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0, rgba(0, 0, 0, 1) 100%);
+        height: 66px;
+        background: rgb(18,18,18);
         justify-content: center;
     }
 
@@ -314,7 +326,7 @@
         display: flex;
         align-items: center;
         justify-content: space-around;
-        margin: 0;
+        margin: 10px 0 0 0;
     }
 
     .app-menu-link {
@@ -333,21 +345,27 @@
 
     .app-content {
         left: 0;
-        bottom: 0;
+        bottom: 125px;
     }
 
     .app-play-bar {
         bottom: 60px;
-        height: 70px;
+        height: 65px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: #463535;
+        background: rgb(18, 18, 18);
+        backdrop-filter: blur(10px);
+    }
+
+    .app-play-bar-container {
+        justify-content: space-between;
+        background-color: rgb(70, 53, 53);
         border-radius: 4px;
-        margin: 0 5px;
     }
 
     .app-play-bar-group {
+        margin-top: 10px;
         justify-content: space-between;
     }
 
@@ -356,12 +374,13 @@
         transition: unset;
     }
 
+    .control {
+        margin: 0;
+    }
+
     #progress-mobile {
         display: block;
-        left: 0;
-        width: 100%;
-        right: 0;
-        margin: 0 20px 0 20px;
+        margin: 10px 15px 0;
     }
 
     .progress.playbar-mobile {
@@ -370,8 +389,8 @@
 
     .app-play-bar-song-thumb-mobile {
         display: block;
-        width: 30px;
-        height: 30px;
+        width: 35px;
+        height: 35px;
         border-radius: 0;
     }
 
@@ -393,7 +412,15 @@
 
     .app-content-body-playbar {
         position: relative;
-        padding: 5px 25px;
+        padding: 5px 15px;
+    }
+
+    .app-content-body-list {
+        padding: 0 15px;
+    }
+
+    .app-content-body-list-songs {
+        padding: 0 15px;
     }
 
     .app-content-body-playbar-control {
@@ -406,5 +433,84 @@
 
     .btn-content-playbar-random {
         display: flex;
+    }
+
+    .btn-play-header-random {
+        position: absolute;
+        bottom: 0;
+        margin: 0;
+        transform: translateY(50%);
+        right: 0;
+        height: 56px;
+        width: 56px;
+        margin-right: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        display: none;
+    }
+
+    .app-content-sub-header-top {
+        padding: 23px 0;
+        justify-content: center;
+    }
+
+    .app-content-header-group {
+        flex-direction: column;
+    }
+
+    .app-content-header-name {
+        font-size: 2rem;
+        line-height: 2rem;
+        margin: 10px 30px;
+    }
+
+    .app-content-header-image {
+    }
+
+
+    .app-content-header {
+        min-height: 460px;
+    }
+
+    .app-content-header-background {
+        background-image: linear-gradient(rgba(0,0,0,.4) 0,var(--content-body-color) 90%, var(--content-body-color) 100%);
+        background-color: rgb(80, 152, 168);
+    }
+
+    .app-content-header-search-box {
+        width: 300px;
+    }
+
+    .app-content-header-search-group {
+        display: flex;
+    }
+
+    .app-content-body-react-album {
+        margin: 0 15px;
+    }
+
+    .app-content-body-list-header {
+        margin-bottom: 0;
+    }
+
+    .app-content-header-image-album {
+        display: flex;
+        justify-content: center;
+    }
+
+    .app-content-header-description,
+    .app-content-header-statistic {
+        font-size: 1.2rem;
+        line-height: 1.2rem;
+    }
+
+    .app-content-header-description {
+        line-height: 1.2rem;
+        margin: 10px 30px;
+    }
+
+    .app-content-header-statistic {
+        margin: 10px 30px;
     }
 }

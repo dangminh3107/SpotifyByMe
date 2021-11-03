@@ -46,6 +46,7 @@ const playBoxSubHeader = $('.app-content-sub-header-play')
 const appContentBody = $('.app-content-body')
 const appContentBodyPlaybar = $('.app-content-body .app-content-body-playbar')
 const appContentBodyList = $('.app-content-body .app-content-body-list')
+const imgHeader = $('.app-content-header-image')
 
 
 const playList = {
@@ -480,48 +481,50 @@ const playList = {
 
         //onscroll display sub header
         var offsetYLarge = appContentBody.offsetTop + appContentBodyPlaybar.offsetHeight / 2;
-        var offsetYMedium = headerContent.offsetHeight + 4;
-        window.onresize = function() {
-            if (window.innerWidth >= 1023) {
-                subHeaderTop.style.padding = '0'
-            }
-            else if (window.innerWidth >= 740 && window.innerWidth < 1023) {
+        var offsetYMedium = headerContent.offsetHeight;
+        window.onresize = function(e) {
+            if (document.documentElement.clientWidth >= 1023) {
                 if (subHeaderTitle.style.display === 'block') {
-                    subHeaderTop.style.padding = '23px 0'
+                    subHeaderTop.style.padding = '0'
+                    playBtnHeader.style.display = 'block';
+                    playBtnRandomHeader.style.display = 'none';
                 }
-                else {
-                    subHeaderTop.style.padding = '33px 0'
-                }
+                playBtnRandomPlaylist.style.display = 'none';
             }
             else {
-
+                if (subHeaderTitle.style.display === 'block') {
+                    subHeaderTop.style.padding = '23px 0'
+                    playBtnHeader.style.display = 'none';
+                    playBtnRandomHeader.style.display = 'flex';
+                }
+                playBtnRandomPlaylist.style.display = 'flex';
             }
         }
         appContent.onscroll = function() {
-            if (window.innerWidth >= 1023) {
+            
+            if (document.documentElement.clientWidth >= 1023) {
                 subHeaderTop.style.padding = '0'
                 subHeaderTitle.style.display = appContent.scrollTop >= offsetYLarge ? 'block' : 'none';
                 subHeaderOverlay.style.opacity = appContent.scrollTop >= offsetYLarge ? 1 : appContent.scrollTop / offsetYLarge;
                 playBtnHeader.style.display = appContent.scrollTop >= offsetYLarge ? 'flex' : 'none';
                 subHeaderBottom.style.opacity = appContent.scrollTop >= offsetYLarge ? 1 : 0;
             }
-            else if (window.innerWidth >= 740 && window.innerWidth < 1023) {
+            else if ( document.documentElement.clientWidth < 1023) {
+                subHeaderTop.style.padding = '23px 0';
                 if (appContent.scrollTop >= offsetYMedium) {
                     subHeaderTitle.style.display = 'block'
-                    subHeaderTop.style.padding = '23px 0'
+                    playBtnRandomPlaylist.style.display = 'none';
                 }
                 else {
+                    var percentScale = 1 - appContent.scrollTop / imgHeader.offsetHeight;
+                    imgHeader.style.transform = `scale(${percentScale})`;
                     subHeaderTitle.style.display = 'none'
-                    subHeaderTop.style.padding = '33px 0'
+                    playBtnRandomPlaylist.style.display = 'flex';
                 }
                 subHeaderOverlay.style.opacity = appContent.scrollTop >= offsetYMedium ? 1 : appContent.scrollTop / offsetYMedium;
                 playBtnRandomHeader.style.display = appContent.scrollTop >= offsetYMedium ? 'flex' : 'none';
                 subHeaderBottom.style.opacity = appContent.scrollTop >= offsetYMedium ? 1 : 0;
-            }
-            else {
-
-            }
-            
+            }         
         }
     },
 
