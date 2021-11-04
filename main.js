@@ -198,6 +198,7 @@ const playList = {
                 this.songs[i].timeTotal = durationList[i];
             }
             const htmls = this.songs.map((song,index) => {
+                song.timeTotal = durationList[index];
                 return `
                     <div class="app-content-body-list-item ${index === this.currentIndex ? 'active' : ''}" data-index="${index}">
                         <span class="app-content-body-list-item-number">${song.id}</span>
@@ -221,6 +222,9 @@ const playList = {
             playlist.innerHTML = htmls.join('')
             this.listSongs = $$('.app-content-body-list-item');
         })
+        return new Promise(resolve => {
+            setTimeout(resolve, 500)
+        });
     },
     
     defineProperties: function() {
@@ -244,8 +248,6 @@ const playList = {
                 audio.pause();
             }
             else {
-                _this.loadTimeSong(_this.timeSongPlayed);
-                _this.setConfig('timeTotal', _this.timeTotal)
                 if (_this.durationPlayed > 0) {
                     audio.currentTime = _this.durationPlayed;
                     audio.play();
@@ -253,6 +255,8 @@ const playList = {
                 else {
                     audio.play();
                 }
+                _this.loadTimeSong(_this.timeSongPlayed);
+                _this.setConfig('timeTotal', _this.timeTotal)
             }  
         }
 
@@ -351,10 +355,12 @@ const playList = {
                 playBarVolume.classList.remove('turn-off')
                 _this.isVolumeOn = true;
             }
-            _this.volume = Number(e.target.value / 100);
+            _this.volume = e.target.value / 100;
+            _this.prevVolume = e.target.value / 100;
             audio.volume = _this.volume;
             volumeBar.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + e.target.value + '%, #b3b3b3 ' + e.target.value + '%, #b3b3b3 100%)'
             _this.setConfig('volume', _this.volume);
+            _this.setConfig('prevVolume', _this.prevVolume);
         }
 
         //Play song
@@ -616,36 +622,69 @@ const playList = {
     },
 
     loadPrevStatus: function() {
+        if (document.cookie === '') {
+            timeStart.innerText = '0:00';
+            this.loadCurrentSong();
+            this.durationPlayed = 0;
+            this.timeSongPlayed = '0:00';
+            this.idSongPlayed = this.currentIndex;
+            this.setConfig('idSongPlayed', this.idSongPlayed)
 
-        if (this.volume === 0) {
-            playBarVolume.classList.add('turn-off')
-            this.isVolumeOn = false;
+            if (this.volume === 0) {
+                playBarVolume.classList.add('turn-off')
+                this.isVolumeOn = false;
+            }
+    
+            if (!this.isVolumeOn) {
+                playBarVolume.classList.add('turn-off')
+                this.volume = 0;
+            }
+    
+            reactHeartBtn.classList.toggle('reacted', this.isReacted);
+    
+            randomBtn.classList.toggle('active', this.isRandom)
+            repeatBtn.classList.toggle('active', this.isRepeat)
+            
+            volumeBar.value = this.volume*100;
+            volumeBar.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + this.volume*100 + '%, #b3b3b3 ' + this.volume*100 + '%, #b3b3b3 100%)'
+            
+            var today = new Date();
+            today.setTime(today.getTime())
+            document.cookie = today.toUTCString();
+        }
+        else {
+            if (this.volume === 0) {
+                playBarVolume.classList.add('turn-off')
+                this.isVolumeOn = false;
+            }
+    
+    
+            if (!this.isVolumeOn) {
+                playBarVolume.classList.add('turn-off')
+                this.volume = 0;
+            }
+
+            this.currentIndex = this.idSongPlayed;
+            this.loadCurrentSong()
+    
+            reactHeartBtn.classList.toggle('reacted', this.isReacted);
+    
+            randomBtn.classList.toggle('active', this.isRandom)
+            repeatBtn.classList.toggle('active', this.isRepeat)
+    
+            timeStart.innerText = this.timeSongPlayed
+            timeEnd.innerText = this.timeTotal
+            
+            volumeBar.value = this.volume*100;
+            volumeBar.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + this.volume*100 + '%, #b3b3b3 ' + this.volume*100 + '%, #b3b3b3 100%)'
+    
+            var percent = Math.round(this.durationPlayed / this.totalDuration * 100)
+            progressBar.value = percent;
+            progressBar.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + percent + '%, #d3d3d3 ' + percent + '%, #d3d3d3 100%)'
+            progressBarMobile.value = percent;
+            progressBarMobile.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + percent + '%, #d3d3d3 ' + percent + '%, #d3d3d3 100%)'
         }
 
-        if (!this.isVolumeOn) {
-            playBarVolume.classList.add('turn-off')
-            this.volume = 0;
-        }
-
-        this.currentIndex = this.idSongPlayed;
-        this.loadCurrentSong()
-
-        reactHeartBtn.classList.toggle('reacted', this.isReacted);
-
-        randomBtn.classList.toggle('active', this.isRandom)
-        repeatBtn.classList.toggle('active', this.isRepeat)
-
-        timeStart.innerText = this.timeSongPlayed
-        timeEnd.innerText = this.timeTotal
-        
-        volumeBar.value = this.volume*100;
-        volumeBar.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + this.volume*100 + '%, #b3b3b3 ' + this.volume*100 + '%, #b3b3b3 100%)'
-
-        var percent = Math.round(this.durationPlayed / this.totalDuration * 100)
-        progressBar.value = percent;
-        progressBar.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + percent + '%, #d3d3d3 ' + percent + '%, #d3d3d3 100%)'
-        progressBarMobile.value = percent;
-        progressBarMobile.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + percent + '%, #d3d3d3 ' + percent + '%, #d3d3d3 100%)'
     },
 
     start: function() {
@@ -653,8 +692,10 @@ const playList = {
         this.defineProperties();
         this.handleEvents();
         this.loadCurrentSong();
-        this.render();
-        this.loadPrevStatus();
+        this.render()
+            .then(() => {
+                playList.loadPrevStatus();
+            })
     }
 }
 
