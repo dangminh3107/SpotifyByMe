@@ -635,14 +635,6 @@ const playList = {
             playBarVolume.classList.add('turn-off')
             this.isVolumeOn = false;
             this.setConfig('isVolumeOn', this.isVolumeOn)
-    
-            reactHeartBtn.classList.toggle('reacted', this.isReacted);
-    
-            randomBtn.classList.toggle('active', this.isRandom)
-            repeatBtn.classList.toggle('active', this.isRepeat)
-            
-            volumeBar.value = this.volume*100;
-            volumeBar.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + this.volume*100 + '%, #b3b3b3 ' + this.volume*100 + '%, #b3b3b3 100%)'
             
             var today = new Date();
             today.setTime(today.getTime())
