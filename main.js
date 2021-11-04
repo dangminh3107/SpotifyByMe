@@ -359,6 +359,7 @@ const playList = {
             _this.prevVolume = e.target.value / 100;
             audio.volume = _this.volume;
             volumeBar.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + e.target.value + '%, #b3b3b3 ' + e.target.value + '%, #b3b3b3 100%)'
+            _this.setConfig('isVolumeOn', _this.isVolumeOn);
             _this.setConfig('volume', _this.volume);
             _this.setConfig('prevVolume', _this.prevVolume);
         }
@@ -630,15 +631,10 @@ const playList = {
             this.idSongPlayed = this.currentIndex;
             this.setConfig('idSongPlayed', this.idSongPlayed)
 
-            if (this.volume === 0) {
-                playBarVolume.classList.add('turn-off')
-                this.isVolumeOn = false;
-            }
-    
-            if (!this.isVolumeOn) {
-                playBarVolume.classList.add('turn-off')
-                this.volume = 0;
-            }
+            this.volume = 0
+            playBarVolume.classList.add('turn-off')
+            this.isVolumeOn = false;
+            this.setConfig('isVolumeOn', this.isVolumeOn)
     
             reactHeartBtn.classList.toggle('reacted', this.isReacted);
     
