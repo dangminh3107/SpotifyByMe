@@ -664,7 +664,7 @@
 
 .app-content-sub-header {
     position: fixed;
-    right: 0;
+    right: 12px;
     left: var(--side-bar-width);
     z-index: 1;
 }

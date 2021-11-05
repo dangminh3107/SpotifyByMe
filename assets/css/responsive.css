@@ -119,6 +119,7 @@
     .app-play-bar-control .control-time-group {
         display: flex;
         margin: 0;
+        width: unset;
     }
 
     .control-time-group .progress {
@@ -142,6 +143,10 @@
     .app-content-body-list-item-date-added,
     .app-content-body-list-item-duration {
         display: none;
+    }
+
+    .app-content-sub-header {
+        right: 0;
     }
 
     .app-content-sub-header-bottom {
@@ -309,6 +314,7 @@
 
     .app-content-sub-header {
         left: 0;
+        right: 0;
     }
     
     .side-bar {
