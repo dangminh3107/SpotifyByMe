@@ -1,0 +1,215 @@
+.app-content-header.home {
+    background-color: rgb(80, 152, 168);
+    background-image: linear-gradient(rgba(0,0,0,.6) 0,#121212 100%);
+    display: flex;
+}
+
+.app-content-header-container {
+    width: 100%;
+    margin-top: auto;
+}
+
+.app-content-header-home-title {
+    font-size: 4rem;
+    line-height: 4rem;
+    margin: 0 0 10px 30px;
+    color: var(--white-color);
+    letter-spacing: 1px;
+}
+
+.app-content-header-container-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 20px;
+    justify-content: space-between;
+}
+
+.app-content-header-container-item {
+    height: 80px;
+    width: 280px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 10px;
+    display: flex;
+    cursor: pointer;
+}
+
+.app-content-header-container-item:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.app-content-header-container-item-box-img {
+    height: 100%;
+}
+
+.app-content-header-container-item-img {
+    height: 100%;
+}
+
+.app-content-header-container-item-box-title {
+    width: 100%;
+    display: flex;
+    padding: 15px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.app-content-header-container-item-title {
+    font-size: 1.4rem;
+    line-height: 2rem;
+    color: var(--white-color);
+    font-weight: bold;
+    letter-spacing: normal;
+}
+
+.btn-play-home {
+    padding: 11px 12px 10px 13px;
+    display: flex;
+    align-items: center;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    box-shadow: 0 8px 8px rgb(0 0 0 / 30%);
+    transition: 0.3s;
+    opacity: 0;
+}
+
+.app-content-header-container-item:hover .app-content-header-container-box-button{
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.btn-play-home-box {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.btn-play-home-icon-play { 
+    color: var(--white-color);
+}
+
+.app-content-header-body-item-group {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+}
+
+.app-content-header-body-item-header {
+    color: var(--white-color);
+    margin: 20px;
+}
+
+.app-content-header-body-item-heading {
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.app-content-header-body-item-sub-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px;
+    color: var(--text-color);
+}
+
+.app-content-header-body-item-sub-heading-description {
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+    font-weight: 500;
+}
+
+.app-content-header-body-item-sub-heading-view-all {
+    font-size: 1.4rem;
+    line-height: 1.4rem;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.app-content-header-body-item-sub-heading-view-all:hover {
+    color: var(--white-color);
+    text-decoration: underline;
+}
+
+.app-content-header-body-item-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 20px;
+    flex-wrap: wrap;
+}
+
+.app-content-header-body-item {
+    flex: 0 0 15%;
+    margin: 0 10px;
+    width: 182px;
+    background-color: #181818;
+    transition: background-color 0.3s ease;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.app-content-header-body-item-box {
+    padding: 15px;
+}
+
+.app-content-header-body-item-thumb {
+    width: 100%;
+    position: relative;
+}
+
+.app-content-header-body-item-thum-img {
+    width: 100%;
+    border-radius: 4px;
+}
+
+.app-content-header-body-item-thum-img.artist {
+    border-radius: 50%;
+}
+
+.app-content-header-body-item-info {
+    margin-top: 5px;
+}
+
+.app-content-header-body-item-info-heading {
+    display: block;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--white-color);
+    margin: 15px 0 10px;
+}
+
+.app-content-header-body-item-info-description {
+    font-size: 1.3rem;
+    line-height: 1.6rem;
+    font-weight: 500;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    color: var(--text-color);
+}
+
+.app-content-header-body-item-btn-play {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 15px;
+}
+
+.app-content-header-body-item:hover {
+    background-color: #282828;
+}
+
+.app-content-header-body-item:hover .app-content-header-body-item-btn-play{
+    opacity: 1;
+    transform: scale(1.1);
+}

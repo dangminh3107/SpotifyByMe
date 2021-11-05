@@ -35,19 +35,27 @@ const iconViewImgThumbUp = $('.app-play-bar-song-view-icon-up')
 const iconViewImgThumbDown = $('.app-play-bar-song-view-icon-down')
 const songItem = $('.app-content-body-list-item')
 const appContent = $('.app-content')
-const headerContent = $('.app-content-header')
-const headerPlaylist = $('.app-content-body-list')
+const headerContent = $('.app-content-header.playlist')
+const appContentBodyPlaybar = $('.app-content-body .app-content-body-playbar')
 const subHeader = $('.app-content-sub-header')
 const subHeaderOverlay = $('.app-content-sub-header-overlay')
 const subHeaderBottom = $('.app-content-sub-header-bottom')
 const subHeaderTop = $('.app-content-sub-header-top')
 const subHeaderTitle = $('.app-content-sub-header-title')
-const playBoxSubHeader = $('.app-content-sub-header-play')
 const appContentBody = $('.app-content-body')
-const appContentBodyPlaybar = $('.app-content-body .app-content-body-playbar')
 const appContentBodyList = $('.app-content-body .app-content-body-list')
 const imgHeader = $('.app-content-header-image')
+const menuSidebar = $('.side-bar')
+const menuItem = Array.from($$('.app-menu-item'));
+const playListItem = Array.from($$('.my-playlist-item'))
+const sidebarList = menuItem.concat(playListItem)
+const pageList = Array.from($$('.app-content-page'))
 
+
+let isPlaylistPage = false;
+let offsetYLarge = 0;
+let offsetYMedium = 0;
+let pageIndex = 0;
 
 const playList = {
     currentIndex: 0,
@@ -238,6 +246,48 @@ const playList = {
     handleEvents: function () {
         const _this = this;
 
+        menuSidebar.onclick = function(e) {
+            const menuNode = e.target.closest('.app-menu-item')
+            const playlistNode = e.target.closest('.my-playlist-item')
+            let node = menuNode || playlistNode;
+            if (node) {
+                appContent.scroll(0, 0);
+                let idx = node.id;
+                let n = sidebarList.length;
+                for (var i = 0; i < n; i++) {
+                    if (sidebarList[i].id !== idx) {
+                        sidebarList[i].classList.remove('active')
+                        pageList[i].classList.remove('active')
+                    }
+                }
+                sidebarList[idx-1].classList.add('active')
+                pageList[idx-1].classList.add('active')
+                if (Number(idx) >= 4) {
+                    isPlaylistPage = true;
+                    offsetYLarge = appContentBody.offsetTop + appContentBodyPlaybar.offsetHeight / 2;
+                    offsetYMedium = headerContent.offsetHeight;
+                    subHeaderBottom.style.opacity = 0;
+                    subHeaderBottom.style.display = 'flex';
+                }
+                else {
+                    isPlaylistPage = false;
+                    subHeaderTitle.style.display = 'none';
+                    subHeaderBottom.style.display = 'none';
+                    subHeaderOverlay.style.opacity = 0;
+                    playBtnHeader.style.display = 'none';
+                }
+            }
+        }
+
+        appContent.onscroll = function() {
+            if (isPlaylistPage) {
+                _this.checkCondition(isPlaylistPage, document.documentElement.clientWidth, offsetYLarge, offsetYMedium, appContent.scrollTop);
+            }
+            else {
+                _this.checkCondition(isPlaylistPage, document.documentElement.clientWidth, offsetYLarge, offsetYMedium, appContent.scrollTop);
+            }
+        }
+
         function Play() {
             if (_this.isRandom) {
                 if (_this.songsPlayed.length === 0){ 
@@ -260,16 +310,6 @@ const playList = {
             }  
         }
 
-        //Rotate thumb image when playing
-        const thumbAnimate = thumbImage.animate([
-            {
-                transform: 'rotate(360deg)'
-            }
-        ], {
-            duration: 10000,
-            iterations: Infinity
-        })
-        thumbAnimate.pause();
 
         //Event when play audio
         playBtn.onclick = Play;
@@ -400,7 +440,6 @@ const playList = {
             playbar.classList.add('playing')
             playBtnPlaylist.classList.add('playing')
             playBtnHeader.classList.add('playing')
-            thumbAnimate.play();
         }
 
         //Pause song
@@ -409,7 +448,6 @@ const playList = {
             playbar.classList.remove('playing');
             playBtnPlaylist.classList.remove('playing');
             playBtnHeader.classList.remove('playing')
-            thumbAnimate.pause();
         }
 
         //Check repeat
@@ -487,8 +525,8 @@ const playList = {
         }
 
         //onscroll display sub header
-        var offsetYLarge = appContentBody.offsetTop + appContentBodyPlaybar.offsetHeight / 2;
-        var offsetYMedium = headerContent.offsetHeight;
+        // var offsetYLarge = 340 + 106/ 2;
+        // var offsetYMedium = 340;
         window.onresize = function(e) {
             if (document.documentElement.clientWidth >= 1023) {
                 if (subHeaderTitle.style.display === 'block') {
@@ -497,6 +535,7 @@ const playList = {
                     playBtnRandomHeader.style.display = 'none';
                 }
                 playBtnRandomPlaylist.style.display = 'none';
+                imgHeader.style.transform = `scale(1)`;
             }
             else {
                 if (subHeaderTitle.style.display === 'block') {
@@ -506,32 +545,6 @@ const playList = {
                 }
                 playBtnRandomPlaylist.style.display = 'flex';
             }
-        }
-        appContent.onscroll = function() {
-            
-            if (document.documentElement.clientWidth >= 1023) {
-                subHeaderTop.style.padding = '0'
-                subHeaderTitle.style.display = appContent.scrollTop >= offsetYLarge ? 'block' : 'none';
-                subHeaderOverlay.style.opacity = appContent.scrollTop >= offsetYLarge ? 1 : appContent.scrollTop / offsetYLarge;
-                playBtnHeader.style.display = appContent.scrollTop >= offsetYLarge ? 'flex' : 'none';
-                subHeaderBottom.style.opacity = appContent.scrollTop >= offsetYLarge ? 1 : 0;
-            }
-            else if ( document.documentElement.clientWidth < 1023) {
-                subHeaderTop.style.padding = '23px 0';
-                if (appContent.scrollTop >= offsetYMedium) {
-                    subHeaderTitle.style.display = 'block'
-                    playBtnRandomPlaylist.style.display = 'none';
-                }
-                else {
-                    var percentScale = 1 - appContent.scrollTop / imgHeader.offsetHeight;
-                    imgHeader.style.transform = `scale(${percentScale})`;
-                    subHeaderTitle.style.display = 'none'
-                    playBtnRandomPlaylist.style.display = 'flex';
-                }
-                subHeaderOverlay.style.opacity = appContent.scrollTop >= offsetYMedium ? 1 : appContent.scrollTop / offsetYMedium;
-                playBtnRandomHeader.style.display = appContent.scrollTop >= offsetYMedium ? 'flex' : 'none';
-                subHeaderBottom.style.opacity = appContent.scrollTop >= offsetYMedium ? 1 : 0;
-            }         
         }
     },
 
@@ -547,6 +560,37 @@ const playList = {
         if (seconds < 10) {seconds = "0" + seconds}
 
         return hours + minutes +':'+ seconds; 
+    },
+
+    checkCondition: function(isPlaylistPage, clientWidth, offsetYLarge, offsetYMedium, appContentSrollTop) {
+        if (isPlaylistPage) {
+            if (clientWidth >= 1023) {
+                subHeaderTop.style.padding = '0'
+                subHeaderTitle.style.display = appContentSrollTop >= offsetYLarge ? 'block' : 'none';
+                subHeaderOverlay.style.opacity = appContentSrollTop >= offsetYLarge ? 1 : appContentSrollTop / offsetYLarge;
+                playBtnHeader.style.display = appContentSrollTop >= offsetYLarge ? 'flex' : 'none';
+                subHeaderBottom.style.opacity = appContentSrollTop >= offsetYLarge ? 1 : 0;
+            }
+            else if (clientWidth < 1023) {
+                subHeaderTop.style.padding = '23px 0';
+                if (appContentSrollTop >= offsetYMedium) {
+                    subHeaderTitle.style.display = 'block'
+                    playBtnRandomPlaylist.style.display = 'none';
+                }
+                else {
+                    var percentScale = 1 - appContentSrollTop / imgHeader.offsetHeight;
+                    imgHeader.style.transform = `scale(${percentScale})`;
+                    subHeaderTitle.style.display = 'none'
+                    playBtnRandomPlaylist.style.display = 'flex';
+                }
+                subHeaderOverlay.style.opacity = appContentSrollTop >= offsetYMedium ? 1 : appContentSrollTop / offsetYMedium;
+                playBtnRandomHeader.style.display = appContentSrollTop >= offsetYMedium ? 'flex' : 'none';
+                subHeaderBottom.style.opacity = appContentSrollTop >= offsetYMedium ? 1 : 0;
+            }  
+        }
+        else {
+            subHeaderOverlay.style.opacity = appContentSrollTop >= 320 ? 1 : appContentSrollTop / 320;
+        }
     },
 
     loadConfig: function() {
@@ -660,8 +704,12 @@ const playList = {
             randomBtn.classList.toggle('active', this.isRandom)
             repeatBtn.classList.toggle('active', this.isRepeat)
     
-            timeStart.innerText = this.timeSongPlayed
-            timeEnd.innerText = this.timeTotal
+            if (!this.timeSongPlayed) {
+                this.timeSongPlayed = '0:00'
+            }
+            else {
+                timeStart.innerText = this.timeSongPlayed
+            }
             
             volumeBar.value = this.volume*100;
             volumeBar.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + this.volume*100 + '%, #b3b3b3 ' + this.volume*100 + '%, #b3b3b3 100%)'
