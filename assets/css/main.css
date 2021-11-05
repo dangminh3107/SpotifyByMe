@@ -548,6 +548,7 @@
     top: 0;
     left: var(--side-bar-width);
     bottom: 100px;
+    scroll-behavior: smooth;
     overflow-y: overlay;
     overflow-x: hidden;
     background: linear-gradient(-60deg, rgba(18,18,18,1), rgba(18,18,18,1) 90%, rgba(18,18,18,0.9) 100%);
