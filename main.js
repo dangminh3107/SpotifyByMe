@@ -36,6 +36,7 @@ const iconViewImgThumbDown = $('.app-play-bar-song-view-icon-down')
 const songItem = $('.app-content-body-list-item')
 const appContent = $('.app-content')
 const headerContent = $('.app-content-header.playlist')
+const headerSearch = $('.app-content-sub-header-search-group')
 const appContentBodyPlaybar = $('.app-content-body .app-content-body-playbar')
 const subHeader = $('.app-content-sub-header')
 const subHeaderOverlay = $('.app-content-sub-header-overlay')
@@ -51,11 +52,21 @@ const playListItem = Array.from($$('.my-playlist-item'))
 const sidebarList = menuItem.concat(playListItem)
 const pageList = Array.from($$('.app-content-page'))
 
+const sliderBox = $('.app-content-header-slider-group')
+const sliderListItem= $$('.app-content-header-search-slider-item')
+const btnNextSlider = $('.slider-control-right')
+const btnPrevSlider = $('.slider-control-left')
+
+
 
 let isPlaylistPage = false;
+let isSearchPage = false;
 let offsetYLarge = 0;
 let offsetYMedium = 0;
 let pageIndex = 0;
+let slideIndex = 1;
+let slideLength = sliderListItem.length - 2;
+let indexPercent = 106;
 
 const playList = {
     currentIndex: 0,
@@ -246,6 +257,50 @@ const playList = {
     handleEvents: function () {
         const _this = this;
 
+        btnNextSlider.onclick = function () {
+            btnNextSlider.style.filter = 'brightness(50%)';
+            setTimeout(() => {
+                btnNextSlider.style.filter = 'brightness(1)';
+            }, 100)
+            if (slideIndex < slideLength) {
+                sliderListItem.forEach((item) => {
+                    item.style.transform = `translateX(-${indexPercent}%)`
+                })
+                indexPercent += 106;
+                slideIndex += 1;
+                if (slideIndex === slideLength) {
+                    setTimeout(() => {
+                        btnNextSlider.style.display = 'none';
+                        btnPrevSlider.style.display = 'block';
+                    }, 500)
+                }
+            }
+        }
+
+        btnPrevSlider.onclick = function () {
+            btnPrevSlider.style.filter = 'brightness(50%)';
+            setTimeout(() => {
+                btnPrevSlider.style.filter = 'brightness(1)';
+            }, 100)
+            if (slideIndex === slideLength) {
+                indexPercent -= 106;
+            }
+            if (slideIndex > 1) {
+                indexPercent -= 106;
+                sliderListItem.forEach((item) => {
+                    item.style.transform = `translateX(-${indexPercent}%)`
+                })
+                slideIndex -= 1;
+                if (slideIndex === 1) {
+                    setTimeout(() => {
+                        btnNextSlider.style.display = 'block';
+                        btnPrevSlider.style.display = 'none';
+                        indexPercent += 106;
+                    }, 500)
+                }
+            }
+        }
+
         menuSidebar.onclick = function(e) {
             const menuNode = e.target.closest('.app-menu-item')
             const playlistNode = e.target.closest('.my-playlist-item')
@@ -262,19 +317,38 @@ const playList = {
                 }
                 sidebarList[idx-1].classList.add('active')
                 pageList[idx-1].classList.add('active')
-                if (Number(idx) >= 4) {
-                    isPlaylistPage = true;
-                    offsetYLarge = appContentBody.offsetTop + appContentBodyPlaybar.offsetHeight / 2;
-                    offsetYMedium = headerContent.offsetHeight;
-                    subHeaderBottom.style.opacity = 0;
-                    subHeaderBottom.style.display = 'flex';
-                }
-                else {
-                    isPlaylistPage = false;
-                    subHeaderTitle.style.display = 'none';
-                    subHeaderBottom.style.display = 'none';
-                    subHeaderOverlay.style.opacity = 0;
-                    playBtnHeader.style.display = 'none';
+
+                switch(Number(idx)) {
+                    case 2:
+                        isSearchPage = true;
+                        headerSearch.style.display = 'block';
+                        subHeaderTitle.style.display = 'none';
+                        subHeaderBottom.style.display = 'none';
+                        playBtnHeader.style.display = 'none';
+                        break;
+                    case 1:
+                    case 3:
+                        headerSearch.style.display = 'none';
+                        isPlaylistPage = false;
+                        isSearchPage = false;
+                        subHeaderTitle.style.display = 'none';
+                        subHeaderBottom.style.display = 'none';
+                        subHeaderOverlay.style.opacity = 0;
+                        playBtnHeader.style.display = 'none';
+                        break;
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                        isPlaylistPage = true;
+                        isSearchPage = false;
+                        headerSearch.style.display = 'none';
+                        offsetYLarge = appContentBody.offsetTop + appContentBodyPlaybar.offsetHeight / 2;
+                        offsetYMedium = headerContent.offsetHeight;
+                        subHeaderBottom.style.opacity = 0;
+                        subHeaderBottom.style.display = 'flex';
+                        break;
+                    default:
                 }
             }
         }
