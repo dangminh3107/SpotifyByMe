@@ -170,11 +170,11 @@
     display: flex;
     flex-wrap: wrap;
     padding: 0 30px;
-    margin-top: 20px;
 }
 
 .app-search-body-item  {
     display: flex;
+    margin-top: 16px;
 }
 
 .app-search-body-item-box {

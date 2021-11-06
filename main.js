@@ -43,6 +43,7 @@ const subHeaderOverlay = $('.app-content-sub-header-overlay')
 const subHeaderBottom = $('.app-content-sub-header-bottom')
 const subHeaderTop = $('.app-content-sub-header-top')
 const subHeaderTitle = $('.app-content-sub-header-title')
+const appContentHeaderOverlay = $('.app-content-header-background-overlay')
 const appContentBody = $('.app-content-body')
 const appContentBodyList = $('.app-content-body .app-content-body-list')
 const imgHeader = $('.app-content-header-image')
@@ -318,15 +319,27 @@ const playList = {
                 sidebarList[idx-1].classList.add('active')
                 pageList[idx-1].classList.add('active')
 
+                pageIndex = Number(idx);
+
                 switch(Number(idx)) {
+                    case 1:
+                        subHeaderTop.style.display = 'none';
+                        headerSearch.style.display = 'none';
+                        subHeaderTop.style.display = 'flex';
+                        subHeaderOverlay.style.display = 'flex';
+                        subHeaderOverlay.style.backgroundColor = 'rgb(80, 152, 168)';
+                        subHeaderOverlay.style.opacity = 0;
+                        break;
                     case 2:
                         isSearchPage = true;
+                        subHeaderTop.style.display = 'flex';
+                        subHeaderOverlay.style.backgroundColor = 'rgba(18,18,18,1)';
+                        subHeaderOverlay.style.opacity = 1;
                         headerSearch.style.display = 'block';
-                        subHeaderTitle.style.display = 'none';
+                        // subHeaderTitle.style.display = 'none';
                         subHeaderBottom.style.display = 'none';
                         playBtnHeader.style.display = 'none';
                         break;
-                    case 1:
                     case 3:
                         headerSearch.style.display = 'none';
                         isPlaylistPage = false;
@@ -337,6 +350,8 @@ const playList = {
                         playBtnHeader.style.display = 'none';
                         break;
                     case 4:
+                        appContentHeaderOverlay.style.backgroundColor = 'rgb(80, 152, 168)';
+                        break;
                     case 5:
                     case 6:
                     case 7:
@@ -664,7 +679,18 @@ const playList = {
         }
         else {
             if (clientWidth >= 1023)  {
-                subHeaderOverlay.style.opacity = appContentSrollTop >= 320 ? 1 : appContentSrollTop / 320;
+                if (pageIndex === 2) {
+                    subHeaderOverlay.style.opacity = 1;
+                }
+                else {
+                    subHeaderOverlay.style.opacity = appContentSrollTop >= 320 ? 1 : appContentSrollTop / 320;
+                }
+            }
+            else {
+                if (pageIndex === 2) {
+                    subHeaderOverlay.style.opacity = 1;
+                    subHeaderOverlay.style.background = 'rgba(18,18,18,1)';
+                }
             }
         }
     },

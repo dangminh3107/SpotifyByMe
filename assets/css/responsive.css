@@ -4,6 +4,18 @@
     }
 }
 
+@media (min-width: 63.9375em) and (max-width: 91em) {
+    .app-content-header-slider-box.col.l-4.l-search-mod {
+        flex: 0 0 33.3%;
+        max-width: 33.6%;
+    }
+
+    .app-content-header-search-slider-item-title {
+        font-size: 2.5rem;
+        line-height: 2.5rem;
+    }
+}
+
 @media (max-width: 81.25em) {
     .app-content-header-container-item {
         width: 240px;
@@ -230,8 +242,7 @@
     .app-content-header-statistic-total-songs,
     .app-content-header-description,
     .app-content-header-statistic-total-time:before,
-    .app-content-sub-header-bottom,
-    .app-content-sub-header-top {
+    .app-content-sub-header-bottom {
         display: none;
     }
 
@@ -356,6 +367,44 @@
         font-size: 3rem;
         line-height: 3rem;
     }
+
+    .app-content-header-slider-group {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .app-content-header-slider-box.col.l-4.l-search-mod {
+        flex: 0 0 50%;
+        max-width: 50%;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .app-content-header.search {
+        min-height: 600px;
+    }
+
+    .app-content-header-search-container {
+        margin: 0;
+    }
+
+    .app-content-header-search-container-box {
+        height: 100%;
+        margin-top: 70px;
+    }
+
+    .slider-control-right {
+        display: none;
+    }
+
+    .app-content-header-slider-group {
+        overflow: unset;
+    }
+
+    .app-content-header-search-slider-item-title {
+        font-size: 2.5rem;
+        line-height: 2.5rem;
+    }
 }
 
 @media (max-width: 46.1875em) {
@@ -378,7 +427,6 @@
     .note-4,
     .app-content::-webkit-scrollbar,
     .app-content-header-profile,
-    .app-content-sub-header-top,
     .app-content-body-list-header-album,
     .app-content-body-list-item-album-link,
     .app-content-body-list-header-date-added,
