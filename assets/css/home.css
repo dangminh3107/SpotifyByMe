@@ -26,11 +26,11 @@
 
 .app-content-header-container-item {
     height: 80px;
-    width: 280px;
+    width: 100%;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 4px;
     overflow: hidden;
-    margin: 10px;
+    margin: 10px auto;
     display: flex;
     cursor: pointer;
 }
@@ -142,8 +142,7 @@
 }
 
 .app-content-header-body-item {
-    flex: 0 0 15%;
-    margin: 0 10px;
+    margin: 10px auto;
     width: 182px;
     background-color: #181818;
     transition: background-color 0.3s ease;

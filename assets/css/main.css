@@ -260,6 +260,7 @@
 .app-play-bar-group {
     width: 100%;
     display: flex;
+    justify-content: space-between;
 }
 
 .app-play-bar-song {
@@ -551,7 +552,7 @@
     scroll-behavior: smooth;
     overflow-y: overlay;
     overflow-x: hidden;
-    background: linear-gradient(-60deg, rgba(18,18,18,1), rgba(18,18,18,1) 90%, rgba(18,18,18,0.9) 100%);
+    background: rgba(18,18,18,1)
 }
 
 .app-content-page[id='1'],
@@ -580,7 +581,6 @@
 }
 
 .app-content-header {
-    height: 30vh;
     width: 100%;
     min-height: 340px;
     max-height: 500px;

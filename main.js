@@ -663,7 +663,9 @@ const playList = {
             }  
         }
         else {
-            subHeaderOverlay.style.opacity = appContentSrollTop >= 320 ? 1 : appContentSrollTop / 320;
+            if (clientWidth >= 1023)  {
+                subHeaderOverlay.style.opacity = appContentSrollTop >= 320 ? 1 : appContentSrollTop / 320;
+            }
         }
     },
 
