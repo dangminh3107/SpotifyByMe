@@ -185,6 +185,11 @@
         max-width: 25%;
     }
 
+    .m-30perc {
+        flex: 0 0 30%;
+        max-width: 30%;
+    }
+
     .m-4 {
         flex: 0 0 33.33333%;
         max-width: 33.33333%;
@@ -203,6 +208,11 @@
     .m-7 {
         flex: 0 0 58.33333%;
         max-width: 58.33333%;
+    }
+
+    .m-60perc {
+        flex: 0 0 60%;
+        max-width: 60%;
     }
 
     .m-8 {

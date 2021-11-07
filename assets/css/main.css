@@ -575,12 +575,14 @@
 
 .app-content-page[id='1'],
 .app-content-page[id='2'],
+.app-content-page[id='3'],
 .app-content-page[id='6'] {
     display: none;
 }
 
 .app-content-page[id='1'].active,
 .app-content-page[id='2'].active,
+.app-content-page[id='3'].active,
 .app-content-page[id='6'].active  {
     display: block;
 }

@@ -53,6 +53,9 @@ const playListCreate = Array.from($$('.app-playlist-item-link'))
 const playListItem = Array.from($$('.my-playlist-item'))
 const sidebarList = menuItem.concat(playListCreate).concat(playListItem)
 const pageList = Array.from($$('.app-content-page'))
+const libHeader = $('.app-content-sub-header-lib-contain')
+const libHeaderList = $$('.app-content-sub-header-lib-item')
+const libPageList = $$('.app-content-page-lib')
 
 const sliderBox = $('.app-content-header-slider-group')
 const sliderListItem= $$('.app-content-header-search-slider-item')
@@ -69,6 +72,7 @@ let pageIndex = 0;
 let slideIndex = 1;
 let slideLength = sliderListItem.length - 2;
 let indexPercent = 106;
+let totalPageLib = libHeaderList.length;
 
 const myApp = {
     currentIndex: 0,
@@ -329,13 +333,15 @@ const myApp = {
                 switch(Number(idx)) {
                     case 1:
                         isPlaylistPage = false;
+                        libHeader.style.display = 'none';
                         headerSearch.style.display = 'none';
                         subHeaderTitle.style.display = 'none';
                         subHeaderBottom.style.display = 'none';
                         playBtnHeader.style.display = 'none';
+                        subHeaderOverlay.style.backgroundColor = 'rgb(80, 152, 168)';
                         if (documentWidth >= 740) {
-                            subHeaderOverlay.style.opacity = 0;
-                            subHeaderOverlay.style.backgroundColor = 'rgb(80, 152, 168)';
+                            // subHeaderOverlay.style.opacity = 0;
+                            // subHeaderOverlay.style.display = 'block';
                             subHeaderTop.style.display = 'flex';
                         }
                         else {
@@ -346,31 +352,62 @@ const myApp = {
                     case 2:
                         isSearchPage = true;
                         isPlaylistPage = false;
+                        libHeader.style.display = 'none';
                         subHeaderTop.style.display = 'flex';
                         subHeaderTitle.style.display = 'none';
+                        subHeaderOverlay.style.display = 'block';
                         subHeaderOverlay.style.backgroundColor = 'rgba(18,18,18,1)';
                         headerSearch.style.display = 'flex';
                         subHeaderBottom.style.display = 'none';
                         playBtnHeader.style.display = 'none';
                         break;
                     case 3:
+                        isSearchPage = false;
+                        isPlaylistPage = false;
+                        headerSearch.style.display = 'none';
+                        libHeader.style.display = 'flex';
+                        subHeaderTop.style.display = 'flex';
+                        subHeaderTitle.style.display = 'none';
+                        subHeaderOverlay.style.display = 'block';
+                        subHeaderOverlay.style.backgroundColor = 'rgba(18,18,18,1)';
+                        subHeaderBottom.style.display = 'none';
+                        playBtnHeader.style.display = 'none';
+                        break;
                     case 4:
+                        break;
                     case 5:
+                        break;
                     case 6:
+                    case 7:
+                    case 8:
+                        isPlaylistPage = true;
+                        isSearchPage = false;
+                        offsetYLarge = appContentBody.offsetTop + appContentBodyPlaybar.offsetHeight / 2;
+                        offsetYMedium = headerContent.offsetHeight;
+                        libHeader.style.display = 'none';
+                        headerSearch.style.display = 'none';
                         appContentHeaderOverlay.style.backgroundColor = 'rgb(80, 152, 168)';
                         subHeaderOverlay.style.opacity = 0;
                         subHeaderOverlay.style.backgroundColor = 'rgb(80, 152, 168)';
-                    case 7:
-                        isPlaylistPage = true;
-                        isSearchPage = false;
-                        headerSearch.style.display = 'none';
-                        offsetYLarge = appContentBody.offsetTop + appContentBodyPlaybar.offsetHeight / 2;
-                        offsetYMedium = headerContent.offsetHeight;
                         subHeaderBottom.style.opacity = 0;
                         subHeaderBottom.style.display = 'flex';
                         break;
                     default:
                 }
+            }
+        }
+
+        libHeader.onclick = function(e) {
+            let libNode = e.target.closest('.app-content-sub-header-lib-item')
+            if (libNode) {
+                for (var i = 0; i < totalPageLib; i++) {
+                    if (libHeaderList[i].id !== libNode.id) {
+                        libHeaderList[i].classList.remove('active')
+                        libPageList[i].classList.remove('active')
+                    }
+                }
+                libNode.classList.add('active')
+                libPageList[libNode.id - 1].classList.add('active')
             }
         }
 
@@ -639,7 +676,9 @@ const myApp = {
                     playBtnHeader.style.display = 'block';
                     playBtnRandomHeader.style.display = 'none';
                 }
+                subHeaderTop.style.display = 'flex';
                 subHeaderOverlay.style.display = 'block';
+                subHeaderOverlay.style.opacity = appContent.scrollTop / 340;
                 playBtnRandomPlaylist.style.display = 'none';
                 imgHeader.style.transform = `scale(1)`;
                 subHeaderOverlay.style.backgroundImage = 'linear-gradient(rgba(0, 0, 0, 0.6) 0, rgba(0, 0, 0, 0.6) 100%)';
@@ -648,6 +687,10 @@ const myApp = {
                 if (pageIndex === 2) {
                     subHeaderOverlay.style.display = 'block';
                     btnNextSlider.style.display = 'none';
+                }
+                else if (pageIndex === 3) {
+                    subHeaderOverlay.style.display = 'block';
+                    // subHeaderOverlay.style.backgroundImage = 'linear-gradient(rgba(0, 0, 0, 0.6) 0, rgba(0, 0, 0, 0.6) 100%)';
                 }
                 else {
                     if (subHeaderTitle.style.display === 'block') {
@@ -716,7 +759,7 @@ const myApp = {
                 }
             }
             else {
-                if (pageIndex === 2) {
+                if (pageIndex === 2 || pageIndex === 3) {
                     subHeaderOverlay.style.opacity = appContentSrollTop >= 320 ? 1 : appContentSrollTop / 320;
                     subHeaderOverlay.style.backgroundColor = 'rgba(18,18,18,1)';
                 }
