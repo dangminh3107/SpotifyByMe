@@ -107,6 +107,24 @@
     color: var(--text-color);
 }
 
+.app-playlist-item-link.active {
+    color: var(--white-color);
+}
+
+.app-playlist-item-link.active:hover {
+    animation: unset;
+}
+
+.app-playlist-item-link.active .app-playlist-item-create,
+.app-playlist-item-link.active  .app-playlist-item-liked   {
+    filter: brightness(1.2);
+}
+
+.app-playlist-item-link.active:hover .app-playlist-item-create,
+.app-playlist-item-link.active:hover .app-playlist-item-liked {
+    animation: unset;
+}
+
 .app-playlist-item-link:hover {
     animation: fadeInText 1s;
     color: var(--white-color);
@@ -557,13 +575,13 @@
 
 .app-content-page[id='1'],
 .app-content-page[id='2'],
-.app-content-page[id='4'] {
+.app-content-page[id='6'] {
     display: none;
 }
 
 .app-content-page[id='1'].active,
 .app-content-page[id='2'].active,
-.app-content-page[id='4'].active  {
+.app-content-page[id='6'].active  {
     display: block;
 }
 

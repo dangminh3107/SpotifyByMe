@@ -82,6 +82,7 @@
     position: relative;
 }
 
+
 .app-content-header-search-slider-item:first-child {
     margin-left: 0;
 }
@@ -173,7 +174,7 @@
 
 .app-search-body-item  {
     display: flex;
-    margin-top: 16px;
+    margin-top: 24px;
 }
 
 .app-search-body-item-box {
@@ -184,6 +185,8 @@
     border-radius: 4px;
     position: relative;
     overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
 }
 
 .app-search-body-item-title {

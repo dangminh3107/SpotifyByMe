@@ -49,8 +49,9 @@ const appContentBodyList = $('.app-content-body .app-content-body-list')
 const imgHeader = $('.app-content-header-image')
 const menuSidebar = $('.side-bar')
 const menuItem = Array.from($$('.app-menu-item'));
+const playListCreate = Array.from($$('.app-playlist-item-link'))
 const playListItem = Array.from($$('.my-playlist-item'))
-const sidebarList = menuItem.concat(playListItem)
+const sidebarList = menuItem.concat(playListCreate).concat(playListItem)
 const pageList = Array.from($$('.app-content-page'))
 
 const sliderBox = $('.app-content-header-slider-group')
@@ -69,7 +70,7 @@ let slideIndex = 1;
 let slideLength = sliderListItem.length - 2;
 let indexPercent = 106;
 
-const playList = {
+const myApp = {
     currentIndex: 0,
     isPlaying: false,
     isVolumeOn: false,
@@ -306,8 +307,9 @@ const playList = {
 
         menuSidebar.onclick = function(e) {
             const menuNode = e.target.closest('.app-menu-item')
+            const playListCreateNode = e.target.closest('.app-playlist-item-link')
             const playlistNode = e.target.closest('.my-playlist-item')
-            let node = menuNode || playlistNode;
+            let node = menuNode || playListCreateNode || playlistNode;
             if (node) {
                 appContent.scroll(0, 0);
                 let idx = node.id;
@@ -352,20 +354,12 @@ const playList = {
                         playBtnHeader.style.display = 'none';
                         break;
                     case 3:
-                        headerSearch.style.display = 'none';
-                        isPlaylistPage = false;
-                        isSearchPage = false;
-                        subHeaderTitle.style.display = 'none';
-                        subHeaderBottom.style.display = 'none';
-                        subHeaderOverlay.style.opacity = 0;
-                        playBtnHeader.style.display = 'none';
-                        break;
                     case 4:
+                    case 5:
+                    case 6:
                         appContentHeaderOverlay.style.backgroundColor = 'rgb(80, 152, 168)';
                         subHeaderOverlay.style.opacity = 0;
                         subHeaderOverlay.style.backgroundColor = 'rgb(80, 152, 168)';
-                    case 5:
-                    case 6:
                     case 7:
                         isPlaylistPage = true;
                         isSearchPage = false;
@@ -629,6 +623,12 @@ const playList = {
         // var offsetYLarge = 340 + 106/ 2;
         // var offsetYMedium = 340;
         window.onresize = function(e) {
+            if (slideIndex > 1) {
+                sliderListItem.forEach((item) => {
+                    item.style.transform = 'translateX(0)';
+                })
+                btnPrevSlider.style.display = 'none';
+            }
             if (document.documentElement.clientWidth >= 1023) {
                 if (pageIndex === 2) {
                     subHeaderTitle.style.display = 'none';
@@ -863,9 +863,9 @@ const playList = {
         this.loadCurrentSong();
         this.render()
             .then(() => {
-                playList.loadPrevStatus();
+                myApp.loadPrevStatus();
             })
     }
 }
 
-playList.start();
+myApp.start();
