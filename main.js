@@ -800,15 +800,17 @@ const playList = {
     loadPrevStatus: function() {
         if (document.cookie === '') {
             timeStart.innerText = '0:00';
+            this.currentIndex = 0;
             this.loadCurrentSong();
             this.durationPlayed = 0;
             this.timeSongPlayed = '0:00';
             this.idSongPlayed = this.currentIndex;
             this.setConfig('idSongPlayed', this.idSongPlayed)
 
-            this.volume = 0
-            playBarVolume.classList.add('turn-off')
-            this.isVolumeOn = false;
+            this.volume = 0.5
+            volumeBar.value = this.volume*100;
+            volumeBar.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + this.volume*100 + '%, #b3b3b3 ' + this.volume*100 + '%, #b3b3b3 100%)'
+            this.isVolumeOn = true;
             this.setConfig('isVolumeOn', this.isVolumeOn)
             
             var today = new Date();
