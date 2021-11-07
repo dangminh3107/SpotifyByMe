@@ -259,21 +259,23 @@ const playList = {
         const _this = this;
 
         btnNextSlider.onclick = function () {
-            btnNextSlider.style.filter = 'brightness(50%)';
-            setTimeout(() => {
-                btnNextSlider.style.filter = 'brightness(1)';
-            }, 100)
-            if (slideIndex < slideLength) {
-                sliderListItem.forEach((item) => {
-                    item.style.transform = `translateX(-${indexPercent}%)`
-                })
-                indexPercent += 106;
-                slideIndex += 1;
-                if (slideIndex === slideLength) {
-                    setTimeout(() => {
-                        btnNextSlider.style.display = 'none';
-                        btnPrevSlider.style.display = 'block';
-                    }, 500)
+            if (document.documentElement.clientWidth >= 1023) {
+                btnNextSlider.style.filter = 'brightness(50%)';
+                setTimeout(() => {
+                    btnNextSlider.style.filter = 'brightness(1)';
+                }, 100)
+                if (slideIndex < slideLength) {
+                    sliderListItem.forEach((item) => {
+                        item.style.transform = `translateX(-${indexPercent}%)`
+                    })
+                    indexPercent += 106;
+                    slideIndex += 1;
+                    if (slideIndex === slideLength) {
+                        setTimeout(() => {
+                            btnNextSlider.style.display = 'none';
+                            btnPrevSlider.style.display = 'block';
+                        }, 500)
+                    }
                 }
             }
         }
@@ -320,23 +322,32 @@ const playList = {
                 pageList[idx-1].classList.add('active')
 
                 pageIndex = Number(idx);
+                let documentWidth = document.documentElement.clientWidth;
 
                 switch(Number(idx)) {
                     case 1:
-                        subHeaderTop.style.display = 'none';
+                        isPlaylistPage = false;
                         headerSearch.style.display = 'none';
-                        subHeaderTop.style.display = 'flex';
-                        subHeaderOverlay.style.display = 'flex';
-                        subHeaderOverlay.style.backgroundColor = 'rgb(80, 152, 168)';
-                        subHeaderOverlay.style.opacity = 0;
+                        subHeaderTitle.style.display = 'none';
+                        subHeaderBottom.style.display = 'none';
+                        playBtnHeader.style.display = 'none';
+                        if (documentWidth >= 740) {
+                            subHeaderOverlay.style.opacity = 0;
+                            subHeaderOverlay.style.backgroundColor = 'rgb(80, 152, 168)';
+                            subHeaderTop.style.display = 'flex';
+                        }
+                        else {
+                            subHeaderOverlay.style.display = 'none';
+                            subHeaderTop.style.display = 'none';
+                        }
                         break;
                     case 2:
                         isSearchPage = true;
+                        isPlaylistPage = false;
                         subHeaderTop.style.display = 'flex';
+                        subHeaderTitle.style.display = 'none';
                         subHeaderOverlay.style.backgroundColor = 'rgba(18,18,18,1)';
-                        subHeaderOverlay.style.opacity = 1;
-                        headerSearch.style.display = 'block';
-                        // subHeaderTitle.style.display = 'none';
+                        headerSearch.style.display = 'flex';
                         subHeaderBottom.style.display = 'none';
                         playBtnHeader.style.display = 'none';
                         break;
@@ -351,7 +362,8 @@ const playList = {
                         break;
                     case 4:
                         appContentHeaderOverlay.style.backgroundColor = 'rgb(80, 152, 168)';
-                        break;
+                        subHeaderOverlay.style.opacity = 0;
+                        subHeaderOverlay.style.backgroundColor = 'rgb(80, 152, 168)';
                     case 5:
                     case 6:
                     case 7:
@@ -618,19 +630,32 @@ const playList = {
         // var offsetYMedium = 340;
         window.onresize = function(e) {
             if (document.documentElement.clientWidth >= 1023) {
+                if (pageIndex === 2) {
+                    subHeaderTitle.style.display = 'none';
+                    btnNextSlider.style.display = 'block';
+                }
                 if (subHeaderTitle.style.display === 'block') {
                     subHeaderTop.style.padding = '0'
                     playBtnHeader.style.display = 'block';
                     playBtnRandomHeader.style.display = 'none';
                 }
+                subHeaderOverlay.style.display = 'block';
                 playBtnRandomPlaylist.style.display = 'none';
                 imgHeader.style.transform = `scale(1)`;
+                subHeaderOverlay.style.backgroundImage = 'linear-gradient(rgba(0, 0, 0, 0.6) 0, rgba(0, 0, 0, 0.6) 100%)';
             }
             else {
-                if (subHeaderTitle.style.display === 'block') {
-                    subHeaderTop.style.padding = '23px 0'
-                    playBtnHeader.style.display = 'none';
-                    playBtnRandomHeader.style.display = 'flex';
+                if (pageIndex === 2) {
+                    subHeaderOverlay.style.display = 'block';
+                    btnNextSlider.style.display = 'none';
+                }
+                else {
+                    if (subHeaderTitle.style.display === 'block') {
+                        subHeaderTop.style.padding = '23px 0'
+                        playBtnHeader.style.display = 'none';
+                        playBtnRandomHeader.style.display = 'flex';
+                    }
+                    subHeaderOverlay.style.display = 'none';
                 }
                 playBtnRandomPlaylist.style.display = 'flex';
             }
@@ -679,8 +704,12 @@ const playList = {
         }
         else {
             if (clientWidth >= 1023)  {
-                if (pageIndex === 2) {
-                    subHeaderOverlay.style.opacity = 1;
+                if (pageIndex === 1) {
+                    subHeaderOverlay.style.opacity = appContentSrollTop >= 320 ? 1 : appContentSrollTop / 320;
+                    
+                }
+                else if (pageIndex === 2) {
+                    subHeaderOverlay.style.opacity = appContentSrollTop >= 320 ? 1 : appContentSrollTop / 320;
                 }
                 else {
                     subHeaderOverlay.style.opacity = appContentSrollTop >= 320 ? 1 : appContentSrollTop / 320;
@@ -688,8 +717,8 @@ const playList = {
             }
             else {
                 if (pageIndex === 2) {
-                    subHeaderOverlay.style.opacity = 1;
-                    subHeaderOverlay.style.background = 'rgba(18,18,18,1)';
+                    subHeaderOverlay.style.opacity = appContentSrollTop >= 320 ? 1 : appContentSrollTop / 320;
+                    subHeaderOverlay.style.backgroundColor = 'rgba(18,18,18,1)';
                 }
             }
         }

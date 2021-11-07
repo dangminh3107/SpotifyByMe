@@ -1,9 +1,8 @@
 .app-content-sub-header-search-group {
     position: absolute;
     height: 65px;
-    display: flex;
     align-items: center;
-    margin: 6px 0 6px 35px;
+    margin-left: 65px;
     display: flex;
     align-items: center;
     display: none;
