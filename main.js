@@ -206,50 +206,41 @@ const myApp = {
         })
       },
       
-    fetchDurationList: async function(paths) {
+    fetchDurationList: function(paths) {
         // Create an array of promises and wait until all have completed
-        const durations = await Promise.all(paths.map((path) => this.fetchDuration(path)));
-        return durations;
+        return Promise.all(paths.map((path) => this.fetchDuration(path)))
+            .then((durations) => durations);
     },
 
-    render: function() {
-        let pathList = []
-        this.songs.forEach((song) => {
-            pathList.push(song.path);
-        })
-        this.fetchDurationList(pathList).then((durationList) => {
-            for (let i = 0; i < durationList.length; i++) {
-                durationList[i] = this.secondToTime(durationList[i])
-                this.songs[i].timeTotal = durationList[i];
-            }
-            const htmls = this.songs.map((song,index) => {
-                song.timeTotal = durationList[index];
-                return `
-                    <div class="app-content-body-list-item ${index === this.currentIndex ? 'active' : ''}" data-index="${index}">
-                        <span class="app-content-body-list-item-number">${song.id}</span>
-                        <div class="app-content-body-list-item-song">
-                            <div class="app-content-body-list-item-song-avavtar">
-                                <img src="${song.image}" alt="" class="app-content-body-list-item-song-avavtar-img">
-                            </div>
-                            <div class="app-content-body-list-item-song-info">
-                                <span class="app-content-body-list-item-song-name">${song.name}</span>
-                                <span class="app-content-body-list-item-song-artist">${song.artist}</span>
-                            </div>
+    render: function(durationList) {
+        for (let i = 0; i < durationList.length; i++) {
+            durationList[i] = this.secondToTime(durationList[i])
+            this.songs[i].timeTotal = durationList[i];
+        }
+        const htmls = this.songs.map((song,index) => {
+            song.timeTotal = durationList[index];
+            return `
+                <div class="app-content-body-list-item ${index === this.currentIndex ? 'active' : ''}" data-index="${index}">
+                    <span class="app-content-body-list-item-number">${song.id}</span>
+                    <div class="app-content-body-list-item-song">
+                        <div class="app-content-body-list-item-song-avavtar">
+                            <img src="${song.image}" alt="" class="app-content-body-list-item-song-avavtar-img">
                         </div>
-                        <span class="app-content-body-list-item-album">
-                            <a href="" class="app-content-body-list-item-album-link">${song.album}</a>
-                        </span>
-                        <span class="app-content-body-list-item-date-added">Aug 19, 2021</span>
-                        <span class="app-content-body-list-item-duration">${durationList[index]}</span>
+                        <div class="app-content-body-list-item-song-info">
+                            <span class="app-content-body-list-item-song-name">${song.name}</span>
+                            <span class="app-content-body-list-item-song-artist">${song.artist}</span>
+                        </div>
                     </div>
-                `
-            })
-            playlist.innerHTML = htmls.join('')
-            this.listSongs = $$('.app-content-body-list-item');
+                    <span class="app-content-body-list-item-album">
+                        <a href="" class="app-content-body-list-item-album-link">${song.album}</a>
+                    </span>
+                    <span class="app-content-body-list-item-date-added">Aug 19, 2021</span>
+                    <span class="app-content-body-list-item-duration">${durationList[index]}</span>
+                </div>
+            `
         })
-        return new Promise(resolve => {
-            setTimeout(resolve, 500)
-        });
+        playlist.innerHTML = htmls.join('')
+        this.listSongs = $$('.app-content-body-list-item');
     },
     
     defineProperties: function() {
@@ -338,6 +329,7 @@ const myApp = {
                         subHeaderTitle.style.display = 'none';
                         subHeaderBottom.style.display = 'none';
                         playBtnHeader.style.display = 'none';
+                        playBtnRandomHeader.style.display = 'none';
                         subHeaderOverlay.style.backgroundColor = 'rgb(80, 152, 168)';
                         if (documentWidth >= 740) {
                             // subHeaderOverlay.style.opacity = 0;
@@ -360,6 +352,7 @@ const myApp = {
                         headerSearch.style.display = 'flex';
                         subHeaderBottom.style.display = 'none';
                         playBtnHeader.style.display = 'none';
+                        playBtnRandomHeader.style.display = 'none';
                         break;
                     case 3:
                         isSearchPage = false;
@@ -372,6 +365,7 @@ const myApp = {
                         subHeaderOverlay.style.backgroundColor = 'rgba(18,18,18,1)';
                         subHeaderBottom.style.display = 'none';
                         playBtnHeader.style.display = 'none';
+                        playBtnRandomHeader.style.display = 'none';
                         break;
                     case 4:
                         break;
@@ -688,8 +682,12 @@ const myApp = {
                     subHeaderOverlay.style.display = 'block';
                     btnNextSlider.style.display = 'none';
                 }
-                else if (pageIndex === 3) {
+                else if (pageIndex === 3 || pageIndex === 6) {
                     subHeaderOverlay.style.display = 'block';
+                    playBtnHeader.style.display = 'none';
+                    if (pageIndex === 6 && appContent.scrollTop >= 340) {
+                        playBtnRandomHeader.style.display = 'flex';
+                    }
                     // subHeaderOverlay.style.backgroundImage = 'linear-gradient(rgba(0, 0, 0, 0.6) 0, rgba(0, 0, 0, 0.6) 100%)';
                 }
                 else {
@@ -904,10 +902,14 @@ const myApp = {
         this.defineProperties();
         this.handleEvents();
         this.loadCurrentSong();
-        this.render()
-            .then(() => {
-                myApp.loadPrevStatus();
-            })
+        let pathList = []
+        this.songs.forEach((song) => {
+            pathList.push(song.path);
+        })
+        this.fetchDurationList(pathList).then((durationList) => {
+            this.render(durationList)
+            this.loadPrevStatus();
+        })
     }
 }
 
