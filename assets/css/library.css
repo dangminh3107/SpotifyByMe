@@ -63,6 +63,7 @@
     margin-top: auto;
     display: flex;
     flex-direction: column;
+    margin-top: 100px;
 }
 
 .app-content-header-lib-title {
@@ -83,13 +84,14 @@
 }
 
 .app-content-header-lib-box-1 {
-    height: 260px;
+    display: flex;
+    align-items: center;
 }
 
 .app-content-header-lib-box-1-box {
     background: linear-gradient(149.46deg, rgb(69, 10, 245), rgb(142, 142, 229) 99.16%);
     width: 100%;
-    height: 100%;
+    height: 268px;
     display: flex;
     align-items: center;
     position: relative;
@@ -159,13 +161,67 @@
     margin: 15px 0;
 }
 
-.app-content-header-body-item-contain.l-lib-head {
-    /* flex: 0 0 20%; */
-    /* max-width: 20%; */
+.podcast-content-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+    align-items: center;
+    justify-content: center;
 }
 
-.lib-item {
-    margin-bottom: 10px;
+.podcast-content-icon {
+    height: 50px;
+    width: 50px;
 }
 
-/* background: linear-gradient(149.46deg, rgb(69, 10, 245), rgb(142, 142, 229) 99.16%); */
+.podcast-content-heading,
+.podcast-content-sub-heading {
+    color: var(--white-color);
+}
+
+.podcast-content-heading {
+    font-size: 3rem;
+    line-height: 3rem;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.podcast-content-sub-heading {
+    font-size: 1.8rem;
+    line-height: 1.8rem;
+    margin: 10px 0;
+}
+
+.podcast-content-button {
+    display: inline-flex;
+    align-items: center;
+    margin: 10px 0;
+    padding: 10px 25px;
+    border-radius: 20px;
+    background-color: var(--white-color);
+    cursor: pointer;
+}
+
+.podcast-content-button-find {
+    outline: none;
+    border: none;
+    font-size: 1.3rem;
+    line-height: 1.3rem;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+}
+
+.app-content-page-lib[id="2"] .app-content-header-body-item-header {
+    margin: 20px 20px 0 20px;
+}
+
+.app-content-artist-page {
+    margin-top: 100px;
+}
+
+.app-content-header-lib .app-content-header-container-item-box-img {
+    height: 100%;
+    display: none;
+}

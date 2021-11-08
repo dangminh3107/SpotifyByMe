@@ -64,7 +64,7 @@
 }
 
 .btn-play-home {
-    padding: 11px 12px 10px 13px;
+    padding: 11px 12px 9px 13px;
     display: flex;
     align-items: center;
     background-color: var(--primary-color);
@@ -136,7 +136,7 @@
 
 .app-content-header-body-item-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
     margin: 0 20px;
     flex-wrap: wrap;
 }
@@ -201,7 +201,7 @@
     position: absolute;
     bottom: 0;
     right: 0;
-    margin: 15px;
+    margin: 10px;
 }
 
 .app-content-header-body-item:hover {
@@ -210,5 +210,5 @@
 
 .app-content-header-body-item:hover .app-content-header-body-item-btn-play{
     opacity: 1;
-    transform: scale(1.1);
+    animation: riseUpBtn 0.2s linear;
 }

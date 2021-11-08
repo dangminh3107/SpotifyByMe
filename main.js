@@ -206,10 +206,10 @@ const myApp = {
         })
       },
       
-    fetchDurationList: function(paths) {
+    fetchDurationList: async function(paths) {
         // Create an array of promises and wait until all have completed
-        return Promise.all(paths.map((path) => this.fetchDuration(path)))
-            .then((durations) => durations);
+        const durations = await Promise.all(paths.map((path) => this.fetchDuration(path)));
+        return durations;
     },
 
     render: function(durationList) {
@@ -901,7 +901,7 @@ const myApp = {
         this.loadConfig();
         this.defineProperties();
         this.handleEvents();
-        this.loadCurrentSong();
+        // this.loadCurrentSong();
         let pathList = []
         this.songs.forEach((song) => {
             pathList.push(song.path);

@@ -23,11 +23,6 @@
     }
 }
 
-@media (max-width: 90.5625em) {
-    /* .app-content-header.lib {
-        min-height: 700px;
-    } */
-}
 
 @media (max-width: 81.25em) {
     .app-content-header-container-item {
@@ -73,8 +68,6 @@
     }
 
 }
-
-
 @media (min-width: 69.5625em) and (max-width: 82.5em) {
     .app-content-header-body-item-contain.col.l-2.l-mod {
         flex: 0 0 33.33333%;
@@ -88,34 +81,41 @@
 
 @media (max-width: 69.5625em) {
     :root{
-        --side-bar-width: 25%;
+        --side-bar-width: 20%;
     }
     .side-bar {
-        flex: 0 0 25%;
-        max-width: 25%;
+        flex: 0 0 20%;
+        max-width: 20%;
         justify-content: unset;
     }
     .app-install-box {
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
+}
+
+
+/* ------------------------------------------------------------------------- */
+@media (min-width: 64em) and (max-width: 77.4375em) {
+    .app-content-header-body-item-contain {
+        flex: 0 0 21.666667%;
+        max-width: 21.666667%;
+    }
+}
+
+@media (min-width: 64em) and (max-width: 69.5625em) {
+    .app-content-header-lib-box-1 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    .app-content-header-body-item-contain {
         flex: 0 0 25%;
         max-width: 25%;
     }
 }
 
-@media (max-width: 65.375em) {
-    .app-content-header-lib-box-contain-second {
-        margin: 0;
-    }
 
-    .app-content-header-lib-box-2 {
-        width: unset;
-        margin: 10px 0;
-    }
-
-    .app-content-header-lib-box-2-item {
-        margin: 0;
-    }
-}
-
+/* ------------------------------------------------------------------------- */
 @media (min-width: 46.25em) and (max-width: 63.9375em) {
     :root{
         --side-bar-width: 25%;
@@ -381,6 +381,80 @@
         flex-wrap: nowrap;
         overflow-x: scroll;
     }
+    
+    /*  */
+    .app-content-header-body-item-container.lib-row {
+        flex-wrap: wrap;
+        overflow-x: scroll;
+    }
+
+    .app-content-header-body-item-box.lib-page {
+        display: flex;
+        align-items: center;
+    }
+
+    .app-content-header-lib .app-content-header-body-item-thum-img,
+    .app-content-header-body-item-box.lib-page .app-content-header-body-item-thum-img.artist {
+        height: 80px;
+        width: 80px;
+    }
+
+    .app-content-header-lib  .app-content-header-body-item-thumb,
+    .app-content-header-body-item-box.lib-page .app-content-header-body-item-thumb {
+        width: unset;
+    }
+
+    .app-content-header-body-item-btn-play,
+    .app-content-header-body-item-box.lib-page .app-content-header-body-item-info-description {
+        display: none;
+    }
+
+    .app-content-header-body-item-box.lib-page .app-content-header-body-item-info-heading {
+        margin: 0 0 0 20px;
+    }
+
+    .app-content-header-body-item-box.lib-page .app-content-header-body-item-info {
+        margin: 0;
+    }
+
+    .app-content-header-lib .app-content-header-container-item-box-img {
+        display: block;
+        padding: 15px;
+    }
+
+    .app-content-header-lib-box-1-box {
+        overflow: hidden;
+        height: 114px;
+        margin: 5px 0;
+        background: #181818;
+    }
+
+    .app-content-header-lib-box-1-box:hover {
+        background-color: #282828;
+    }
+
+    .app-content-header-lib-box-1-group {
+        margin-left: 120px;
+    }
+
+    .app-content-header-lib-box-1-title {
+        font-size: 1.4rem;
+        line-height: 2rem;
+    }
+
+    .app-content-header-lib-box-1-total-liked-song {
+        font-size: 1rem;
+    }
+
+    .app-content-header-lib .app-content-header-lib-box-1-content {
+        display: none;
+    }
+    
+    .app-content-header-lib  .app-content-header-body-item-contain {
+        margin: 5px 0;
+    }
+    /*  */
+
 
     .app-content-header-body-item-container.row::-webkit-scrollbar {
         display: none;
@@ -457,6 +531,8 @@
     }
 }
 
+
+/* ------------------------------------------------------------------------- */
 @media (max-width: 46.1875em) {
     .app-logo,
     .app-playlist,
@@ -782,5 +858,88 @@
 
     .app-content-header-lib-title {
         margin: 10px 24px;
+    }
+
+    .app-content-header-body-item-container.lib-row {
+        flex-wrap: wrap;
+        overflow-x: scroll;
+    }
+
+    .app-content-header-body-item-box.lib-page {
+        display: flex;
+        align-items: center;
+    }
+
+    .app-content-header-lib .app-content-header-body-item-thum-img,
+    .app-content-header-body-item-box.lib-page .app-content-header-body-item-thum-img.artist {
+        height: 80px;
+        width: 80px;
+    }
+
+    .app-content-header-lib  .app-content-header-body-item-thumb,
+    .app-content-header-body-item-box.lib-page .app-content-header-body-item-thumb {
+        width: unset;
+    }
+
+    .app-content-header-body-item-btn-play,
+    .app-content-header-body-item-box.lib-page .app-content-header-body-item-info-description {
+        display: none;
+    }
+
+    .app-content-header-body-item-box.lib-page .app-content-header-body-item-info-heading {
+        margin: 0 0 0 20px;
+    }
+
+    .app-content-header-body-item-box.lib-page .app-content-header-body-item-info {
+        margin: 0;
+    }
+
+    .app-content-header-lib .app-content-header-container-item-box-img {
+        display: block;
+        padding: 15px;
+    }
+
+    .app-content-header-lib-box-1-box {
+        overflow: hidden;
+        height: 114px;
+        margin: 5px 0;
+        background: #181818;
+    }
+
+    .app-content-header-lib-box-1-box:hover {
+        background-color: #282828;
+    }
+
+    .app-content-header-lib-box-1-group {
+        margin-left: 120px;
+    }
+
+    .app-content-header-lib-box-1-title {
+        font-size: 1.4rem;
+        line-height: 2rem;
+    }
+
+    .app-content-header-lib-box-1-total-liked-song {
+        font-size: 1rem;
+    }
+
+    .app-content-header-lib .app-content-header-lib-box-1-content {
+        display: none;
+    }
+
+    .app-content-header-lib .app-content-header-body-item {
+        width: unset;
+    }
+
+    .app-content-header-lib  .app-content-header-body-item-contain {
+        margin: 5px 0;
+    }
+
+    .app-content-artist-page .app-content-header-body-item {
+        width: 100%;
+    }
+
+    .app-content-artist-page .app-content-header-body-item-contain {
+        margin: 5px 0;
     }
 }
