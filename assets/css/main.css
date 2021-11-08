@@ -7,7 +7,7 @@
     top: 0;
     left: 0;
     right: 0;
-    bottom: 143px;
+    bottom: calc(var(--playbar-height) + 43px);
     background-color: var(--black-color);
     overflow: hidden;
     display: flex;
@@ -193,7 +193,7 @@
     padding: 22px;
     background-color: black;
     z-index: 1;
-    bottom: 100px;
+    bottom: var(--playbar-height);
 }
 
 .app-install {
@@ -390,6 +390,8 @@
 
 .app-play-bar.playing .icon-pause {
     display: inline-block;
+    margin-bottom: -1px;
+    margin-left: -0.5px;
 }
 
 .app-play-bar.playing .btn-toggle-play {
@@ -414,7 +416,7 @@
 }
 
 .btn-toggle-play {
-    padding: 10px 10px 9px 12px;
+    padding: 10px 10px 8px 12px;
     display: flex;
     align-items: center;
     color: var(--playbar-color);
@@ -565,7 +567,7 @@
     right: 0;
     top: 0;
     left: var(--side-bar-width);
-    bottom: 100px;
+    bottom: var(--playbar-height);
     scroll-behavior: smooth;
     overflow-y: overlay;
     overflow-x: hidden;

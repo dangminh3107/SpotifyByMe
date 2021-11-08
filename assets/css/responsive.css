@@ -248,7 +248,8 @@
     .app-content-body-list-header-time-added,
     .app-content-body-list-item-album,
     .app-content-body-list-item-date-added,
-    .app-content-body-list-item-duration {
+    .app-content-body-list-item-duration,
+    .app-content-header-container-box-button {
         display: none;
     }
 
@@ -393,7 +394,7 @@
         align-items: center;
     }
 
-    .app-content-header-lib .app-content-header-body-item-thum-img,
+    .app-content-header-body-item-thum-img.lib-img,
     .app-content-header-body-item-box.lib-page .app-content-header-body-item-thum-img.artist {
         height: 80px;
         width: 80px;
@@ -870,7 +871,7 @@
         align-items: center;
     }
 
-    .app-content-header-lib .app-content-header-body-item-thum-img,
+    .app-content-header-body-item-thum-img.lib-img,
     .app-content-header-body-item-box.lib-page .app-content-header-body-item-thum-img.artist {
         height: 80px;
         width: 80px;
@@ -927,7 +928,7 @@
         display: none;
     }
 
-    .app-content-header-lib .app-content-header-body-item {
+    .app-content-header-body-item.lib-page {
         width: unset;
     }
 

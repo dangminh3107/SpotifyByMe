@@ -323,6 +323,7 @@ const myApp = {
 
                 switch(Number(idx)) {
                     case 1:
+                        console.log(documentWidth)
                         isPlaylistPage = false;
                         libHeader.style.display = 'none';
                         headerSearch.style.display = 'none';
@@ -330,11 +331,10 @@ const myApp = {
                         subHeaderBottom.style.display = 'none';
                         playBtnHeader.style.display = 'none';
                         playBtnRandomHeader.style.display = 'none';
-                        subHeaderOverlay.style.backgroundColor = 'rgb(80, 152, 168)';
                         if (documentWidth >= 740) {
-                            // subHeaderOverlay.style.opacity = 0;
-                            // subHeaderOverlay.style.display = 'block';
                             subHeaderTop.style.display = 'flex';
+                            // subHeaderOverlay.style.display = 'block';
+                            subHeaderOverlay.style.backgroundColor = 'rgb(80, 152, 168)';
                         }
                         else {
                             subHeaderOverlay.style.display = 'none';
@@ -672,7 +672,7 @@ const myApp = {
                 }
                 subHeaderTop.style.display = 'flex';
                 subHeaderOverlay.style.display = 'block';
-                subHeaderOverlay.style.opacity = appContent.scrollTop / 340;
+                subHeaderOverlay.style.opacity = appContent.scrollTop / 320;
                 playBtnRandomPlaylist.style.display = 'none';
                 imgHeader.style.transform = `scale(1)`;
                 subHeaderOverlay.style.backgroundImage = 'linear-gradient(rgba(0, 0, 0, 0.6) 0, rgba(0, 0, 0, 0.6) 100%)';
@@ -685,7 +685,7 @@ const myApp = {
                 else if (pageIndex === 3 || pageIndex === 6) {
                     subHeaderOverlay.style.display = 'block';
                     playBtnHeader.style.display = 'none';
-                    if (pageIndex === 6 && appContent.scrollTop >= 340) {
+                    if (pageIndex === 6 && appContent.scrollTop >= 320) {
                         playBtnRandomHeader.style.display = 'flex';
                     }
                     // subHeaderOverlay.style.backgroundImage = 'linear-gradient(rgba(0, 0, 0, 0.6) 0, rgba(0, 0, 0, 0.6) 100%)';
@@ -760,6 +760,9 @@ const myApp = {
                 if (pageIndex === 2 || pageIndex === 3) {
                     subHeaderOverlay.style.opacity = appContentSrollTop >= 320 ? 1 : appContentSrollTop / 320;
                     subHeaderOverlay.style.backgroundColor = 'rgba(18,18,18,1)';
+                }
+                else {
+                    subHeaderOverlay.style.display = 'none';
                 }
             }
         }
