@@ -9,12 +9,35 @@
     margin-top: auto;
 }
 
+.app-content-header-headbox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 30px 30px;
+}
+
 .app-content-header-home-title {
     font-size: 4rem;
     line-height: 4rem;
-    margin: 0 0 10px 30px;
     color: var(--white-color);
     letter-spacing: 1px;
+}
+
+.app-content-header-setting {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--white-color);
+    font-size: 1.8rem;
+}
+
+.app-content-header-setting i {
+    cursor: pointer;
+}
+
+.history-icon {
+    margin: 0 20px;
+    font-size: 1.7rem;
 }
 
 .app-content-header-container-row {
@@ -213,3 +236,4 @@
     opacity: 1;
     animation: riseUpBtn 0.2s linear;
 }
+

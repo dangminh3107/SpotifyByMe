@@ -26,3 +26,19 @@ function secondsToTime(value) {
 }
 var a = secondsToTime(7400);
 console.log(a);
+
+function setHeader([libHeader, libHdisplay], [headerSearch, headerSdisplay], 
+    [subHeaderTop, subTopdisplay], [subHeaderOverlay, subOverlay], [subHeaderTitle, subTitledisplay], 
+    [subHeaderBottom, subBottom], [playBtnHeader, playHeaddisplay], [playBtnRandomHeader, playRHeaddisplay]) {
+        libHeader.style.display = libHdisplay;
+        headerSearch.style.display = headerSdisplay;
+        subHeaderTop.style.display = subTopdisplay;
+        subHeaderOverlay.style.opacity = subOverlay.opacity;
+        subHeaderOverlay.style.display = subOverlay.display;
+        subHeaderOverlay.style.backgroundColor = subOverlay.backgroundColor;
+        subHeaderTitle.style.display = subTitledisplay;
+        subHeaderBottom.style.opacity = subBottom.opacity;
+        subHeaderBottom.style.display = subBottom.display;
+        playBtnHeader.style.display = playHeaddisplay;
+        playBtnRandomHeader.style.display = playRHeaddisplay;
+}

@@ -169,7 +169,14 @@
             <div class="app-content-page active" id="1">
                 <div class="app-content-header home">
                     <div class="app-content-header-container">
-                        <h1 class="app-content-header-home-title">Good morning</h1>
+                        <div class="app-content-header-headbox">
+                            <h1 class="app-content-header-home-title">Good morning</h1>
+                            <div class="app-content-header-setting">
+                                <i class="ti-bell bell-icon"></i>
+                                <i class="fas fa-history history-icon"></i>
+                                <i class="ti-settings setting-icon"></i>
+                            </div>
+                        </div>
                         <div class="app-content-header-container-row row">
                             <div class="app-content-header-container-item-contain col l-3 l-header-mod">
                                 <div class="app-content-header-container-item">
@@ -4085,6 +4092,49 @@
                 </div>
             </div>
             <input id="progress-mobile" class="progress playbar-mobile" type="range" value="0" step="1" min="0" max="100">
+        </div>
+    </div>
+    <div class="song-modal">
+        <div class="song-modal-collapse">
+            <i class="ti-angle-down"></i>
+        </div>
+        <div class="song-modal-content">
+            <div class="song-modal-img"></div>
+            <div class="song-modal-content-name">
+                <div class="song-modal-content-info">
+                    <span class="song-modal-name">Leviating</span>
+                    <span class="song-modal-artist">Dua Lipa</span>
+                </div>
+            </div>
+            <div class="song-modal-playbar">
+                <div class="app-play-bar-control-modal">
+                    <div class="control">
+                        <div class="btn btn-random-modal">
+                            <i class="fas fa-random"></i>
+                            </div>
+                        <div class="btn btn-prev-modal">
+                            <i class="fas fa-backward"></i>
+                        </div>
+                        <div class="btn btn-toggle-play-modal">
+                            <i class="fas fa-pause icon-pause-modal"></i>
+                            <i class="fas fa-play icon-play-modal"></i>
+                        </div>
+                        <div class="btn btn-next-modal">
+                            <i class="fas fa-forward"></i>
+                        </div>
+                        <div class="btn btn-repeat-modal">
+                            <i class="fas fa-redo"></i>
+                            </div>
+                    </div>    
+                    <div class="control-time-group-modal">
+                        <input id="progress-modal" class="progress modal-playbar" type="range" value="0" step="1" min="0" max="100">
+                        <div class="control-time-modal">
+                            <span class="control-time-lapse-modal">00:00</span>
+                            <span class="control-time-duration-modal">00:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <script src="./main.js"></script>

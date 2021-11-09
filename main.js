@@ -8,25 +8,37 @@ const playlist = $('.app-content-body-list-songs');
 const thumbImage = $('.app-play-bar-song-thumb');
 const thumbImageMobile = $('.app-play-bar-song-thumb-mobile')
 const thumbImageMobileTablet = $('.app-play-bar-song-thumb-mobile-tablet')
+const thumbImageModal = $('.song-modal-img')
 const playBtn = $('.btn-toggle-play');
+const playModal = $('.btn-toggle-play-modal')
 const playBtnPlaylist = $('.btn-content-playbar')
 const playBtnHeader = $('.btn-play-header')
 const playBtnRandomHeader = $('.btn-play-header-random')
 const playBtnRandomPlaylist = $('.btn-content-playbar-random')
 const playbar = $('.app-play-bar')
+const playbarModal = $('.song-modal-playbar')
 const playbarSongName = $$('.app-play-bar-song-name')
+const modalSongName = $('.song-modal-name')
 const playbarAuthor = $$('.app-play-bar-song-author')
+const modalAuthor = $('.song-modal-artist')
 const progressBar = $('#progress')
 const progressBarMobile = $('#progress-mobile')
+const progressModal = $('#progress-modal')
 const playBarVolume = $('.app-play-bar-volume')
 const volumeBtn = $('.app-play-bar-volume-group')
 const volumeBar = $('#volume')
 const timeStart = $('.control-time-lapse')
+const timeStartModal = $('.control-time-lapse-modal')
 const timeEnd = $('.control-time-duration')
+const timeEndModal = $('.control-time-duration-modal')
 const prevBtn = $('.btn-prev')
+const prevBtnModal = $('.btn-prev-modal')
 const nextBtn = $('.btn-next')
+const nextBtnModal = $('.btn-next-modal')
 const randomBtn = $('.btn-random')
+const randomBtnModal = $('.btn-random-modal')
 const repeatBtn = $('.btn-repeat')
+const repeatBtnModal = $('.btn-repeat-modal')
 const reactHeartBtn = $('.app-content-body-react-album')
 const btnViewImgThumb = $('.app-play-bar-song-view')
 const imgViewLarge = $('.app-install')
@@ -56,6 +68,7 @@ const pageList = Array.from($$('.app-content-page'))
 const libHeader = $('.app-content-sub-header-lib-contain')
 const libHeaderList = $$('.app-content-sub-header-lib-item')
 const libPageList = $$('.app-content-page-lib')
+const settingHome = $('.app-content-header-setting')
 
 const sliderBox = $('.app-content-header-slider-group')
 const sliderListItem= $$('.app-content-header-search-slider-item')
@@ -68,7 +81,7 @@ let isPlaylistPage = false;
 let isSearchPage = false;
 let offsetYLarge = 0;
 let offsetYMedium = 0;
-let pageIndex = 0;
+let pageIndex = 1;
 let slideIndex = 1;
 let slideLength = sliderListItem.length - 2;
 let indexPercent = 106;
@@ -251,6 +264,23 @@ const myApp = {
         })
     },
 
+    setHeader: function([settingHome, settingdisplay],[libHeader, libHdisplay], [headerSearch, headerSdisplay], 
+        [subHeaderTop, subTopdisplay], [subHeaderOverlay, subOverlay], [subHeaderTitle, subTitledisplay], 
+        [subHeaderBottom, subBottom], [playBtnHeader, playHeaddisplay], [playBtnRandomHeader, playRHeaddisplay]) {
+            settingHome.style.display = settingdisplay;
+            libHeader.style.display = libHdisplay;
+            headerSearch.style.display = headerSdisplay;
+            subHeaderTop.style.display = subTopdisplay;
+            subHeaderOverlay.style.opacity = subOverlay.opacity;
+            subHeaderOverlay.style.display = subOverlay.display;
+            subHeaderOverlay.style.backgroundColor = subOverlay.backgroundColor;
+            subHeaderTitle.style.display = subTitledisplay;
+            subHeaderBottom.style.opacity = subBottom.opacity
+            subHeaderBottom.style.display = subBottom.display;
+            playBtnHeader.style.display = playHeaddisplay;
+            playBtnRandomHeader.style.display = playRHeaddisplay;
+    },
+
     handleEvents: function () {
         const _this = this;
 
@@ -320,52 +350,59 @@ const myApp = {
 
                 pageIndex = Number(idx);
                 let documentWidth = document.documentElement.clientWidth;
+                const defaultOverlay = Object.create({display: '', opacity: '', backgroundColor: ''})
+                const defaultSubBottom = Object.create({display: '', opacity: ''})
+                let subOverlay = defaultOverlay;
+                let subBottom = defaultSubBottom;
+                console.log(idx);
 
                 switch(Number(idx)) {
                     case 1:
-                        console.log(documentWidth)
                         isPlaylistPage = false;
-                        libHeader.style.display = 'none';
-                        headerSearch.style.display = 'none';
-                        subHeaderTitle.style.display = 'none';
-                        subHeaderBottom.style.display = 'none';
-                        playBtnHeader.style.display = 'none';
-                        playBtnRandomHeader.style.display = 'none';
+                        subOverlay = defaultOverlay;
+                        subBottom  = defaultSubBottom;
+                        subOverlay.backgroundColor = 'rgb(80, 152, 168)';
                         if (documentWidth >= 740) {
-                            subHeaderTop.style.display = 'flex';
-                            // subHeaderOverlay.style.display = 'block';
-                            subHeaderOverlay.style.backgroundColor = 'rgb(80, 152, 168)';
+                            subBottom.display = 'none';
+                            if (documentWidth < 1024) {
+                                _this.setHeader([settingHome, 'flex'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
+                                [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                                [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                            }
+                            else {
+                                _this.setHeader([settingHome, 'none'], [settingHome, 'flex'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
+                                [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                                [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                            }
                         }
                         else {
-                            subHeaderOverlay.style.display = 'none';
-                            subHeaderTop.style.display = 'none';
+                            subOverlay.display = 'none';
+                            subBottom.display = 'none';
+                            _this.setHeader([settingHome, 'flex'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'none'], 
+                            [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                            [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
                         }
                         break;
                     case 2:
+                        subOverlay = defaultOverlay;
+                        subOverlay.backgroundColor = 'rgba(18,18,18,1)'
                         isSearchPage = true;
                         isPlaylistPage = false;
-                        libHeader.style.display = 'none';
-                        subHeaderTop.style.display = 'flex';
-                        subHeaderTitle.style.display = 'none';
-                        subHeaderOverlay.style.display = 'block';
-                        subHeaderOverlay.style.backgroundColor = 'rgba(18,18,18,1)';
-                        headerSearch.style.display = 'flex';
-                        subHeaderBottom.style.display = 'none';
-                        playBtnHeader.style.display = 'none';
-                        playBtnRandomHeader.style.display = 'none';
+                        _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'flex'], [subHeaderTop, 'flex'], 
+                        [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                        [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
                         break;
                     case 3:
                         isSearchPage = false;
                         isPlaylistPage = false;
-                        headerSearch.style.display = 'none';
-                        libHeader.style.display = 'flex';
-                        subHeaderTop.style.display = 'flex';
-                        subHeaderTitle.style.display = 'none';
-                        subHeaderOverlay.style.display = 'block';
-                        subHeaderOverlay.style.backgroundColor = 'rgba(18,18,18,1)';
-                        subHeaderBottom.style.display = 'none';
-                        playBtnHeader.style.display = 'none';
-                        playBtnRandomHeader.style.display = 'none';
+                        subOverlay = defaultOverlay;
+                        subBottom  = defaultSubBottom;
+                        subOverlay.display = 'block';
+                        subOverlay.backgroundColor = 'rgba(18,18,18,1)';
+                        subBottom.display = 'none';
+                        _this.setHeader([settingHome, 'none'], [libHeader, 'flex'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
+                        [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                        [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
                         break;
                     case 4:
                         break;
@@ -376,15 +413,18 @@ const myApp = {
                     case 8:
                         isPlaylistPage = true;
                         isSearchPage = false;
+                        subOverlay = defaultOverlay;
+                        subBottom  = defaultSubBottom;
                         offsetYLarge = appContentBody.offsetTop + appContentBodyPlaybar.offsetHeight / 2;
                         offsetYMedium = headerContent.offsetHeight;
-                        libHeader.style.display = 'none';
-                        headerSearch.style.display = 'none';
                         appContentHeaderOverlay.style.backgroundColor = 'rgb(80, 152, 168)';
-                        subHeaderOverlay.style.opacity = 0;
-                        subHeaderOverlay.style.backgroundColor = 'rgb(80, 152, 168)';
-                        subHeaderBottom.style.opacity = 0;
-                        subHeaderBottom.style.display = 'flex';
+                        subOverlay.opacity = 0;
+                        subOverlay.backgroundColor = 'rgb(80, 152, 168)';
+                        subBottom.opacity = 0;
+                        subBottom.display = 'flex';
+                        _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
+                        [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                        [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
                         break;
                     default:
                 }
@@ -439,6 +479,7 @@ const myApp = {
 
         //Event when play audio
         playBtn.onclick = Play;
+        playModal.onclick = Play;
         playBtnPlaylist.onclick = Play;
         playBtnHeader.onclick = Play;
         playBtnRandomHeader.onclick = function() {
@@ -464,8 +505,30 @@ const myApp = {
             _this.setConfig('idSongPlayed', _this.currentIndex);
         }
 
+        nextBtnModal.onclick = function() {
+            if (_this.isRandom) {
+                _this.playRandomSong();
+            }
+            else {
+                _this.nextSong();
+            }
+            audio.play();
+            _this.setConfig('idSongPlayed', _this.currentIndex);
+        }
+
         //Previous button
         prevBtn.onclick = function() {
+            if (_this.isRandom) {
+                _this.playRandomSong();
+            }
+            else {
+                _this.previousSong();
+            }
+            audio.play();
+            _this.setConfig('idSongPlayed', _this.currentIndex);
+        }
+
+        prevBtnModal.onclick = function() {
             if (_this.isRandom) {
                 _this.playRandomSong();
             }
@@ -483,11 +546,23 @@ const myApp = {
             randomBtn.classList.toggle('active', _this.isRandom)
         }
 
+        randomBtnModal.onclick = function() {
+            _this.isRandom = !_this.isRandom;
+            _this.setConfig('isRandom', _this.isRandom);
+            randomBtnModal.classList.toggle('active', _this.isRandom)
+        }
+
         //Repeat button
         repeatBtn.onclick = function() {
             _this.isRepeat = !_this.isRepeat;
             _this.setConfig('isRepeat', _this.isRepeat);
             repeatBtn.classList.toggle('active', _this.isRepeat)
+        }
+
+        repeatBtnModal.onclick = function() {
+            _this.isRepeat = !_this.isRepeat;
+            _this.setConfig('isRepeat', _this.isRepeat);
+            repeatBtnModal.classList.toggle('active', _this.isRepeat)
         }
 
         //Update volume when click volume button
@@ -552,6 +627,7 @@ const myApp = {
                     //Save time song played
                     var timePlayed = _this.secondToTime(audio.currentTime)
                     timeStart.innerText = timePlayed;
+                    timeStartModal.innertext = timePlayed;
                     _this.setConfig('timeSongPlayed', timePlayed)
 
                     //display prgress bar
@@ -560,10 +636,13 @@ const myApp = {
                     progressBar.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + progressPercent + '%, #d3d3d3 ' + progressPercent + '%, #d3d3d3 100%)'
                     progressBarMobile.value = progressPercent;
                     progressBarMobile.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + progressPercent + '%, #d3d3d3 ' + progressPercent + '%, #d3d3d3 100%)'
+                    progressModal.value = progressPercent;
+                    progressModal.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + progressPercent + '%, #d3d3d3 ' + progressPercent + '%, #d3d3d3 100%)'
                 }
             }
             _this.isPlaying = true;
             playbar.classList.add('playing')
+            playbarModal.classList.add('playing')
             playBtnPlaylist.classList.add('playing')
             playBtnHeader.classList.add('playing')
         }
@@ -572,6 +651,7 @@ const myApp = {
         audio.onpause = function() {
             _this.isPlaying = false;
             playbar.classList.remove('playing');
+            playbarModal.classList.remove('playing')
             playBtnPlaylist.classList.remove('playing');
             playBtnHeader.classList.remove('playing')
         }
@@ -609,6 +689,22 @@ const myApp = {
                 if (audio.duration){
                     progressBarMobile.value = e.target.value;
                     progressBarMobile.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + e.target.value + '%, #d3d3d3 ' + e.target.value + '%, #d3d3d3 100%)'
+                }
+            }
+            audio.pause();
+            setTimeout(() => {
+                audio.play();
+            }, 500)
+            const seekTime = e.target.value * audio.duration / 100;
+            audio.currentTime = seekTime;
+        }
+
+        progressModal.oninput = function(e) {
+            //when progress bar changed
+            audio.ontimeupdate = function() {
+                if (audio.duration){
+                    progressModal.value = e.target.value;
+                    progressModal.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + e.target.value + '%, #d3d3d3 ' + e.target.value + '%, #d3d3d3 100%)'
                 }
             }
             audio.pause();
@@ -660,7 +756,7 @@ const myApp = {
                 })
                 btnPrevSlider.style.display = 'none';
             }
-            if (document.documentElement.clientWidth >= 1023) {
+            if (document.documentElement.clientWidth > 1023) {
                 if (pageIndex === 2) {
                     subHeaderTitle.style.display = 'none';
                     btnNextSlider.style.display = 'block';
@@ -670,6 +766,7 @@ const myApp = {
                     playBtnHeader.style.display = 'block';
                     playBtnRandomHeader.style.display = 'none';
                 }
+                settingHome.style.display = 'none';
                 subHeaderTop.style.display = 'flex';
                 subHeaderOverlay.style.display = 'block';
                 subHeaderOverlay.style.opacity = appContent.scrollTop / 320;
@@ -696,6 +793,7 @@ const myApp = {
                         playBtnHeader.style.display = 'none';
                         playBtnRandomHeader.style.display = 'flex';
                     }
+                    settingHome.style.display = pageIndex === 1 ? 'flex' : 'none';
                     subHeaderOverlay.style.display = 'none';
                 }
                 playBtnRandomPlaylist.style.display = 'flex';
@@ -719,7 +817,8 @@ const myApp = {
 
     checkCondition: function(isPlaylistPage, clientWidth, offsetYLarge, offsetYMedium, appContentSrollTop) {
         if (isPlaylistPage) {
-            if (clientWidth >= 1023) {
+            settingHome.style.display = 'none';
+            if (clientWidth > 1023) {
                 subHeaderTop.style.padding = '0'
                 subHeaderTitle.style.display = appContentSrollTop >= offsetYLarge ? 'block' : 'none';
                 subHeaderOverlay.style.opacity = appContentSrollTop >= offsetYLarge ? 1 : appContentSrollTop / offsetYLarge;
@@ -744,13 +843,18 @@ const myApp = {
             }  
         }
         else {
-            if (clientWidth >= 1023)  {
+            subHeaderTitle.style.display = 'none';
+            subHeaderBottom.style.display = 'none';
+            if (clientWidth > 1023)  {
+                settingHome.style.display = 'none';
                 if (pageIndex === 1) {
                     subHeaderOverlay.style.opacity = appContentSrollTop >= 320 ? 1 : appContentSrollTop / 320;
+                    subHeaderOverlay.style.backgroundColor = 'rgb(80, 152, 168)';
                     
                 }
-                else if (pageIndex === 2) {
+                else if (pageIndex === 2 || pageIndex === 3) {
                     subHeaderOverlay.style.opacity = appContentSrollTop >= 320 ? 1 : appContentSrollTop / 320;
+                    subHeaderOverlay.style.backgroundColor = 'rgba(18,18,18,1)';
                 }
                 else {
                     subHeaderOverlay.style.opacity = appContentSrollTop >= 320 ? 1 : appContentSrollTop / 320;
@@ -762,6 +866,12 @@ const myApp = {
                     subHeaderOverlay.style.backgroundColor = 'rgba(18,18,18,1)';
                 }
                 else {
+                    if (pageIndex === 1) {
+                        settingHome.style.display = 'flex';
+                    }
+                    else {
+                        settingHome.style.display = 'none';
+                    }
                     subHeaderOverlay.style.display = 'none';
                 }
             }
@@ -789,17 +899,23 @@ const myApp = {
         playbarAuthor.forEach((val) => {
             val.textContent = this.currentSong.artist;
         })
+        modalSongName.textContent = this.currentSong.name;
+        modalAuthor.textContent = this.currentSong.artist;
         thumbImage.style.backgroundImage = `url('${this.currentSong.image}')`;
         thumbImageMobileTablet.style.backgroundImage = `url('${this.currentSong.imageLarge}')`;
         thumbImageMobile.style.backgroundImage = `url('${this.currentSong.imageLarge}')`;
+        thumbImageModal.style.backgroundImage = `url('${this.currentSong.imageLarge}')`;
         audio.src = this.currentSong.path;
         imgViewBox.src = this.currentSong.imageLarge;
         timeEnd.innerText = this.currentSong.timeTotal;
+        timeEndModal.innerText = this.currentSong.timeTotal;
     },
 
     loadTimeSong: function(start) {
         timeStart.innerText = start;
+        timeStartModal.innerText = start;
         timeEnd.innerText = this.currentSong.timeTotal;
+        timeEndModal.innerText = this.currentSong.timeTotal;
         this.timeTotal = this.currentSong.timeTotal;
     },
 
@@ -879,13 +995,16 @@ const myApp = {
             reactHeartBtn.classList.toggle('reacted', this.isReacted);
     
             randomBtn.classList.toggle('active', this.isRandom)
+            randomBtnModal.classList.toggle('active', this.isRandom)
             repeatBtn.classList.toggle('active', this.isRepeat)
+            repeatBtnModal.classList.toggle('active', this.isRepeat)
     
             if (!this.timeSongPlayed) {
                 this.timeSongPlayed = '0:00'
             }
             else {
-                timeStart.innerText = this.timeSongPlayed
+                timeStart.innerText = this.timeSongPlayed;
+                timeStartModal.innerText = this.timeSongPlayed;
             }
             
             volumeBar.value = this.volume*100;
@@ -896,6 +1015,8 @@ const myApp = {
             progressBar.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + percent + '%, #d3d3d3 ' + percent + '%, #d3d3d3 100%)'
             progressBarMobile.value = percent;
             progressBarMobile.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + percent + '%, #d3d3d3 ' + percent + '%, #d3d3d3 100%)'
+            progressModal.value = percent;
+            progressModal.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + percent + '%, #d3d3d3 ' + percent + '%, #d3d3d3 100%)'
         }
 
     },
