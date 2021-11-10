@@ -7,7 +7,10 @@ const root = $(':root')
 const playlist = $('.app-content-body-list-songs');
 const thumbImage = $('.app-play-bar-song-thumb');
 const thumbImageMobile = $('.app-play-bar-song-thumb-mobile')
+const playBarMobile = $('.app-play-bar-container')
 const thumbImageMobileTablet = $('.app-play-bar-song-thumb-mobile-tablet')
+const songModal = $('.song-modal')
+const collapseModalBtn = $('.song-modal-collapse')
 const thumbImageModal = $('.song-modal-img')
 const playBtn = $('.btn-toggle-play');
 const playModal = $('.btn-toggle-play-modal')
@@ -231,26 +234,28 @@ const myApp = {
             this.songs[i].timeTotal = durationList[i];
         }
         const htmls = this.songs.map((song,index) => {
-            song.timeTotal = durationList[index];
-            return `
-                <div class="app-content-body-list-item ${index === this.currentIndex ? 'active' : ''}" data-index="${index}">
-                    <span class="app-content-body-list-item-number">${song.id}</span>
-                    <div class="app-content-body-list-item-song">
-                        <div class="app-content-body-list-item-song-avavtar">
-                            <img src="${song.image}" alt="" class="app-content-body-list-item-song-avavtar-img">
+            if (index > 0) {
+                song.timeTotal = durationList[index];
+                return `
+                    <div class="app-content-body-list-item ${index === this.currentIndex ? 'active' : ''}" data-index="${index}">
+                        <span class="app-content-body-list-item-number">${song.id}</span>
+                        <div class="app-content-body-list-item-song">
+                            <div class="app-content-body-list-item-song-avavtar">
+                                <img src="${song.image}" alt="" class="app-content-body-list-item-song-avavtar-img">
+                            </div>
+                            <div class="app-content-body-list-item-song-info">
+                                <span class="app-content-body-list-item-song-name">${song.name}</span>
+                                <span class="app-content-body-list-item-song-artist">${song.artist}</span>
+                            </div>
                         </div>
-                        <div class="app-content-body-list-item-song-info">
-                            <span class="app-content-body-list-item-song-name">${song.name}</span>
-                            <span class="app-content-body-list-item-song-artist">${song.artist}</span>
-                        </div>
+                        <span class="app-content-body-list-item-album">
+                            <a href="" class="app-content-body-list-item-album-link">${song.album}</a>
+                        </span>
+                        <span class="app-content-body-list-item-date-added">Aug 19, 2021</span>
+                        <span class="app-content-body-list-item-duration">${durationList[index]}</span>
                     </div>
-                    <span class="app-content-body-list-item-album">
-                        <a href="" class="app-content-body-list-item-album-link">${song.album}</a>
-                    </span>
-                    <span class="app-content-body-list-item-date-added">Aug 19, 2021</span>
-                    <span class="app-content-body-list-item-duration">${durationList[index]}</span>
-                </div>
-            `
+                `
+            }
         })
         playlist.innerHTML = htmls.join('')
         this.listSongs = $$('.app-content-body-list-item');
@@ -283,7 +288,6 @@ const myApp = {
 
     handleEvents: function () {
         const _this = this;
-
         btnNextSlider.onclick = function () {
             if (document.documentElement.clientWidth >= 1023) {
                 btnNextSlider.style.filter = 'brightness(50%)';
@@ -627,7 +631,7 @@ const myApp = {
                     //Save time song played
                     var timePlayed = _this.secondToTime(audio.currentTime)
                     timeStart.innerText = timePlayed;
-                    timeStartModal.innertext = timePlayed;
+                    timeStartModal.innerText = timePlayed;
                     _this.setConfig('timeSongPlayed', timePlayed)
 
                     //display prgress bar
@@ -745,6 +749,23 @@ const myApp = {
                 iconViewImgThumbDown.style.display = 'none';
             }
         }
+
+        //Modal Song
+        thumbImageMobileTablet.onclick = function() {
+            songModal.classList.add('active');
+        }
+
+        collapseModalBtn.onclick = function() {
+            songModal.classList.remove('active');
+        }
+
+        playBarMobile.onclick = function() {
+            if (document.documentElement.clientWidth < 740) {
+                songModal.classList.add('active');
+            }
+        }
+
+        // sidebarList[5].click();
 
         //onscroll display sub header
         // var offsetYLarge = 340 + 106/ 2;

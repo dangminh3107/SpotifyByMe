@@ -116,6 +116,8 @@
 
 
 /* ------------------------------------------------------------------------- */
+
+
 @media (min-width: 46.25em) and (max-width: 63.9375em) {
     :root{
         --side-bar-width: 25%;
@@ -196,6 +198,7 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
+        cursor: pointer;
     }
 
     .app-play-bar-song-thumb-group ~ .app-play-bar-song-details {
@@ -317,9 +320,9 @@
         background: transparent;
     } */
 
-    .app-content-body {
+    /* .app-content-body {
         background: var(--content-body-color);
-    }
+    } */
 
     .app-content-body-playbar {
         position: relative;
@@ -571,9 +574,9 @@
         background-color: red;
     }
 
-    .app-content-body {
+    /* .app-content-body {
         background-color: var(--content-body-color);
-    }
+    } */
 
     .app-content-body-list-item-song {
         width: 100%;
@@ -635,6 +638,7 @@
         justify-content: space-between;
         background-color: rgb(70, 53, 53);
         border-radius: 4px;
+        cursor: pointer;
     }
 
     .app-play-bar-group {
@@ -941,5 +945,11 @@
 
     .app-content-artist-page .app-content-header-body-item-contain {
         margin: 5px 0;
+    }
+}
+
+@media (min-width: 31.25em) and (max-width: 41.1875em) {
+    .song-modal-content {
+        min-width: 400px;
     }
 }

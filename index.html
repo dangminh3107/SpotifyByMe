@@ -4046,10 +4046,11 @@
                     </div>
                     <div class="app-play-bar-song-thumb-group">
                         <div class="app-play-bar-song-thumb-mobile"></div>
-                        <div class="app-play-bar-song-thumb"></div>
-                        <div class="app-play-bar-song-view">
-                            <i class="ti-angle-up app-play-bar-song-view-icon-up"></i>
-                            <i class="ti-angle-down app-play-bar-song-view-icon-down"></i>
+                        <div class="app-play-bar-song-thumb">
+                            <div class="app-play-bar-song-view">
+                                <i class="ti-angle-up app-play-bar-song-view-icon-up"></i>
+                                <i class="ti-angle-down app-play-bar-song-view-icon-down"></i>
+                            </div>
                         </div>
                     </div>
                     <div class="app-play-bar-song-details">
@@ -4099,6 +4100,10 @@
             <i class="ti-angle-down"></i>
         </div>
         <div class="song-modal-content">
+            <div class="song-modal-content-from">
+                <span class="song-play-from">PLAYING FROM</span>
+                <span class="song-play-list">Summer Time</span>
+            </div>
             <div class="song-modal-img"></div>
             <div class="song-modal-content-name">
                 <div class="song-modal-content-info">
@@ -4108,6 +4113,13 @@
             </div>
             <div class="song-modal-playbar">
                 <div class="app-play-bar-control-modal">
+                    <div class="control-time-group-modal">
+                        <input id="progress-modal" class="progress modal-playbar" type="range" value="0" step="1" min="0" max="100">
+                        <div class="control-time-modal">
+                            <span class="control-time-lapse-modal">0:00</span>
+                            <span class="control-time-duration-modal">00:00</span>
+                        </div>
+                    </div>
                     <div class="control">
                         <div class="btn btn-random-modal">
                             <i class="fas fa-random"></i>
@@ -4125,13 +4137,6 @@
                         <div class="btn btn-repeat-modal">
                             <i class="fas fa-redo"></i>
                             </div>
-                    </div>    
-                    <div class="control-time-group-modal">
-                        <input id="progress-modal" class="progress modal-playbar" type="range" value="0" step="1" min="0" max="100">
-                        <div class="control-time-modal">
-                            <span class="control-time-lapse-modal">00:00</span>
-                            <span class="control-time-duration-modal">00:00</span>
-                        </div>
                     </div>
                 </div>
             </div>
