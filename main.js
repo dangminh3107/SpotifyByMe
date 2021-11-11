@@ -4,7 +4,7 @@ $$ = document.querySelectorAll.bind(document);
 const PLAYER_STORAGE_KEY = 'MY_PLAYER'
 
 const root = $(':root')
-const playlist = $('.app-content-body-list-songs');
+const playlist = Array.from($$('.app-content-body-list-songs'));
 const thumbImage = $('.app-play-bar-song-thumb');
 const thumbImageMobile = $('.app-play-bar-song-thumb-mobile')
 const playBarMobile = $('.app-play-bar-container')
@@ -14,10 +14,10 @@ const collapseModalBtn = $('.song-modal-collapse')
 const thumbImageModal = $('.song-modal-img')
 const playBtn = $('.btn-toggle-play');
 const playModal = $('.btn-toggle-play-modal')
-const playBtnPlaylist = $('.btn-content-playbar')
+const playBtnPlaylist = $$('.btn-content-playbar')
 const playBtnHeader = $('.btn-play-header')
 const playBtnRandomHeader = $('.btn-play-header-random')
-const playBtnRandomPlaylist = $('.btn-content-playbar-random')
+const playBtnRandomPlaylist = $$('.btn-content-playbar-random')
 const playbar = $('.app-play-bar')
 const playbarModal = $('.song-modal-playbar')
 const playbarSongName = $$('.app-play-bar-song-name')
@@ -50,16 +50,16 @@ const iconViewImgThumbUp = $('.app-play-bar-song-view-icon-up')
 const iconViewImgThumbDown = $('.app-play-bar-song-view-icon-down')
 const songItem = $('.app-content-body-list-item')
 const appContent = $('.app-content')
-const headerContent = $('.app-content-header.playlist')
+const headerContent = Array.from($$('.app-content-header.playlist'));
 const headerSearch = $('.app-content-sub-header-search-group')
-const appContentBodyPlaybar = $('.app-content-body .app-content-body-playbar')
+const appContentBodyPlaybar = Array.from($$('.app-content-body .app-content-body-playbar'))
 const subHeader = $('.app-content-sub-header')
 const subHeaderOverlay = $('.app-content-sub-header-overlay')
 const subHeaderBottom = $('.app-content-sub-header-bottom')
 const subHeaderTop = $('.app-content-sub-header-top')
 const subHeaderTitle = $('.app-content-sub-header-title')
-const appContentHeaderOverlay = $('.app-content-header-background-overlay')
-const appContentBody = $('.app-content-body')
+const appContentHeaderOverlay = Array.from($$('.app-content-header-background-overlay'))
+const appContentBody = Array.from($$('.app-content-body'))
 const appContentBodyList = $('.app-content-body .app-content-body-list')
 const imgHeader = $('.app-content-header-image')
 const menuSidebar = $('.side-bar')
@@ -72,12 +72,12 @@ const libHeader = $('.app-content-sub-header-lib-contain')
 const libHeaderList = $$('.app-content-sub-header-lib-item')
 const libPageList = $$('.app-content-page-lib')
 const settingHome = $('.app-content-header-setting')
+const viewPlaylist = $('.song-modal-content-from')
 
 const sliderBox = $('.app-content-header-slider-group')
 const sliderListItem= $$('.app-content-header-search-slider-item')
 const btnNextSlider = $('.slider-control-right')
 const btnPrevSlider = $('.slider-control-left')
-
 
 
 let isPlaylistPage = false;
@@ -89,9 +89,15 @@ let slideIndex = 1;
 let slideLength = sliderListItem.length - 2;
 let indexPercent = 106;
 let totalPageLib = libHeaderList.length;
+let pagePlaylist = 1;
 
 const myApp = {
-    currentIndex: 0,
+    currentIndex: {
+        index: 0,
+        page: 1,
+        prevPage: 1,
+    },
+    pagePlaylist: 1,
     isPlaying: false,
     isVolumeOn: false,
     isRandom: false,
@@ -107,106 +113,12 @@ const myApp = {
     timeTotal: '00:00',
     timeSongPlayed: '00:00',
     config: JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY)) || {},
-    songs: [
+    songArr: [
         {
-            id: 1,
-            name: 'Bad Habits',
-            artist: 'Ed Sheeran',
-            album: 'Bad Habits',
-            path: './assets/music/mp3/song_1.mp3',
-            image: './assets/music/img/song_1.jpg',
-            imageLarge: './assets/music/img_big/song_1.jpg',
-            timeTotal: ''
+            songs: JSON.parse(localStorage.getItem(PLAYLIST1_STORAGE)) || {}
         },
         {
-            id: 2,
-            name: 'STAY (with Justin Bieber)',
-            artist: 'The Kid LAROI, Justin Bieber',
-            album: 'STAY (with Justin Bieber)',
-            path: './assets/music/mp3/song_2.mp3',
-            image: './assets/music/img/song_2.jpg',
-            imageLarge: './assets/music/img_big/song_2.jpg',
-            timeTotal: ''
-        },
-        {
-            id: 3,
-            name: 'leviating (feat. DaBaby)',
-            artist: 'Dua Lipa, DaBaby',
-            album: 'Future Nostalgia',
-            path: './assets/music/mp3/song_3.mp3',
-            image: './assets/music/img/song_3.jpg',
-            imageLarge: './assets/music/img_big/song_3.jpg',
-            timeTotal: ''
-        },
-        {
-            id: 4,
-            name: 'MONTERO (Call Me By Your Name)',
-            artist: 'Lil Nas X',
-            album: 'MONTERO',
-            path: './assets/music/mp3/song_4.mp3',
-            image: './assets/music/img/song_4.jpg',
-            imageLarge: './assets/music/img_big/song_4.jpg',
-            timeTotal: ''
-        },
-        {
-            id: 5,
-            name: 'Kiss Me More (feat. SZA)',
-            artist: 'Doja Cat, SZA',
-            album: 'Kiss Me More (feat. SZA)',
-            path: './assets/music/mp3/song_5.mp3',
-            image: './assets/music/img/song_5.jpg',
-            imageLarge: './assets/music/img_big/song_5.jpg',
-            timeTotal: ''
-        },
-        {
-            id: 6,
-            name: 'Higher Love',
-            artist: 'Kygo, Whitney Houston',
-            album: 'Golden Hour',
-            path: './assets/music/mp3/song_6.mp3',
-            image: './assets/music/img/song_6.jpg',
-            imageLarge: './assets/music/img_big/song_6.jpg',
-            timeTotal: ''
-        },
-        {
-            id: 7,
-            name: 'Higher Love',
-            artist: 'Kygo, Whitney Houston',
-            album: 'Golden Hour',
-            path: './assets/music/mp3/song_6.mp3',
-            image: './assets/music/img/song_6.jpg',
-            imageLarge: './assets/music/img_big/song_6.jpg',
-            timeTotal: ''
-        },
-        {
-            id: 8,
-            name: 'Higher Love',
-            artist: 'Kygo, Whitney Houston',
-            album: 'Golden Hour',
-            path: './assets/music/mp3/song_6.mp3',
-            image: './assets/music/img/song_6.jpg',
-            imageLarge: './assets/music/img_big/song_6.jpg',
-            timeTotal: ''
-        },
-        {
-            id: 9,
-            name: 'Higher Love',
-            artist: 'Kygo, Whitney Houston',
-            album: 'Golden Hour',
-            path: './assets/music/mp3/song_6.mp3',
-            image: './assets/music/img/song_6.jpg',
-            imageLarge: './assets/music/img_big/song_6.jpg',
-            timeTotal: ''
-        },
-        {
-            id: 10,
-            name: 'Higher Love',
-            artist: 'Kygo, Whitney Houston',
-            album: 'Golden Hour',
-            path: './assets/music/mp3/song_6.mp3',
-            image: './assets/music/img/song_6.jpg',
-            imageLarge: './assets/music/img_big/song_6.jpg',
-            timeTotal: ''
+            songs: JSON.parse(localStorage.getItem(PLAYLIST2_STORAGE)) || {}
         }
     ],
     setConfig: function(key, value) {
@@ -227,44 +139,65 @@ const myApp = {
         const durations = await Promise.all(paths.map((path) => this.fetchDuration(path)));
         return durations;
     },
+    setTotalTime: function(playlist, durations, n) {
+        for (let i = 0; i < n; i++) {
+            durations[i] = this.secondToTime(durations[i])
+            playlist[i].timeTotal = durations[i];
+        }
+    },
+    getHTML: function(songs, durationList) {
+        const htmls = songs.map((song,index) => {
+            song.timeTotal = durationList[index];
+            return `
+                <div class="app-content-body-list-item ${index === this.currentIndex.index && Number(song.id.slice(0,1)) === myApp.getPage() ?'active' : ''}" data-index="${index}">
+                    <span class="app-content-body-list-item-number">${song.id.slice(2)}</span>
+                    <div class="app-content-body-list-item-song">
+                        <div class="app-content-body-list-item-song-avavtar">
+                            <img src="${song.image}" alt="" class="app-content-body-list-item-song-avavtar-img">
+                        </div>
+                        <div class="app-content-body-list-item-song-info">
+                            <span class="app-content-body-list-item-song-name">${song.name}</span>
+                            <span class="app-content-body-list-item-song-artist">${song.artist}</span>
+                        </div>
+                    </div>
+                    <span class="app-content-body-list-item-album">
+                        <a href="" class="app-content-body-list-item-album-link">${song.album}</a>
+                    </span>
+                    <span class="app-content-body-list-item-date-added">Aug 19, 2021</span>
+                    <span class="app-content-body-list-item-duration">${durationList[index]}</span>
+                </div>
+            `
+        })
+        return htmls;
+    },
 
     render: function(durationList) {
-        for (let i = 0; i < durationList.length; i++) {
-            durationList[i] = this.secondToTime(durationList[i])
-            this.songs[i].timeTotal = durationList[i];
-        }
-        const htmls = this.songs.map((song,index) => {
-            if (index > 0) {
-                song.timeTotal = durationList[index];
-                return `
-                    <div class="app-content-body-list-item ${index === this.currentIndex ? 'active' : ''}" data-index="${index}">
-                        <span class="app-content-body-list-item-number">${song.id}</span>
-                        <div class="app-content-body-list-item-song">
-                            <div class="app-content-body-list-item-song-avavtar">
-                                <img src="${song.image}" alt="" class="app-content-body-list-item-song-avavtar-img">
-                            </div>
-                            <div class="app-content-body-list-item-song-info">
-                                <span class="app-content-body-list-item-song-name">${song.name}</span>
-                                <span class="app-content-body-list-item-song-artist">${song.artist}</span>
-                            </div>
-                        </div>
-                        <span class="app-content-body-list-item-album">
-                            <a href="" class="app-content-body-list-item-album-link">${song.album}</a>
-                        </span>
-                        <span class="app-content-body-list-item-date-added">Aug 19, 2021</span>
-                        <span class="app-content-body-list-item-duration">${durationList[index]}</span>
-                    </div>
-                `
-            }
+        let n1 = this.songArr[0].songs.length, n2 = this.songArr[1].songs.length;
+        let list1 = durationList.splice(0, n1), list2 = durationList.splice(0, n2);
+        this.setTotalTime(this.songArr[0].songs, list1, n1);
+        this.setTotalTime(this.songArr[1].songs, list2, n2);
+        const html1 = this.getHTML(this.songArr[0].songs, list1)
+        const html2 = this.getHTML(this.songArr[1].songs, list2)
+        playlist[0].innerHTML = html1.join('')
+        playlist[1].innerHTML = html2.join('')
+        playlist.forEach((item) => {
+            this.listSongs.push(Array.from(item.querySelectorAll('.app-content-body-list-item')));
         })
-        playlist.innerHTML = htmls.join('')
-        this.listSongs = $$('.app-content-body-list-item');
     },
     
     defineProperties: function() {
         Object.defineProperty(this, 'currentSong', {
             get: function() {
-                return this.songs[this.currentIndex];
+                switch(this.currentIndex.page) {
+                    case 1:
+                        return this.songArr[0].songs[this.currentIndex.index];
+                        break;
+                    case 2:
+                        return this.songArr[1].songs[this.currentIndex.index];
+                        break;
+                    default:
+                        return this.songArr[0].songs[this.currentIndex.index];
+                }
             }
         })
     },
@@ -358,7 +291,6 @@ const myApp = {
                 const defaultSubBottom = Object.create({display: '', opacity: ''})
                 let subOverlay = defaultOverlay;
                 let subBottom = defaultSubBottom;
-                console.log(idx);
 
                 switch(Number(idx)) {
                     case 1:
@@ -413,15 +345,45 @@ const myApp = {
                     case 5:
                         break;
                     case 6:
+                        isPlaylistPage = true;
+                        isSearchPage = false;
+                        subOverlay = defaultOverlay;
+                        subBottom  = defaultSubBottom;
+                        offsetYLarge = appContentBody[0].offsetTop + appContentBodyPlaybar[0].offsetHeight / 2;
+                        offsetYMedium = headerContent[0].offsetHeight;
+                        appContentHeaderOverlay[0].style.backgroundColor = 'rgb(80, 152, 168)';
+                        subOverlay.opacity = 0;
+                        subOverlay.backgroundColor = 'rgb(80, 152, 168)';
+                        subBottom.opacity = 0;
+                        subBottom.display = 'flex';
+                        _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
+                        [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                        [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        break;
                     case 7:
+                        isPlaylistPage = true;
+                        isSearchPage = false;
+                        subOverlay = defaultOverlay;
+                        subBottom  = defaultSubBottom;
+                        offsetYLarge = appContentBody[1].offsetTop + appContentBodyPlaybar[1].offsetHeight / 2;
+                        offsetYMedium = headerContent[1].offsetHeight;
+                        appContentHeaderOverlay[1].style.backgroundColor = 'rgb(80, 152, 168)';
+                        subOverlay.opacity = 0;
+                        subOverlay.backgroundColor = 'rgb(80, 152, 168)';
+                        subBottom.opacity = 0;
+                        subBottom.display = 'flex';
+                        _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
+                        [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                        [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        break;
                     case 8:
                         isPlaylistPage = true;
                         isSearchPage = false;
                         subOverlay = defaultOverlay;
                         subBottom  = defaultSubBottom;
-                        offsetYLarge = appContentBody.offsetTop + appContentBodyPlaybar.offsetHeight / 2;
-                        offsetYMedium = headerContent.offsetHeight;
-                        appContentHeaderOverlay.style.backgroundColor = 'rgb(80, 152, 168)';
+                        offsetYLarge = appContentBody[2].offsetTop + appContentBodyPlaybar[2].offsetHeight / 2;
+                        offsetYMedium = headerContent[2].offsetHeight;
+                        appContentHeaderOverlay[2].style.backgroundColor = 'rgb(80, 152, 168)';
                         subOverlay.opacity = 0;
                         subOverlay.backgroundColor = 'rgb(80, 152, 168)';
                         subBottom.opacity = 0;
@@ -461,7 +423,7 @@ const myApp = {
         function Play() {
             if (_this.isRandom) {
                 if (_this.songsPlayed.length === 0){ 
-                    _this.songsPlayed.push(_this.currentIndex + 1)
+                    _this.songsPlayed.push(_this.currentIndex.index + 1)
                 }
             }
             if(_this.isPlaying){
@@ -484,18 +446,26 @@ const myApp = {
         //Event when play audio
         playBtn.onclick = Play;
         playModal.onclick = Play;
-        playBtnPlaylist.onclick = Play;
+        playBtnPlaylist.forEach((item => {
+            item.onclick = function() {
+                let idPage = Number(item.closest('.app-content-page').id) - 5;
+            }
+        }))
         playBtnHeader.onclick = Play;
         playBtnRandomHeader.onclick = function() {
             _this.playRandomSong();
             audio.play();
-            _this.setConfig('idSongPlayed', _this.currentIndex);
+            _this.setConfig('idSongPlayed', _this.currentIndex.index);
+            _this.setConfig('pagePlaylist', _this.currentIndex.page)
         };
-        playBtnRandomPlaylist.onclick = function() {
-            _this.playRandomSong();
-            audio.play();
-            _this.setConfig('idSongPlayed', _this.currentIndex);
-        }
+        playBtnRandomPlaylist.forEach((item => {
+            item.onclick = function() {
+                _this.playRandomSong();
+                audio.play();
+                _this.setConfig('idSongPlayed', _this.currentIndex.index);
+                _this.setConfig('pagePlaylist', _this.currentIndex.page)
+            }
+        }))
 
         //Next button
         nextBtn.onclick = function() {
@@ -506,7 +476,8 @@ const myApp = {
                 _this.nextSong();
             }
             audio.play();
-            _this.setConfig('idSongPlayed', _this.currentIndex);
+            _this.setConfig('idSongPlayed', _this.currentIndex.index);
+            _this.setConfig('pagePlaylist', _this.currentIndex.page)
         }
 
         nextBtnModal.onclick = function() {
@@ -517,7 +488,8 @@ const myApp = {
                 _this.nextSong();
             }
             audio.play();
-            _this.setConfig('idSongPlayed', _this.currentIndex);
+            _this.setConfig('idSongPlayed', _this.currentIndex.index);
+            _this.setConfig('pagePlaylist', _this.currentIndex.page)
         }
 
         //Previous button
@@ -529,7 +501,7 @@ const myApp = {
                 _this.previousSong();
             }
             audio.play();
-            _this.setConfig('idSongPlayed', _this.currentIndex);
+            _this.setConfig('idSongPlayed', _this.currentIndex.index);
         }
 
         prevBtnModal.onclick = function() {
@@ -540,7 +512,8 @@ const myApp = {
                 _this.previousSong();
             }
             audio.play();
-            _this.setConfig('idSongPlayed', _this.currentIndex);
+            _this.setConfig('idSongPlayed', _this.currentIndex.index);
+            _this.setConfig('pagePlaylist', _this.currentIndex.page)
         }
 
         //Random button
@@ -611,12 +584,20 @@ const myApp = {
 
         //Play song
         audio.onplay = function() {
-            _this.listSongs.forEach(function(value, index){
-                if ((value.classList.contains('active')) && (index !== _this.currentIndex)){
-                    value.classList.remove('active');
-                }
+            _this.listSongs.forEach(function(list){
+                let idPage = Number(list[0].closest('.app-content-page').id) - 5;
+                list.forEach((item, index) => {
+                    if (idPage === this.pagePlaylist) {
+                        if (item.classList.contains('active') && index !== __this.currentIndex.index){
+                            item.classList.remove('active');
+                        }
+                    }
+                    else {
+                        item.classList.remove('active');
+                    }
+                })
             })
-            _this.listSongs[_this.currentIndex].classList.add('active');
+            _this.listSongs[_this.getPage()-1][_this.currentIndex.index].classList.add('active');
             audio.volume = _this.volume;
             audio.ontimeupdate = function() {
                 if (audio.duration){
@@ -647,7 +628,11 @@ const myApp = {
             _this.isPlaying = true;
             playbar.classList.add('playing')
             playbarModal.classList.add('playing')
-            playBtnPlaylist.classList.add('playing')
+            // playBtnPlaylist.forEach((item => {
+            //     if (item.closest(`.app-content-page[id="${_this.currentIndex.page + 5}"]`)) {
+            //         item.classList.add('playing')
+            //     }
+            // }))
             playBtnHeader.classList.add('playing')
         }
 
@@ -656,7 +641,11 @@ const myApp = {
             _this.isPlaying = false;
             playbar.classList.remove('playing');
             playbarModal.classList.remove('playing')
-            playBtnPlaylist.classList.remove('playing');
+            // playBtnPlaylist.forEach((item => {
+            //     if (item.closest(`.app-content-page[id="${_this.currentIndex.page + 5}"]`)) {
+            //         item.classList.remove('playing')
+            //     }
+            // }))
             playBtnHeader.classList.remove('playing')
         }
 
@@ -720,15 +709,22 @@ const myApp = {
         }
 
         //When click on playlist
-        playlist.onclick = function(e) {
-            const songNode = e.target.closest('.app-content-body-list-item:not(.active)');
-            if (songNode) {
-                _this.currentIndex = Number(songNode.dataset.index);
-                _this.setConfig('idSongPlayed', _this.currentIndex)
-                _this.loadCurrentSong();
-                audio.play();
+        playlist.forEach((item) => {
+            item.onclick = function(e) {
+                const songNode = e.target.closest('.app-content-body-list-item:not(.active)');
+                const page = e.target.closest('.app-content-page')
+                if (songNode) {
+                    _this.currentIndex.index = Number(songNode.dataset.index);
+                    _this.currentIndex.page = page.id - 5;
+                    _this.pagePlaylist = page.id - 5;
+                    _this.setConfig('currentIndex', _this.currentIndex)
+                    _this.setConfig('idSongPlayed', _this.currentIndex.index);
+                    _this.setConfig('pagePlaylist', page.id - 5);
+                    _this.loadCurrentSong();
+                    audio.play();
+                }
             }
-        }
+        })
 
         //React playlist
         reactHeartBtn.onclick = function() {
@@ -765,11 +761,11 @@ const myApp = {
             }
         }
 
-        // sidebarList[5].click();
+        viewPlaylist.onclick = function() {
+            songModal.classList.remove('active');
+            playListItem[_this.currentIndex.page - 1].closest('.my-playlist-item').click();
+        }
 
-        //onscroll display sub header
-        // var offsetYLarge = 340 + 106/ 2;
-        // var offsetYMedium = 340;
         window.onresize = function(e) {
             if (slideIndex > 1) {
                 sliderListItem.forEach((item) => {
@@ -791,7 +787,9 @@ const myApp = {
                 subHeaderTop.style.display = 'flex';
                 subHeaderOverlay.style.display = 'block';
                 subHeaderOverlay.style.opacity = appContent.scrollTop / 320;
-                playBtnRandomPlaylist.style.display = 'none';
+                playBtnRandomPlaylist.forEach(item => {
+                    item.style.display = 'none';
+                })
                 imgHeader.style.transform = `scale(1)`;
                 subHeaderOverlay.style.backgroundImage = 'linear-gradient(rgba(0, 0, 0, 0.6) 0, rgba(0, 0, 0, 0.6) 100%)';
             }
@@ -806,7 +804,6 @@ const myApp = {
                     if (pageIndex === 6 && appContent.scrollTop >= 320) {
                         playBtnRandomHeader.style.display = 'flex';
                     }
-                    // subHeaderOverlay.style.backgroundImage = 'linear-gradient(rgba(0, 0, 0, 0.6) 0, rgba(0, 0, 0, 0.6) 100%)';
                 }
                 else {
                     if (subHeaderTitle.style.display === 'block') {
@@ -817,11 +814,21 @@ const myApp = {
                     settingHome.style.display = pageIndex === 1 ? 'flex' : 'none';
                     subHeaderOverlay.style.display = 'none';
                 }
-                playBtnRandomPlaylist.style.display = 'flex';
+                playBtnRandomPlaylist.forEach(item => {
+                    item.style.display = 'flex';
+                })
             }
         }
     },
 
+    checkPage: function(idPage) {
+        let numPage = Number(this.currentSong.id.slice(0,1))
+        return idPage === numPage ? true : false;
+    },
+
+    getPage: function() {
+        return Number(this.currentSong.id.slice(0,1));
+    },
 
     secondToTime: function(value) {
         const sec = parseInt(value, 10);
@@ -850,13 +857,17 @@ const myApp = {
                 subHeaderTop.style.padding = '23px 0';
                 if (appContentSrollTop >= offsetYMedium) {
                     subHeaderTitle.style.display = 'block'
-                    playBtnRandomPlaylist.style.display = 'none';
+                    playBtnRandomPlaylist.forEach(item => {
+                        item.style.display = 'none';
+                    })
                 }
                 else {
                     var percentScale = 1 - appContentSrollTop / imgHeader.offsetHeight;
                     imgHeader.style.transform = `scale(${percentScale})`;
                     subHeaderTitle.style.display = 'none'
-                    playBtnRandomPlaylist.style.display = 'flex';
+                    playBtnRandomPlaylist.forEach(item => {
+                        item.style.display = 'flex';
+                    })
                 }
                 subHeaderOverlay.style.opacity = appContentSrollTop >= offsetYMedium ? 1 : appContentSrollTop / offsetYMedium;
                 playBtnRandomHeader.style.display = appContentSrollTop >= offsetYMedium ? 'flex' : 'none';
@@ -900,20 +911,31 @@ const myApp = {
     },
 
     loadConfig: function() {
-        this.volume = this.config.volume;
-        this.isVolumeOn = this.config.isVolumeOn;
-        this.prevVolume = this.config.prevVolume;
-        this.durationPlayed = this.config.durationPlayed;
-        this.totalDuration = this.config.totalDuration;
-        this.idSongPlayed = this.config.idSongPlayed;
-        this.timeTotal = this.config.timeTotal
-        this.timeSongPlayed = this.config.timeSongPlayed;
-        this.isRandom = this.config.isRandom;
-        this.isRepeat = this.config.isRepeat;
-        this.isReacted = this.config.isReacted;
+        this.volume = this.config.volume || 0;
+        this.isVolumeOn = this.config.isVolumeOn || true;
+        this.prevVolume = this.config.prevVolume || 0;
+        this.durationPlayed = this.config.durationPlayed || 0;
+        this.totalDuration = this.config.totalDuration || 0;
+        this.idSongPlayed = this.config.idSongPlayed || 0;
+        this.timeTotal = this.config.timeTotal || '0:00'
+        this.timeSongPlayed = this.config.timeSongPlayed || '0:00';
+        this.isRandom = this.config.isRandom || false;
+        this.isRepeat = this.config.isRepeat || false;
+        this.isReacted = this.config.isReacted || false;
+        this.pagePlaylist = this.config.pagePlaylist || 1;
     },
 
     loadCurrentSong: function() {
+        // switch(this.currentIndex.page) {
+        //     case 1:
+        //         this.currentSong = this.songArr[0].songs[this.currentIndex.index];
+        //         break;
+        //     case 2: 
+        //         this.currentSong = this.songArr[1].songs[this.currentIndex.index];
+        //         break;
+        //     default:
+        //         this.currentSong = this.songArr[0].songs[this.currentIndex.index];
+        // }
         playbarSongName.forEach((val) => {
             val.textContent = this.currentSong.name;
         })
@@ -941,35 +963,35 @@ const myApp = {
     },
 
     nextSong: function() {
-        this.currentIndex++;
-        if (this.currentIndex >= this.songs.length) {
-            this.currentIndex = 0;
+        this.currentIndex.index++;
+        if (this.currentIndex.index >= this.listSongs[this.currentIndex.page - 1].length) {
+            this.currentIndex.index = 0;
         }
         this.loadCurrentSong();
     },
 
     previousSong: function() {
-        this.currentIndex--;
-        if (this.currentIndex < 0) {
-            this.currentIndex = this.songs.length - 1;
+        this.currentIndex.index--;
+        if (this.currentIndex.index < 0) {
+            this.currentIndex.index = this.listSongs[this.currentIndex.page - 1].length- 1;
         }
         this.loadCurrentSong();
     },
 
     playRandomSong: function() {
         let newIndex, newID, isPlayed = false;
-        if (this.songsPlayed.length === this.songs.length) {
+        if (this.songsPlayed.length === this.listSongs[this.currentIndex.page - 1].length) {
             this.songsPlayed = [];
         }
         do {
-            newIndex = Math.floor(Math.random() * this.songs.length);     
-        } while (newIndex === this.currentIndex)
+            newIndex = Math.floor(Math.random() * this.listSongs[this.currentIndex.page - 1].length);     
+        } while (newIndex === this.currentIndex.index)
 
-        newID = this.songs[newIndex].id;
+        newID = Number(this.songArr[this.currentIndex.page - 1].songs[newIndex].id.slice(2));
         isPlayed = this.songsPlayed.find(value => newID === value)
 
         if (!isPlayed) {
-            this.currentIndex = newIndex;
+            this.currentIndex.index = newIndex;
             this.songsPlayed.push(newID);
             this.loadCurrentSong();
         }
@@ -978,77 +1000,75 @@ const myApp = {
         }
     },
 
-    loadPrevStatus: function() {
-        if (document.cookie === '') {
-            timeStart.innerText = '0:00';
-            this.currentIndex = 0;
-            this.loadCurrentSong();
-            this.durationPlayed = 0;
-            this.timeSongPlayed = '0:00';
-            this.idSongPlayed = this.currentIndex;
-            this.setConfig('idSongPlayed', this.idSongPlayed)
+    setActiveSong: function() {
+        let __this = this;
+        this.listSongs.forEach(function(list){
+            let idPage = Number(list[0].closest('.app-content-page').id) - 5;
+            list.forEach((item, index) => {
+                if (idPage === this.pagePlaylist) {
+                    if (item.classList.contains('active') && index !== __this.currentIndex.index){
+                        item.classList.remove('active');
+                    }
+                }
+                else {
+                    item.classList.remove('active');
+                }
+            })
+        })
+        this.listSongs[this.pagePlaylist - 1][this.currentIndex.index].classList.add('active');
+    },
 
-            this.volume = 0.5
-            volumeBar.value = this.volume*100;
-            volumeBar.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + this.volume*100 + '%, #b3b3b3 ' + this.volume*100 + '%, #b3b3b3 100%)'
-            this.isVolumeOn = true;
-            this.setConfig('isVolumeOn', this.isVolumeOn)
-            
-            var today = new Date();
-            today.setTime(today.getTime())
-            document.cookie = today.toUTCString();
+    loadPrevStatus: function() {
+        if (this.volume === 0) {
+            playBarVolume.classList.add('turn-off')
+            this.isVolumeOn = false;
+        }
+
+
+        if (!this.isVolumeOn) {
+            playBarVolume.classList.add('turn-off')
+            this.volume = 0;
+        }
+        this.currentIndex.index = this.idSongPlayed;
+        this.currentIndex.page = this.pagePlaylist;
+        this.setConfig('currentIndex', this.currentIndex)
+        this.setActiveSong();
+        this.loadCurrentSong()
+
+        reactHeartBtn.classList.toggle('reacted', this.isReacted);
+
+        randomBtn.classList.toggle('active', this.isRandom)
+        randomBtnModal.classList.toggle('active', this.isRandom)
+        repeatBtn.classList.toggle('active', this.isRepeat)
+        repeatBtnModal.classList.toggle('active', this.isRepeat)
+
+        if (!this.timeSongPlayed) {
+            this.timeSongPlayed = '0:00'
         }
         else {
-            if (this.volume === 0) {
-                playBarVolume.classList.add('turn-off')
-                this.isVolumeOn = false;
-            }
-    
-    
-            if (!this.isVolumeOn) {
-                playBarVolume.classList.add('turn-off')
-                this.volume = 0;
-            }
-
-            this.currentIndex = this.idSongPlayed;
-            this.loadCurrentSong()
-    
-            reactHeartBtn.classList.toggle('reacted', this.isReacted);
-    
-            randomBtn.classList.toggle('active', this.isRandom)
-            randomBtnModal.classList.toggle('active', this.isRandom)
-            repeatBtn.classList.toggle('active', this.isRepeat)
-            repeatBtnModal.classList.toggle('active', this.isRepeat)
-    
-            if (!this.timeSongPlayed) {
-                this.timeSongPlayed = '0:00'
-            }
-            else {
-                timeStart.innerText = this.timeSongPlayed;
-                timeStartModal.innerText = this.timeSongPlayed;
-            }
-            
-            volumeBar.value = this.volume*100;
-            volumeBar.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + this.volume*100 + '%, #b3b3b3 ' + this.volume*100 + '%, #b3b3b3 100%)'
-    
-            var percent = Math.round(this.durationPlayed / this.totalDuration * 100)
-            progressBar.value = percent;
-            progressBar.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + percent + '%, #d3d3d3 ' + percent + '%, #d3d3d3 100%)'
-            progressBarMobile.value = percent;
-            progressBarMobile.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + percent + '%, #d3d3d3 ' + percent + '%, #d3d3d3 100%)'
-            progressModal.value = percent;
-            progressModal.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + percent + '%, #d3d3d3 ' + percent + '%, #d3d3d3 100%)'
+            timeStart.innerText = this.timeSongPlayed;
+            timeStartModal.innerText = this.timeSongPlayed;
         }
+        
+        volumeBar.value = this.volume*100;
+        volumeBar.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + this.volume*100 + '%, #b3b3b3 ' + this.volume*100 + '%, #b3b3b3 100%)'
 
+        var percent = Math.round(this.durationPlayed / this.totalDuration * 100)
+        progressBar.value = percent;
+        progressBar.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + percent + '%, #d3d3d3 ' + percent + '%, #d3d3d3 100%)'
+        progressBarMobile.value = percent;
+        progressBarMobile.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + percent + '%, #d3d3d3 ' + percent + '%, #d3d3d3 100%)'
+        progressModal.value = percent;
+        progressModal.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + percent + '%, #d3d3d3 ' + percent + '%, #d3d3d3 100%)'
     },
 
     start: function() {
         this.loadConfig();
         this.defineProperties();
         this.handleEvents();
-        // this.loadCurrentSong();
         let pathList = []
-        this.songs.forEach((song) => {
+        let arr = this.songArr[0].songs.concat(this.songArr[1].songs);
+        arr.forEach((song) => {
             pathList.push(song.path);
         })
         this.fetchDurationList(pathList).then((durationList) => {
