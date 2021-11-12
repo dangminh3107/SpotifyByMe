@@ -26,4 +26,3 @@ function secondsToTime(value) {
 }
 var a = secondsToTime(7400);
 console.log(a);
-

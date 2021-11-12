@@ -1,4 +1,5 @@
 let playlist2 = [
+    'Spring 2022',
     {
         id: '2_1',
         name: 'Em Hát Ai Nghe',

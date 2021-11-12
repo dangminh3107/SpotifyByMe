@@ -416,6 +416,7 @@
 }
 
 .btn-toggle-play {
+    width: 36px;
     padding: 10px 10px 8px 12px;
     display: flex;
     align-items: center;
@@ -716,6 +717,20 @@
     background-color: #181818;
     border-bottom: 1px solid var(--text-color);
     opacity: 0;
+}
+
+.app-content-sub-header-bottom .app-content-body-list-header-date-added {
+    width: 14%;
+}
+
+.app-content-sub-header-bottom .app-content-body-list-item-heart {
+    left: 4%;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.app-content-sub-header-bottom .icon-time-added {
+    left: 77% !important;
 }
 
 .app-content-sub-header-overlay {
@@ -1038,6 +1053,25 @@
     margin-bottom: 15px;
 }
 
+.app-content-body-list-item-heart-head {
+    display: flex;
+    align-items: center;
+    position: relative;
+    left: 3%;
+    font-size: 1.4rem;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.app-content-body-list-item-heart-head .icon-fill {
+    display: none;
+}
+
+.app-content-body-list-header .app-content-body-list-item-heart {
+    opacity: 0;
+    pointer-events: none;
+}
+
 .app-content-body-list-header-number {
     width: 5%;
     font-size: 1.6rem;
@@ -1164,7 +1198,31 @@
     font-size: 1.4rem;
     text-align: center;
     position: relative;
-    left: 10%;
+    left: 9.8%;
+}
+
+.app-content-body-list-item-heart {
+    display: flex;
+    align-items: center;
+    position: relative;
+    left: 3%;
+    font-size: 1.4rem;
+}
+
+.app-content-body-list-item-heart .icon-empty {
+}
+
+.app-content-body-list-item-heart .icon-fill {
+    color: var(--primary-color);
+    display: none;
+}
+
+.app-content-body-list-item-heart.active .icon-empty {
+    display: none;
+}
+
+.app-content-body-list-item-heart.active .icon-fill {
+    display: block;
 }
 
 .song-modal {

@@ -1,4 +1,5 @@
 let playlist1 = [
+    'Summer Songs 2021 🍉',
     {
         id: '1_1',
         name: 'Bad Habits',

@@ -42,7 +42,7 @@ const randomBtn = $('.btn-random')
 const randomBtnModal = $('.btn-random-modal')
 const repeatBtn = $('.btn-repeat')
 const repeatBtnModal = $('.btn-repeat-modal')
-const reactHeartBtn = $('.app-content-body-react-album')
+const reactHeartBtn = $$('.app-content-body-react-album')
 const btnViewImgThumb = $('.app-play-bar-song-view')
 const imgViewLarge = $('.app-install')
 const imgViewBox = $('.app-install-image')
@@ -73,6 +73,13 @@ const libHeaderList = $$('.app-content-sub-header-lib-item')
 const libPageList = $$('.app-content-page-lib')
 const settingHome = $('.app-content-header-setting')
 const viewPlaylist = $('.song-modal-content-from')
+const namePlaylist = Array.from($$('.app-content-header-name'));
+const namePlaylistModal = $('.song-play-list')
+const namePlaylistSidebar = Array.from($$('.my-playlist-item-link'));
+
+let x = 21;
+let a = new Array(x).fill(false);
+console.log(a);
 
 const sliderBox = $('.app-content-header-slider-group')
 const sliderListItem= $$('.app-content-header-search-slider-item')
@@ -97,12 +104,13 @@ const myApp = {
         page: 1,
         prevPage: 1,
     },
+    listPlaylistName: [],
+    listPlaylist: [],
     pagePlaylist: 1,
     isPlaying: false,
     isVolumeOn: false,
     isRandom: false,
     isRepeat: false,
-    isReacted: false,
     volume: 0.2,
     durationPlayed: 0,
     totalDuration: 0,
@@ -112,6 +120,7 @@ const myApp = {
     prevVolume: 0,
     timeTotal: '00:00',
     timeSongPlayed: '00:00',
+    reactHeart: [false, false],
     config: JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY)) || {},
     songArr: [
         {
@@ -149,7 +158,7 @@ const myApp = {
         const htmls = songs.map((song,index) => {
             song.timeTotal = durationList[index];
             return `
-                <div class="app-content-body-list-item ${index === this.currentIndex.index && Number(song.id.slice(0,1)) === myApp.getPage() ?'active' : ''}" data-index="${index}">
+                <div class="app-content-body-list-item ${index === this.currentIndex.index && Number(song.id.slice(0,1)) === this.getPage() ?'active' : ''}" data-index="${index}">
                     <span class="app-content-body-list-item-number">${song.id.slice(2)}</span>
                     <div class="app-content-body-list-item-song">
                         <div class="app-content-body-list-item-song-avavtar">
@@ -164,6 +173,10 @@ const myApp = {
                         <a href="" class="app-content-body-list-item-album-link">${song.album}</a>
                     </span>
                     <span class="app-content-body-list-item-date-added">Aug 19, 2021</span>
+                    <div class="app-content-body-list-item-heart">
+                        <i class="far fa-heart icon-empty"></i>
+                        <i class="fas fa-heart icon-fill"></i>
+                    </div>
                     <span class="app-content-body-list-item-duration">${durationList[index]}</span>
                 </div>
             `
@@ -171,33 +184,44 @@ const myApp = {
         return htmls;
     },
 
+    getNameAndList: function([name, ...list]) {
+        this.listPlaylistName.push(name);
+        this.listPlaylist.push([...list]);
+    },
+
     render: function(durationList) {
-        let n1 = this.songArr[0].songs.length, n2 = this.songArr[1].songs.length;
-        let list1 = durationList.splice(0, n1), list2 = durationList.splice(0, n2);
-        this.setTotalTime(this.songArr[0].songs, list1, n1);
-        this.setTotalTime(this.songArr[1].songs, list2, n2);
-        const html1 = this.getHTML(this.songArr[0].songs, list1)
-        const html2 = this.getHTML(this.songArr[1].songs, list2)
-        playlist[0].innerHTML = html1.join('')
-        playlist[1].innerHTML = html2.join('')
+        let nArray = [], list = [], n = this.listPlaylist.length;
+        this.listPlaylist.forEach(item => {
+            nArray.push(item.length);
+        })
+        nArray.forEach(item => {
+            let temp = durationList.splice(0, item);
+            list.push(temp);
+        })
+
+        for (let i = 0; i < n; i++) {
+            this.setTotalTime(this.listPlaylist[i], list[i], nArray[i]);
+            let htmls= this.getHTML(this.listPlaylist[i], list[i]);
+            namePlaylist[i].innerText = this.listPlaylistName[i];
+            playlist[i].innerHTML = htmls.join('');
+            namePlaylistSidebar[i].innerText = this.listPlaylistName[i];
+        }
+
         playlist.forEach((item) => {
             this.listSongs.push(Array.from(item.querySelectorAll('.app-content-body-list-item')));
         })
+
+        namePlaylistModal.innerText = this.listPlaylistName[this.pagePlaylist - 1];
+
+        const listHeartSongs = Array.from($$('.app-content-body-list-item-heart'))
+        console.log(listHeartSongs)
+
     },
     
     defineProperties: function() {
         Object.defineProperty(this, 'currentSong', {
             get: function() {
-                switch(this.currentIndex.page) {
-                    case 1:
-                        return this.songArr[0].songs[this.currentIndex.index];
-                        break;
-                    case 2:
-                        return this.songArr[1].songs[this.currentIndex.index];
-                        break;
-                    default:
-                        return this.songArr[0].songs[this.currentIndex.index];
-                }
+                return this.listPlaylist[this.currentIndex.page-1][this.currentIndex.index];
             }
         })
     },
@@ -349,13 +373,27 @@ const myApp = {
                         isSearchPage = false;
                         subOverlay = defaultOverlay;
                         subBottom  = defaultSubBottom;
+                        subHeaderTitle.innerText = _this.listPlaylistName[0];
+                        if (_this.isPlaying) {
+                            if (_this.pagePlaylist !== 1) {
+                                playBtnHeader.classList.remove('playing');
+                            }
+                            else {
+                                playBtnHeader.classList.add('playing');
+                            }
+                        }
                         offsetYLarge = appContentBody[0].offsetTop + appContentBodyPlaybar[0].offsetHeight / 2;
                         offsetYMedium = headerContent[0].offsetHeight;
                         appContentHeaderOverlay[0].style.backgroundColor = 'rgb(80, 152, 168)';
                         subOverlay.opacity = 0;
                         subOverlay.backgroundColor = 'rgb(80, 152, 168)';
                         subBottom.opacity = 0;
-                        subBottom.display = 'flex';
+                        if (documentWidth < 1024) {
+                            subBottom.display = 'none';
+                        }
+                        else {
+                            subBottom.display = 'flex';
+                        }
                         _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
                         [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
                         [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
@@ -365,13 +403,27 @@ const myApp = {
                         isSearchPage = false;
                         subOverlay = defaultOverlay;
                         subBottom  = defaultSubBottom;
+                        subHeaderTitle.innerText = _this.listPlaylistName[1];
+                        if (_this.isPlaying) {
+                            if (_this.pagePlaylist !== 2) {
+                                playBtnHeader.classList.remove('playing');
+                            }
+                            else {
+                                playBtnHeader.classList.add('playing');
+                            }
+                        }
                         offsetYLarge = appContentBody[1].offsetTop + appContentBodyPlaybar[1].offsetHeight / 2;
                         offsetYMedium = headerContent[1].offsetHeight;
                         appContentHeaderOverlay[1].style.backgroundColor = 'rgb(80, 152, 168)';
                         subOverlay.opacity = 0;
                         subOverlay.backgroundColor = 'rgb(80, 152, 168)';
                         subBottom.opacity = 0;
-                        subBottom.display = 'flex';
+                        if (documentWidth < 1024) {
+                            subBottom.display = 'none';
+                        }
+                        else {
+                            subBottom.display = 'flex';
+                        }
                         _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
                         [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
                         [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
@@ -387,7 +439,12 @@ const myApp = {
                         subOverlay.opacity = 0;
                         subOverlay.backgroundColor = 'rgb(80, 152, 168)';
                         subBottom.opacity = 0;
-                        subBottom.display = 'flex';
+                        if (documentWidth < 1024) {
+                            subBottom.display = 'none';
+                        }
+                        else {
+                            subBottom.display = 'flex';
+                        }
                         _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
                         [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
                         [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
@@ -446,12 +503,45 @@ const myApp = {
         //Event when play audio
         playBtn.onclick = Play;
         playModal.onclick = Play;
-        playBtnPlaylist.forEach((item => {
+        playBtnPlaylist.forEach((item) => {
             item.onclick = function() {
-                let idPage = Number(item.closest('.app-content-page').id) - 5;
+                let itemIndex = Number(item.closest('.app-content-page').id)
+                let idPage = itemIndex - 5;
+                if (idPage === _this.getPage()) {
+                    Play();
+                }
+                else {
+                    _this.currentIndex.index = 0;
+                    _this.currentIndex.page = idPage;
+                    _this.pagePlaylist = _this.currentIndex.page;
+                    _this.setConfig('idSongPlayed', _this.currentIndex.index);
+                    _this.setConfig('pagePlaylist', _this.currentIndex.page)
+                    _this.loadCurrentSong();
+                    audio.play();
+                }
+                item.classList.toggle('playing')
             }
-        }))
-        playBtnHeader.onclick = Play;
+        })
+        playBtnHeader.onclick = function() {
+            let index = pageIndex - 5;
+            if (_this.isPlaying) {
+                if (_this.pagePlaylist !== index) {
+                    playBtnPlaylist[index - 1].click();
+                }
+                else {
+                    audio.pause();
+                }
+            }
+            else {
+                if (_this.pagePlaylist !== index) {
+                    playBtnPlaylist[index - 1].click();
+                }
+                else {
+                    audio.play();
+                }
+            }
+            playBtnHeader.classList.toggle('playing')
+        }
         playBtnRandomHeader.onclick = function() {
             _this.playRandomSong();
             audio.play();
@@ -521,11 +611,13 @@ const myApp = {
             _this.isRandom = !_this.isRandom;
             _this.setConfig('isRandom', _this.isRandom);
             randomBtn.classList.toggle('active', _this.isRandom)
+            randomBtnModal.classList.toggle('active', _this.isRandom)
         }
 
         randomBtnModal.onclick = function() {
             _this.isRandom = !_this.isRandom;
             _this.setConfig('isRandom', _this.isRandom);
+            randomBtn.classList.toggle('active', _this.isRandom)
             randomBtnModal.classList.toggle('active', _this.isRandom)
         }
 
@@ -534,11 +626,13 @@ const myApp = {
             _this.isRepeat = !_this.isRepeat;
             _this.setConfig('isRepeat', _this.isRepeat);
             repeatBtn.classList.toggle('active', _this.isRepeat)
+            repeatBtnModal.classList.toggle('active', _this.isRepeat)
         }
 
         repeatBtnModal.onclick = function() {
             _this.isRepeat = !_this.isRepeat;
             _this.setConfig('isRepeat', _this.isRepeat);
+            repeatBtn.classList.toggle('active', _this.isRepeat)
             repeatBtnModal.classList.toggle('active', _this.isRepeat)
         }
 
@@ -597,6 +691,7 @@ const myApp = {
                     }
                 })
             })
+            namePlaylistModal.innerText = _this.listPlaylistName[_this.pagePlaylist - 1];
             _this.listSongs[_this.getPage()-1][_this.currentIndex.index].classList.add('active');
             audio.volume = _this.volume;
             audio.ontimeupdate = function() {
@@ -628,11 +723,12 @@ const myApp = {
             _this.isPlaying = true;
             playbar.classList.add('playing')
             playbarModal.classList.add('playing')
-            // playBtnPlaylist.forEach((item => {
-            //     if (item.closest(`.app-content-page[id="${_this.currentIndex.page + 5}"]`)) {
-            //         item.classList.add('playing')
-            //     }
-            // }))
+            playBtnPlaylist.forEach((value, index) => {
+                if (_this.pagePlaylist - 1 !== index) {
+                    value.classList.remove('playing');
+                }
+            })
+            playBtnPlaylist[_this.pagePlaylist - 1].classList.add('playing')
             playBtnHeader.classList.add('playing')
         }
 
@@ -641,11 +737,7 @@ const myApp = {
             _this.isPlaying = false;
             playbar.classList.remove('playing');
             playbarModal.classList.remove('playing')
-            // playBtnPlaylist.forEach((item => {
-            //     if (item.closest(`.app-content-page[id="${_this.currentIndex.page + 5}"]`)) {
-            //         item.classList.remove('playing')
-            //     }
-            // }))
+            playBtnPlaylist[_this.pagePlaylist - 1].classList.remove('playing')
             playBtnHeader.classList.remove('playing')
         }
 
@@ -727,11 +819,18 @@ const myApp = {
         })
 
         //React playlist
-        reactHeartBtn.onclick = function() {
-            _this.isReacted = !_this.isReacted;
-            _this.setConfig('isReacted', _this.isReacted);
-            reactHeartBtn.classList.toggle('reacted', _this.isReacted);
-        }
+        reactHeartBtn.forEach((item,index) => {
+            item.onclick = function () {
+                if (_this.reactHeart[index]) {
+                    _this.reactHeart[index] = false;
+                }
+                else {
+                    _this.reactHeart[index] = true;
+                }
+                _this.setConfig('reactHeart', _this.reactHeart);
+                item.classList.toggle('reacted', _this.reactHeart[index]);
+            }
+        })
 
         //Button view on image song thumb
         btnViewImgThumb.onclick = function() {
@@ -783,6 +882,7 @@ const myApp = {
                     playBtnHeader.style.display = 'block';
                     playBtnRandomHeader.style.display = 'none';
                 }
+                subHeaderBottom.style.display = 'flex';
                 settingHome.style.display = 'none';
                 subHeaderTop.style.display = 'flex';
                 subHeaderOverlay.style.display = 'block';
@@ -798,10 +898,10 @@ const myApp = {
                     subHeaderOverlay.style.display = 'block';
                     btnNextSlider.style.display = 'none';
                 }
-                else if (pageIndex === 3 || pageIndex === 6) {
+                else if (pageIndex === 3 || pageIndex === 6 || pageIndex === 7) {
                     subHeaderOverlay.style.display = 'block';
                     playBtnHeader.style.display = 'none';
-                    if (pageIndex === 6 && appContent.scrollTop >= 320) {
+                    if ((pageIndex === 6 || pageIndex === 7) && appContent.scrollTop >= 320) {
                         playBtnRandomHeader.style.display = 'flex';
                     }
                 }
@@ -814,6 +914,7 @@ const myApp = {
                     settingHome.style.display = pageIndex === 1 ? 'flex' : 'none';
                     subHeaderOverlay.style.display = 'none';
                 }
+                subHeaderBottom.style.display = 'none';
                 playBtnRandomPlaylist.forEach(item => {
                     item.style.display = 'flex';
                 })
@@ -871,7 +972,7 @@ const myApp = {
                 }
                 subHeaderOverlay.style.opacity = appContentSrollTop >= offsetYMedium ? 1 : appContentSrollTop / offsetYMedium;
                 playBtnRandomHeader.style.display = appContentSrollTop >= offsetYMedium ? 'flex' : 'none';
-                subHeaderBottom.style.opacity = appContentSrollTop >= offsetYMedium ? 1 : 0;
+                subHeaderBottom.style.display = 'none';
             }  
         }
         else {
@@ -911,8 +1012,8 @@ const myApp = {
     },
 
     loadConfig: function() {
-        this.volume = this.config.volume || 0;
-        this.isVolumeOn = this.config.isVolumeOn || true;
+        this.volume = this.config.volume || 0.3;
+        this.isVolumeOn = this.config.isVolumeOn;
         this.prevVolume = this.config.prevVolume || 0;
         this.durationPlayed = this.config.durationPlayed || 0;
         this.totalDuration = this.config.totalDuration || 0;
@@ -921,21 +1022,11 @@ const myApp = {
         this.timeSongPlayed = this.config.timeSongPlayed || '0:00';
         this.isRandom = this.config.isRandom || false;
         this.isRepeat = this.config.isRepeat || false;
-        this.isReacted = this.config.isReacted || false;
+        this.reactHeart = this.config.reactHeart || [false, false];
         this.pagePlaylist = this.config.pagePlaylist || 1;
     },
 
     loadCurrentSong: function() {
-        // switch(this.currentIndex.page) {
-        //     case 1:
-        //         this.currentSong = this.songArr[0].songs[this.currentIndex.index];
-        //         break;
-        //     case 2: 
-        //         this.currentSong = this.songArr[1].songs[this.currentIndex.index];
-        //         break;
-        //     default:
-        //         this.currentSong = this.songArr[0].songs[this.currentIndex.index];
-        // }
         playbarSongName.forEach((val) => {
             val.textContent = this.currentSong.name;
         })
@@ -987,7 +1078,7 @@ const myApp = {
             newIndex = Math.floor(Math.random() * this.listSongs[this.currentIndex.page - 1].length);     
         } while (newIndex === this.currentIndex.index)
 
-        newID = Number(this.songArr[this.currentIndex.page - 1].songs[newIndex].id.slice(2));
+        newID = Number(this.listPlaylist[this.currentIndex.page - 1][newIndex].id.slice(2));
         isPlayed = this.songsPlayed.find(value => newID === value)
 
         if (!isPlayed) {
@@ -1023,19 +1114,20 @@ const myApp = {
             playBarVolume.classList.add('turn-off')
             this.isVolumeOn = false;
         }
-
-
         if (!this.isVolumeOn) {
             playBarVolume.classList.add('turn-off')
             this.volume = 0;
         }
+
         this.currentIndex.index = this.idSongPlayed;
         this.currentIndex.page = this.pagePlaylist;
         this.setConfig('currentIndex', this.currentIndex)
         this.setActiveSong();
         this.loadCurrentSong()
 
-        reactHeartBtn.classList.toggle('reacted', this.isReacted);
+        reactHeartBtn.forEach((item, index) => {
+            item.classList.toggle('reacted', this.reactHeart[index]);
+        })
 
         randomBtn.classList.toggle('active', this.isRandom)
         randomBtnModal.classList.toggle('active', this.isRandom)
@@ -1060,17 +1152,29 @@ const myApp = {
         progressBarMobile.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + percent + '%, #d3d3d3 ' + percent + '%, #d3d3d3 100%)'
         progressModal.value = percent;
         progressModal.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + percent + '%, #d3d3d3 ' + percent + '%, #d3d3d3 100%)'
+
     },
 
     start: function() {
         this.loadConfig();
         this.defineProperties();
         this.handleEvents();
+        let _this = this;
         let pathList = []
-        let arr = this.songArr[0].songs.concat(this.songArr[1].songs);
+        
+        this.songArr.forEach((item) => {
+            _this.getNameAndList(item.songs)
+        })
+        
+        let arr = this.listPlaylist[0];
+        for (let i = 1; i < this.listPlaylist.length; i++) {
+            arr = arr.concat(this.listPlaylist[i]);
+        }
+
         arr.forEach((song) => {
             pathList.push(song.path);
         })
+
         this.fetchDurationList(pathList).then((durationList) => {
             this.render(durationList)
             this.loadPrevStatus();

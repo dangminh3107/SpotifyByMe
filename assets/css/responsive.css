@@ -946,6 +946,18 @@
     .app-content-artist-page .app-content-header-body-item-contain {
         margin: 5px 0;
     }
+
+    .app-content-sub-header-bottom {
+        padding: 10px 16px;
+    }
+
+    .app-content-sub-header-bottom .app-content-body-list-header-title {
+        width: 100%;
+    }
+
+    .app-content-sub-header-bottom {
+        display: none;
+    }
 }
 
 @media (min-width: 31.25em) and (max-width: 41.1875em) {
