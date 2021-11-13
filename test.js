@@ -24,5 +24,20 @@ function secondsToTime(value) {
 
     return hours + minutes +':'+ seconds; 
 }
-var a = secondsToTime(7400);
-console.log(a);
+// var a = secondsToTime(7400);
+// console.log(a);
+
+let a = new Array(10).fill(0); // convert
+let b = new Array(11).fill(0);
+let d = new Array(12).fill(0);
+let e = new Array(13).fill(0);
+let f = new Array(14).fill(0);
+let c = []; // convert
+c.push(a, b, d, e, f);
+
+function Tong(c, i) {
+    if (i < 0 || c[i-1] === undefined) {return 0}
+    return c[i - 1].length + Tong(c, i - 1);
+}
+
+console.log(Tong(c, 4));

@@ -499,10 +499,12 @@
 
 .control-time-lapse {
     margin-right: 10px;
+    width: 27px;
 }
 
 .control-time-duration {
     margin-left: 10px;
+    width: 27px;
 }
 
 .app-play-bar-volume {
@@ -730,7 +732,7 @@
 }
 
 .app-content-sub-header-bottom .icon-time-added {
-    left: 77% !important;
+    left: 67% !important;
 }
 
 .app-content-sub-header-overlay {
@@ -1061,6 +1063,7 @@
     font-size: 1.4rem;
     opacity: 0;
     pointer-events: none;
+    padding: 0 5px;
 }
 
 .app-content-body-list-item-heart-head .icon-fill {
@@ -1094,7 +1097,7 @@
 .app-content-body-list-header-time-added .icon-time-added {
     font-size: 1.4rem;
     position: relative;
-    left: 70%;
+    left: 60%;
 }
 
 
@@ -1198,7 +1201,26 @@
     font-size: 1.4rem;
     text-align: center;
     position: relative;
-    left: 9.8%;
+    left: 8%;
+}
+
+.app-content-body-list-item-more-head {
+    position: relative;
+    left: -1.5%;
+    padding: 0 5px;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.app-content-body-list-item-more {
+    position: relative;
+    left: -1.5%;
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+    cursor: pointer;
 }
 
 .app-content-body-list-item-heart {
@@ -1207,6 +1229,7 @@
     position: relative;
     left: 3%;
     font-size: 1.4rem;
+    padding: 0 5px;
 }
 
 .app-content-body-list-item-heart .icon-empty {
@@ -1217,11 +1240,11 @@
     display: none;
 }
 
-.app-content-body-list-item-heart.active .icon-empty {
+.app-content-body-list-item-heart.reacted .icon-empty {
     display: none;
 }
 
-.app-content-body-list-item-heart.active .icon-fill {
+.app-content-body-list-item-heart.reacted .icon-fill {
     display: block;
 }
 

@@ -533,6 +533,10 @@
     .app-content-header-lib-title {
         margin: 10px 30px;
     }
+
+    .app-content-body-list-item-heart {
+        left: -6%;
+    }
 }
 
 
@@ -957,6 +961,18 @@
 
     .app-content-sub-header-bottom {
         display: none;
+    }
+
+    .app-content-body-list-item-heart {
+        left: -6%;
+    }
+
+    .app-content-body-list-header-number {
+        width: 7%;
+    }
+
+    .app-content-body-list-item-number {
+        width: 10%;
     }
 }
 

@@ -77,16 +77,13 @@ const namePlaylist = Array.from($$('.app-content-header-name'));
 const namePlaylistModal = $('.song-play-list')
 const namePlaylistSidebar = Array.from($$('.my-playlist-item-link'));
 
-let x = 21;
-let a = new Array(x).fill(false);
-console.log(a);
 
 const sliderBox = $('.app-content-header-slider-group')
 const sliderListItem= $$('.app-content-header-search-slider-item')
 const btnNextSlider = $('.slider-control-right')
 const btnPrevSlider = $('.slider-control-left')
 
-
+let N = playListItem.length;
 let isPlaylistPage = false;
 let isSearchPage = false;
 let offsetYLarge = 0;
@@ -120,7 +117,9 @@ const myApp = {
     prevVolume: 0,
     timeTotal: '00:00',
     timeSongPlayed: '00:00',
-    reactHeart: [false, false],
+    isReactedList: new Array(21).fill(false),
+    reactList: [],
+    songReact: [],
     config: JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY)) || {},
     songArr: [
         {
@@ -178,6 +177,9 @@ const myApp = {
                         <i class="fas fa-heart icon-fill"></i>
                     </div>
                     <span class="app-content-body-list-item-duration">${durationList[index]}</span>
+                    <div class="app-content-body-list-item-more">
+                        <i class="ti-more-alt icon-more"></i>
+                    </div>
                 </div>
             `
         })
@@ -212,10 +214,7 @@ const myApp = {
         })
 
         namePlaylistModal.innerText = this.listPlaylistName[this.pagePlaylist - 1];
-
-        const listHeartSongs = Array.from($$('.app-content-body-list-item-heart'))
-        console.log(listHeartSongs)
-
+        this.reactList = Array.from($$('.app-content-body-list-item-heart'));
     },
     
     defineProperties: function() {
@@ -804,16 +803,31 @@ const myApp = {
         playlist.forEach((item) => {
             item.onclick = function(e) {
                 const songNode = e.target.closest('.app-content-body-list-item:not(.active)');
+                const songNodeIncludeActive = e.target.closest('.app-content-body-list-item');
                 const page = e.target.closest('.app-content-page')
-                if (songNode) {
-                    _this.currentIndex.index = Number(songNode.dataset.index);
-                    _this.currentIndex.page = page.id - 5;
-                    _this.pagePlaylist = page.id - 5;
-                    _this.setConfig('currentIndex', _this.currentIndex)
-                    _this.setConfig('idSongPlayed', _this.currentIndex.index);
-                    _this.setConfig('pagePlaylist', page.id - 5);
-                    _this.loadCurrentSong();
-                    audio.play();
+                const reactSong = e.target.closest('.app-content-body-list-item-heart')
+                const option = e.target.closest('.app-content-body-list-item-more')
+                if (songNode || reactSong || option) {
+                    if (reactSong) {
+                        let id = _this.getPrevLength(_this.listPlaylist, page.id - 6) + Number(songNodeIncludeActive.dataset.index);
+                        _this.isReactedList[id] = !_this.isReactedList[id];
+                        _this.reactList[id].classList.toggle('reacted', _this.isReactedList[id]);
+                        _this.setConfig('isReactedList', _this.isReactedList);
+
+                    }
+                    else if (option) {
+                        
+                    }
+                    else if (songNode) {
+                        _this.currentIndex.index = Number(songNode.dataset.index);
+                        _this.currentIndex.page = page.id - 5;
+                        _this.pagePlaylist = page.id - 5;
+                        _this.setConfig('currentIndex', _this.currentIndex)
+                        _this.setConfig('idSongPlayed', _this.currentIndex.index);
+                        _this.setConfig('pagePlaylist', page.id - 5);
+                        _this.loadCurrentSong();
+                        audio.play();
+                    }
                 }
             }
         })
@@ -854,9 +868,12 @@ const myApp = {
             songModal.classList.remove('active');
         }
 
-        playBarMobile.onclick = function() {
+        playBarMobile.onclick = function(e) {
             if (document.documentElement.clientWidth < 740) {
-                songModal.classList.add('active');
+                let node = e.target.closest('.btn-toggle-play')
+                if (!node) {
+                    songModal.classList.add('active');
+                }
             }
         }
 
@@ -1010,6 +1027,10 @@ const myApp = {
             }
         }
     },
+    getPrevLength: function(arr, index) {
+        if (index < 0 || arr[index - 1] === undefined) {return 0}
+        return arr[index - 1].length + this.getPrevLength(arr, index - 1);
+    },
 
     loadConfig: function() {
         this.volume = this.config.volume || 0.3;
@@ -1022,8 +1043,10 @@ const myApp = {
         this.timeSongPlayed = this.config.timeSongPlayed || '0:00';
         this.isRandom = this.config.isRandom || false;
         this.isRepeat = this.config.isRepeat || false;
-        this.reactHeart = this.config.reactHeart || [false, false];
+        this.reactHeart = this.config.reactHeart;
         this.pagePlaylist = this.config.pagePlaylist || 1;
+        console.log(this.config.isReactedList)
+        this.isReactedList = this.config.isReactedList || new Array(21).fill(false);
     },
 
     loadCurrentSong: function() {
@@ -1117,6 +1140,10 @@ const myApp = {
         if (!this.isVolumeOn) {
             playBarVolume.classList.add('turn-off')
             this.volume = 0;
+        }
+        let heartLength = this.isReactedList.length;
+        for (var i = 0; i < heartLength; i++) {
+            this.reactList[i].classList.toggle('reacted', this.isReactedList[i]);
         }
 
         this.currentIndex.index = this.idSongPlayed;
