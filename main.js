@@ -1045,7 +1045,6 @@ const myApp = {
         this.isRepeat = this.config.isRepeat || false;
         this.reactHeart = this.config.reactHeart;
         this.pagePlaylist = this.config.pagePlaylist || 1;
-        console.log(this.config.isReactedList)
         this.isReactedList = this.config.isReactedList || new Array(21).fill(false);
     },
 
