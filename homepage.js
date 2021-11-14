@@ -1,7 +1,41 @@
 let homepage = JSON.parse(localStorage.getItem(HOMEPAGE_STORAGE)) || {}
 
 let listGroupItem1 = [];
-home.forEach((item, index) => {
+let listHeaderItem = []
+
+homepage[0].header.forEach(value => {
+    let row = document.createElement('div');
+    row.classList.add('app-content-header-container-row');
+    row.classList.add('row');
+    let html = value.group.map(item => {
+        return `
+            <div class="app-content-header-container-item-contain col l-3 l-header-mod">
+                <div class="app-content-header-container-item">
+                    <div class="app-content-header-container-item-box-img">
+                        <img src="${item.image}" alt="" class="app-content-header-container-item-img">
+                    </div>
+                    <div class="app-content-header-container-item-box-title">
+                        <span class="app-content-header-container-item-title">${item.name}</span>
+                        <div class="btn-play-home app-content-header-container-box-button">
+                            <button class="btn-play-home-box">
+                                <i class="fas fa-play btn-play-home-icon-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `
+    })
+    row.innerHTML = html.join('');
+    listHeaderItem.push(row);
+})
+
+let headerContentHomePage = document.querySelector('.app-content-header-container')
+listHeaderItem.forEach(item => {
+    headerContentHomePage.append(item);
+})
+
+homepage[1].body.forEach((item, index) => {
     let groupItem1 = document.createElement('div');
     groupItem1.classList.add('app-content-header-body-item-group')
     let header = `

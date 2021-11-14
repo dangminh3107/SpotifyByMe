@@ -90,7 +90,7 @@ let libpage3 = JSON.parse(localStorage.getItem(LIBPAGE3_STORAGE)) || {}
 let libHTML3 = libpage3.map(item => {
     return `
             <div class="app-content-header-body-item-contain col l-2 m-12 c-12">
-                <div class="app-content-header-body-item">
+                <div class="app-content-header-body-item lib-page">
                     <div class="app-content-header-body-item-box lib-page">
                         <div class="app-content-header-body-item-thumb">
                             <img src="${item.image}" alt="" class="app-content-header-body-item-thum-img artist">

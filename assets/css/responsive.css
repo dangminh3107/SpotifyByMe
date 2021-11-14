@@ -114,6 +114,36 @@
     }
 }
 
+@media (max-width: 63.9375em) {
+    .app-content-header-body-item-box.lib-page {
+        padding: 0;
+    }
+
+    .app-content-header-body-item.lib-page{
+        background-color: transparent;
+    }
+
+    .app-content-header-lib .app-content-header-container-item-box-img {
+        display: block;
+        padding: 0;
+    }
+
+    .app-content-header-lib .app-content-header-container-item-img {
+        height: 80px;
+        width: 80px;
+    }
+
+    .app-content-header-lib-box-1-box {
+        overflow: hidden;
+        height: 80px;
+        margin: 5px 0;
+        background: transparent;
+    }
+
+    .app-content-header-lib-box-1-group {
+        margin-left: 100px;
+    }
+}
 
 /* ------------------------------------------------------------------------- */
 
@@ -415,30 +445,13 @@
 
     .app-content-header-body-item-box.lib-page .app-content-header-body-item-info-heading {
         margin: 0 0 0 20px;
+        overflow: unset;
+        text-overflow: unset;
+        white-space: unset;
     }
 
     .app-content-header-body-item-box.lib-page .app-content-header-body-item-info {
         margin: 0;
-    }
-
-    .app-content-header-lib .app-content-header-container-item-box-img {
-        display: block;
-        padding: 15px;
-    }
-
-    .app-content-header-lib-box-1-box {
-        overflow: hidden;
-        height: 114px;
-        margin: 5px 0;
-        background: #181818;
-    }
-
-    .app-content-header-lib-box-1-box:hover {
-        background-color: #282828;
-    }
-
-    .app-content-header-lib-box-1-group {
-        margin-left: 120px;
     }
 
     .app-content-header-lib-box-1-title {
@@ -896,30 +909,15 @@
 
     .app-content-header-body-item-box.lib-page .app-content-header-body-item-info-heading {
         margin: 0 0 0 20px;
+        overflow: unset;
+        text-overflow: unset;
+        white-space: unset;
     }
 
     .app-content-header-body-item-box.lib-page .app-content-header-body-item-info {
         margin: 0;
-    }
-
-    .app-content-header-lib .app-content-header-container-item-box-img {
-        display: block;
-        padding: 15px;
-    }
-
-    .app-content-header-lib-box-1-box {
-        overflow: hidden;
-        height: 114px;
-        margin: 5px 0;
-        background: #181818;
-    }
-
-    .app-content-header-lib-box-1-box:hover {
-        background-color: #282828;
-    }
-
-    .app-content-header-lib-box-1-group {
-        margin-left: 120px;
+        inline-size: 340px;
+        overflow-wrap: break-word;
     }
 
     .app-content-header-lib-box-1-title {

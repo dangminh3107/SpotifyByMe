@@ -117,7 +117,7 @@ const myApp = {
     prevVolume: 0,
     timeTotal: '00:00',
     timeSongPlayed: '00:00',
-    isReactedList: new Array(21).fill(false),
+    isReactedList: new Array(31).fill(false),
     reactList: [],
     songReact: [],
     config: JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY)) || {},
@@ -1045,7 +1045,7 @@ const myApp = {
         this.isRepeat = this.config.isRepeat || false;
         this.reactHeart = this.config.reactHeart;
         this.pagePlaylist = this.config.pagePlaylist || 1;
-        this.isReactedList = this.config.isReactedList || new Array(21).fill(false);
+        this.isReactedList = this.config.isReactedList || new Array(31).fill(false);
     },
 
     loadCurrentSong: function() {

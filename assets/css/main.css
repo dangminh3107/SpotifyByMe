@@ -370,14 +370,16 @@
 
 
 .app-play-bar-song-name {
-    font-weight: 400;
+    font-weight: bold;
     font-size: 1.4rem;
     line-height: 1.4rem;
     margin-bottom: 6px;
 }
 
+.app-play-bar-song-author:hover,
 .app-play-bar-song-name:hover {
-    animation: shake 5s linear infinite;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .app-play-bar .icon-pause {
@@ -1171,6 +1173,7 @@
 .app-content-body-list-item-song-name {
     margin-bottom: 8px;
     font-size: 1.4rem;
+    line-height: 2rem;
     font-weight: 500;
     color: var(--white-color);
 }
@@ -1182,7 +1185,7 @@
 .app-content-body-list-item-album-link {
     text-decoration: none;
     font-size: 1.4rem;
-    line-height: 1.4rem;
+    line-height: 2rem;
     font-weight: 500;
     color: var(--text-color);
 }
