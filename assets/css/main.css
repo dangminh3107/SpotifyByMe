@@ -583,7 +583,9 @@
 .app-content-page[id='2'],
 .app-content-page[id='3'],
 .app-content-page[id='6'],
-.app-content-page[id='7'] {
+.app-content-page[id='7'],
+.app-content-page[id='8'],
+.app-content-page[id='9'] {
     display: none;
 }
 
@@ -591,7 +593,9 @@
 .app-content-page[id='2'].active,
 .app-content-page[id='3'].active,
 .app-content-page[id='6'].active,
-.app-content-page[id='7'].active  {
+.app-content-page[id='7'].active,
+.app-content-page[id='8'].active,
+.app-content-page[id='9'].active  {
     display: block;
 }
 

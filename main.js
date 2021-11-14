@@ -127,6 +127,12 @@ const myApp = {
         },
         {
             songs: JSON.parse(localStorage.getItem(PLAYLIST2_STORAGE)) || {}
+        },
+        {
+            songs: JSON.parse(localStorage.getItem(PLAYLIST3_STORAGE)) || {}
+        },
+        {
+            songs: JSON.parse(localStorage.getItem(PLAYLIST4_STORAGE)) || {}
         }
     ],
     setConfig: function(key, value) {
@@ -435,6 +441,27 @@ const myApp = {
                         offsetYLarge = appContentBody[2].offsetTop + appContentBodyPlaybar[2].offsetHeight / 2;
                         offsetYMedium = headerContent[2].offsetHeight;
                         appContentHeaderOverlay[2].style.backgroundColor = 'rgb(80, 152, 168)';
+                        subOverlay.opacity = 0;
+                        subOverlay.backgroundColor = 'rgb(80, 152, 168)';
+                        subBottom.opacity = 0;
+                        if (documentWidth < 1024) {
+                            subBottom.display = 'none';
+                        }
+                        else {
+                            subBottom.display = 'flex';
+                        }
+                        _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
+                        [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                        [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        break;
+                    case 9:
+                        isPlaylistPage = true;
+                        isSearchPage = false;
+                        subOverlay = defaultOverlay;
+                        subBottom  = defaultSubBottom;
+                        offsetYLarge = appContentBody[3].offsetTop + appContentBodyPlaybar[3].offsetHeight / 2;
+                        offsetYMedium = headerContent[3].offsetHeight;
+                        appContentHeaderOverlay[3].style.backgroundColor = 'rgb(80, 152, 168)';
                         subOverlay.opacity = 0;
                         subOverlay.backgroundColor = 'rgb(80, 152, 168)';
                         subBottom.opacity = 0;
