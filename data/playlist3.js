@@ -1,5 +1,9 @@
 let playlist3 = [
     'Daily Mix 3',
+    'rgb(160, 16, 16)',
+    './assets/img/playlist/playlist3.jpg',
+    'JUUN D, Hoài Lâm, Pulssarr and more',
+    'Spotify',
     {
         id: '3_1',
         name: 'Sài Gòn Đau Lòng Quá',
@@ -102,6 +106,8 @@ let playlist3 = [
     }
 ]
 
-
+let lengthP3 = pLoad(playlist3)
+const PLAYLIST3_TOTAL_SONGS_STORAGE = 'PLAYLIST3TOTALSONGS'
+localStorage.setItem(PLAYLIST3_TOTAL_SONGS_STORAGE, JSON.stringify(lengthP3.length))
 const PLAYLIST3_STORAGE = 'PLAYLIST3';
 localStorage.setItem(PLAYLIST3_STORAGE, JSON.stringify(playlist3))

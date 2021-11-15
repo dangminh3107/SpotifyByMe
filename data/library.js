@@ -1,5 +1,30 @@
 let lib1 = [
     { 
+        image: './assets/img/playlist/playlist1.jpg',
+        title: 'Summer Songs 2021 🍉',
+        description: 'Get into a tropical summer mood! summer music summer songs summer hits summer remixes summer covers summer chill summer house summer mix summer playlist summer beats summer vibes.'
+    },
+    { 
+        image: './assets/img/playlist/playlist2.jpg',
+        title: 'Daily Mix 2',
+        description: 'Alan Walker, Orange, Rhymastic and more'
+    },
+    { 
+        image: './assets/img/playlist/playlist3.jpg',
+        title: 'Daily Mix 3',
+        description: 'JUUN D, Hoài Lâm, Pulssarr and more'
+    },
+    { 
+        image: './assets/img/playlist/playlist4.jpg',
+        title: 'Điều Buồn Nhất',
+        description: 'Điều buồn nhất là anh biết lại làm như không biết... Ảnh bìa: T.R.I'
+    },
+    { 
+        image: './assets/img/playlist/playlist5.jpg',
+        title: 'Pop Mix',
+        description: 'Bella Poarch, Đông Nhi, Ed Sheeran and more'
+    },
+    { 
         image: './assets/img/lib_page/img_1.jpg',
         title: 'League of Legends Official Playlist',
         description: 'The official LoL Esports playlist for Worlds 2021, getting you ready for every make or break moment.'

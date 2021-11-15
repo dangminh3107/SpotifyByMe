@@ -176,6 +176,7 @@
     color: var(--text-color);
     font-size: 1.4rem;
     line-height: 1.6rem;
+    font-weight: 600;
 }
 
 .my-playlist-item-link:hover {
@@ -585,7 +586,13 @@
 .app-content-page[id='6'],
 .app-content-page[id='7'],
 .app-content-page[id='8'],
-.app-content-page[id='9'] {
+.app-content-page[id='9'],
+.app-content-page[id='10'],
+.app-content-page[id='11'],
+.app-content-page[id='12'],
+.app-content-page[id='13'],
+.app-content-page[id='14'],
+.app-content-page[id='15'] {
     display: none;
 }
 
@@ -595,7 +602,13 @@
 .app-content-page[id='6'].active,
 .app-content-page[id='7'].active,
 .app-content-page[id='8'].active,
-.app-content-page[id='9'].active  {
+.app-content-page[id='9'].active,
+.app-content-page[id='10'].active,
+.app-content-page[id='11'].active,
+.app-content-page[id='12'].active,
+.app-content-page[id='13'].active,
+.app-content-page[id='14'].active,
+.app-content-page[id='15'].active   {
     display: block;
 }
 
@@ -683,7 +696,7 @@
 }
 
 .app-content-header-background {
-    background-color: rgb(80, 152, 168);
+    /* background-color: rgb(80, 152, 168); */
     height: 100%;
     width: 100%;
 }
@@ -867,7 +880,7 @@
 }
 
 .app-content-header-image-album {
-    margin: 0 20px 20px 30px;
+    margin: 0 30px 20px 30px;
 }
 
 .app-content-header-image {
@@ -905,11 +918,11 @@
     font-size: 5rem;
     line-height: 5rem;
     color: var(--white-color);
-    margin: 5px 0;
+    margin: 20px 0;
 }
 
 .app-content-header-description {
-    margin: 5px 0;
+    margin: 20px 0;
     font-size: 1.4rem;
     line-height: 2.2rem;
     font-weight: 500;
@@ -939,7 +952,6 @@
     background: var(--content-body-color);
     position: relative;
     background-image: linear-gradient(rgba(0,0,0,.6) 0,var(--content-body-color) 40%, var(--content-body-color) 100%);
-    background-color: rgb(80, 152, 168);
     min-height: 323px;
     top: 0;
 }

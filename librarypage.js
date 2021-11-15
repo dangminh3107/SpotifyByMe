@@ -2,9 +2,9 @@ let libpage1 = JSON.parse(localStorage.getItem(LIBPAGE1_STORAGE)) || {}
 
 let libGroupItem1 = []
 
-let libHTML1 = libpage1.map(item => {
+let libHTML1 = libpage1.map((item,index) => {
     return `<div class="app-content-header-body-item-contain col l-2 m-12 c-12">
-                <div class="app-content-header-body-item lib-page">
+                <div id="${index}" class="app-content-header-body-item lib-page">
                     <div class="app-content-header-body-item-box lib-page">
                         <div class="app-content-header-body-item-thumb">
                             <img src="${item.image}" alt="" class="app-content-header-body-item-thum-img lib-img">

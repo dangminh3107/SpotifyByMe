@@ -1,5 +1,9 @@
 let playlist4 = [
     'Điều Buồn Nhất',
+    'rgb(88, 120, 128)',
+    './assets/img/playlist/playlist4.jpg',
+    'Điều buồn nhất là anh biết lại làm như không biết... Ảnh bìa: T.R.I',
+    'Spotify',
     {
         id: '4_1',
         name: 'Mình Chia Tay Đi',
@@ -102,5 +106,8 @@ let playlist4 = [
     }
 ]
 
+let lengthP4 = pLoad(playlist4)
+const PLAYLIST4_TOTAL_SONGS_STORAGE = 'PLAYLIST4TOTALSONGS'
+localStorage.setItem(PLAYLIST4_TOTAL_SONGS_STORAGE, JSON.stringify(lengthP4.length))
 const PLAYLIST4_STORAGE = 'PLAYLIST4';
 localStorage.setItem(PLAYLIST4_STORAGE, JSON.stringify(playlist4))

@@ -1,5 +1,9 @@
 let playlist1 = [
     'Summer Songs 2021 🍉',
+    'rgb(80, 152, 168)',
+    './assets/img/playlist/playlist1.jpg',
+    'Get into a tropical summer mood! summer music summer songs summer hits summer remixes summer covers summer chill summer house summer mix summer playlist summer beats summer vibes',
+    'Soave',
     {
         id: '1_1',
         name: 'Bad Habits',
@@ -202,5 +206,11 @@ let playlist1 = [
     }
 ]
 
+function pLoad([a,b,c,d,e,...res]){
+    return [...res];
+}
+let lengthP1 = pLoad(playlist1)
 const PLAYLIST1_STORAGE = 'PLAYLIST1';
+const PLAYLIST1_TOTAL_SONGS_STORAGE = 'PLAYLIST1TOTALSONGS'
 localStorage.setItem(PLAYLIST1_STORAGE, JSON.stringify(playlist1))
+localStorage.setItem(PLAYLIST1_TOTAL_SONGS_STORAGE, JSON.stringify(lengthP1.length))

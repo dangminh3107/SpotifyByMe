@@ -974,8 +974,8 @@
     }
 }
 
-@media (min-width: 31.25em) and (max-width: 41.1875em) {
+@media (max-width: 41.1875em) {
     .song-modal-content {
-        min-width: 400px;
+        min-width: unset;
     }
 }

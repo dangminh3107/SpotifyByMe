@@ -1,5 +1,9 @@
 let playlist2 = [
     'Daily Mix 2',
+    'rgb(8, 72, 72)',
+    './assets/img/playlist/playlist2.jpg',
+    'Alan Walker, Orange, Rhymastic and more',
+    'Spotify',
     {
         id: '2_1',
         name: 'Em Hát Ai Nghe',
@@ -102,5 +106,9 @@ let playlist2 = [
     }
 ]
 
+
+let lengthP2 = pLoad(playlist2)
+const PLAYLIST2_TOTAL_SONGS_STORAGE = 'PLAYLIST2TOTALSONGS'
+localStorage.setItem(PLAYLIST2_TOTAL_SONGS_STORAGE, JSON.stringify(lengthP2.length))
 const PLAYLIST2_STORAGE = 'PLAYLIST2';
 localStorage.setItem(PLAYLIST2_STORAGE, JSON.stringify(playlist2))

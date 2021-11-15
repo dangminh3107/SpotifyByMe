@@ -61,7 +61,9 @@ const subHeaderTitle = $('.app-content-sub-header-title')
 const appContentHeaderOverlay = Array.from($$('.app-content-header-background-overlay'))
 const appContentBody = Array.from($$('.app-content-body'))
 const appContentBodyList = $('.app-content-body .app-content-body-list')
-const imgHeader = $('.app-content-header-image')
+const imgHeader = Array.from($$('.app-content-header-image'))
+const ownerHeader = Array.from($$('.app-content-header-statistic-user'))
+const descPlaylist = Array.from($$('.app-content-header-description'))
 const menuSidebar = $('.side-bar')
 const menuItem = Array.from($$('.app-menu-item'));
 const playListCreate = Array.from($$('.app-playlist-item-link'))
@@ -76,6 +78,7 @@ const viewPlaylist = $('.song-modal-content-from')
 const namePlaylist = Array.from($$('.app-content-header-name'));
 const namePlaylistModal = $('.song-play-list')
 const namePlaylistSidebar = Array.from($$('.my-playlist-item-link'));
+const libItemsHasPlaylist = Array.from($$('.app-content-header-body-item.lib-page[id]'));
 
 
 const sliderBox = $('.app-content-header-slider-group')
@@ -95,6 +98,12 @@ let indexPercent = 106;
 let totalPageLib = libHeaderList.length;
 let pagePlaylist = 1;
 
+let totalSongs = 0;
+for (let i = 1; i <= 5; i++) {
+    let p = Number(JSON.parse(localStorage.getItem(`PLAYLIST${i}TOTALSONGS`)) || {});
+    totalSongs += p;
+}
+
 const myApp = {
     currentIndex: {
         index: 0,
@@ -103,6 +112,10 @@ const myApp = {
     },
     listPlaylistName: [],
     listPlaylist: [],
+    listPlaylistColor: [],
+    listPlaylistBG: [],
+    listPlaylistDesc: [],
+    listPlaylistOwner: [],
     pagePlaylist: 1,
     isPlaying: false,
     isVolumeOn: false,
@@ -117,7 +130,8 @@ const myApp = {
     prevVolume: 0,
     timeTotal: '00:00',
     timeSongPlayed: '00:00',
-    isReactedList: new Array(31).fill(false),
+    isReactedList: new Array(totalSongs).fill(false),
+    reactHeart: new Array(N).fill(false),
     reactList: [],
     songReact: [],
     config: JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY)) || {},
@@ -133,6 +147,9 @@ const myApp = {
         },
         {
             songs: JSON.parse(localStorage.getItem(PLAYLIST4_STORAGE)) || {}
+        },
+        {
+            songs: JSON.parse(localStorage.getItem(PLAYLIST5_STORAGE)) || {}
         }
     ],
     setConfig: function(key, value) {
@@ -192,8 +209,12 @@ const myApp = {
         return htmls;
     },
 
-    getNameAndList: function([name, ...list]) {
+    getNameAndList: function([name, color, image, desc, owner, ...list]) {
         this.listPlaylistName.push(name);
+        this.listPlaylistColor.push(color);
+        this.listPlaylistBG.push(image);
+        this.listPlaylistDesc.push(desc);
+        this.listPlaylistOwner.push(owner);
         this.listPlaylist.push([...list]);
     },
 
@@ -206,11 +227,15 @@ const myApp = {
             let temp = durationList.splice(0, item);
             list.push(temp);
         })
-
         for (let i = 0; i < n; i++) {
             this.setTotalTime(this.listPlaylist[i], list[i], nArray[i]);
             let htmls= this.getHTML(this.listPlaylist[i], list[i]);
             namePlaylist[i].innerText = this.listPlaylistName[i];
+            imgHeader[i].src = this.listPlaylistBG[i];
+            ownerHeader[i].innerText = this.listPlaylistOwner[i];
+            descPlaylist[i].innerText = this.listPlaylistDesc[i];
+            appContentHeaderOverlay[i].style.backgroundColor = this.listPlaylistColor[i];
+            appContentBody[i].style.backgroundColor = this.listPlaylistColor[i];
             playlist[i].innerHTML = htmls.join('');
             namePlaylistSidebar[i].innerText = this.listPlaylistName[i];
         }
@@ -419,9 +444,8 @@ const myApp = {
                         }
                         offsetYLarge = appContentBody[1].offsetTop + appContentBodyPlaybar[1].offsetHeight / 2;
                         offsetYMedium = headerContent[1].offsetHeight;
-                        appContentHeaderOverlay[1].style.backgroundColor = 'rgb(80, 152, 168)';
                         subOverlay.opacity = 0;
-                        subOverlay.backgroundColor = 'rgb(80, 152, 168)';
+                        subOverlay.backgroundColor = 'rgb(8, 72, 72)';
                         subBottom.opacity = 0;
                         if (documentWidth < 1024) {
                             subBottom.display = 'none';
@@ -438,11 +462,11 @@ const myApp = {
                         isSearchPage = false;
                         subOverlay = defaultOverlay;
                         subBottom  = defaultSubBottom;
+                        subHeaderTitle.innerText = _this.listPlaylistName[2];
                         offsetYLarge = appContentBody[2].offsetTop + appContentBodyPlaybar[2].offsetHeight / 2;
                         offsetYMedium = headerContent[2].offsetHeight;
-                        appContentHeaderOverlay[2].style.backgroundColor = 'rgb(80, 152, 168)';
                         subOverlay.opacity = 0;
-                        subOverlay.backgroundColor = 'rgb(80, 152, 168)';
+                        subOverlay.backgroundColor = 'rgb(160, 16, 16)';
                         subBottom.opacity = 0;
                         if (documentWidth < 1024) {
                             subBottom.display = 'none';
@@ -459,11 +483,32 @@ const myApp = {
                         isSearchPage = false;
                         subOverlay = defaultOverlay;
                         subBottom  = defaultSubBottom;
+                        subHeaderTitle.innerText = _this.listPlaylistName[3];
                         offsetYLarge = appContentBody[3].offsetTop + appContentBodyPlaybar[3].offsetHeight / 2;
                         offsetYMedium = headerContent[3].offsetHeight;
-                        appContentHeaderOverlay[3].style.backgroundColor = 'rgb(80, 152, 168)';
                         subOverlay.opacity = 0;
-                        subOverlay.backgroundColor = 'rgb(80, 152, 168)';
+                        subOverlay.backgroundColor = 'rgb(88, 120, 128)';
+                        subBottom.opacity = 0;
+                        if (documentWidth < 1024) {
+                            subBottom.display = 'none';
+                        }
+                        else {
+                            subBottom.display = 'flex';
+                        }
+                        _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
+                        [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                        [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        break;
+                    case 10:
+                        isPlaylistPage = true;
+                        isSearchPage = false;
+                        subOverlay = defaultOverlay;
+                        subBottom  = defaultSubBottom;
+                        subHeaderTitle.innerText = _this.listPlaylistName[4];
+                        offsetYLarge = appContentBody[4].offsetTop + appContentBodyPlaybar[4].offsetHeight / 2;
+                        offsetYMedium = headerContent[4].offsetHeight;
+                        subOverlay.opacity = 0;
+                        subOverlay.backgroundColor = 'rgb(80, 96, 104)';
                         subBottom.opacity = 0;
                         if (documentWidth < 1024) {
                             subBottom.display = 'none';
@@ -859,6 +904,20 @@ const myApp = {
             }
         })
 
+        //Library Item when click
+        libItemsHasPlaylist.forEach(item => {
+            item.onclick = function(e) {
+                let btnItem = e.target.closest('.app-content-header-body-item.lib-page .btn-play-home.app-content-header-body-item-btn-play')
+                if (btnItem) {
+                    playListItem[item.id].closest('.my-playlist-item').click();
+                    playBtnPlaylist[item.id].click();
+                }
+                else {
+                    playListItem[item.id].closest('.my-playlist-item').click();
+                }
+            }
+        })
+
         //React playlist
         reactHeartBtn.forEach((item,index) => {
             item.onclick = function () {
@@ -934,7 +993,7 @@ const myApp = {
                 playBtnRandomPlaylist.forEach(item => {
                     item.style.display = 'none';
                 })
-                imgHeader.style.transform = `scale(1)`;
+                imgHeader[_this.pagePlaylist - 1].style.transform = `scale(1)`;
                 subHeaderOverlay.style.backgroundImage = 'linear-gradient(rgba(0, 0, 0, 0.6) 0, rgba(0, 0, 0, 0.6) 100%)';
             }
             else {
@@ -942,10 +1001,10 @@ const myApp = {
                     subHeaderOverlay.style.display = 'block';
                     btnNextSlider.style.display = 'none';
                 }
-                else if (pageIndex === 3 || pageIndex === 6 || pageIndex === 7) {
+                else if (pageIndex === 3 || pageIndex >= 6) {
                     subHeaderOverlay.style.display = 'block';
                     playBtnHeader.style.display = 'none';
-                    if ((pageIndex === 6 || pageIndex === 7) && appContent.scrollTop >= 320) {
+                    if ((pageIndex >= 6) && appContent.scrollTop >= 320) {
                         playBtnRandomHeader.style.display = 'flex';
                     }
                 }
@@ -1007,8 +1066,8 @@ const myApp = {
                     })
                 }
                 else {
-                    var percentScale = 1 - appContentSrollTop / imgHeader.offsetHeight;
-                    imgHeader.style.transform = `scale(${percentScale})`;
+                    var percentScale = 1 - appContentSrollTop / imgHeader[pageIndex - 6].offsetHeight;
+                    imgHeader[pageIndex - 6].style.transform = `scale(${percentScale})`;
                     subHeaderTitle.style.display = 'none'
                     playBtnRandomPlaylist.forEach(item => {
                         item.style.display = 'flex';
