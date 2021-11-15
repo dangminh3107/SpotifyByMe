@@ -177,6 +177,10 @@
     font-size: 1.4rem;
     line-height: 1.6rem;
     font-weight: 600;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
 }
 
 .my-playlist-item-link:hover {
@@ -1153,6 +1157,7 @@
 
 .app-content-body-list-item-song {
     width: 40%;
+    overflow: hidden;
 }
 
 .app-content-body-list-item-number,
@@ -1166,6 +1171,7 @@
 
 .app-content-body-list-item-album {
     width: 25%;
+    overflow: hidden;
 }
 
 .app-content-body-list-item-date-added,
@@ -1184,6 +1190,7 @@
     flex-direction: column;
     justify-content: end;
     margin-left: 15px;
+    width: 80%;
 }
 
 .app-content-body-list-item-song-name {
@@ -1192,10 +1199,18 @@
     line-height: 2rem;
     font-weight: 500;
     color: var(--white-color);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
 }
 
 .app-content-body-list-item-song-artist {
     margin-bottom: 2px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
 }
 
 .app-content-body-list-item-album-link {
@@ -1204,6 +1219,11 @@
     line-height: 2rem;
     font-weight: 500;
     color: var(--text-color);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    width: 90%;
 }
 
 .app-content-body-list-item-album-link:hover {

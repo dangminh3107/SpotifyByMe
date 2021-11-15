@@ -150,6 +150,21 @@ const myApp = {
         },
         {
             songs: JSON.parse(localStorage.getItem(PLAYLIST5_STORAGE)) || {}
+        },
+        {
+            songs: JSON.parse(localStorage.getItem(PLAYLIST6_STORAGE)) || {}
+        },
+        {
+            songs: JSON.parse(localStorage.getItem(PLAYLIST7_STORAGE)) || {}
+        },
+        {
+            songs: JSON.parse(localStorage.getItem(PLAYLIST8_STORAGE)) || {}
+        },
+        {
+            songs: JSON.parse(localStorage.getItem(PLAYLIST9_STORAGE)) || {}
+        },
+        {
+            songs: JSON.parse(localStorage.getItem(PLAYLIST10_STORAGE)) || {}
         }
     ],
     setConfig: function(key, value) {
@@ -179,9 +194,10 @@ const myApp = {
     getHTML: function(songs, durationList) {
         const htmls = songs.map((song,index) => {
             song.timeTotal = durationList[index];
+            let letter = song.id.indexOf('_');
             return `
-                <div class="app-content-body-list-item ${index === this.currentIndex.index && Number(song.id.slice(0,1)) === this.getPage() ?'active' : ''}" data-index="${index}">
-                    <span class="app-content-body-list-item-number">${song.id.slice(2)}</span>
+                <div class="app-content-body-list-item ${index === this.currentIndex.index && Number(song.id.slice(0,letter)) === this.getPage() ?'active' : ''}" data-index="${index}">
+                    <span class="app-content-body-list-item-number">${song.id.slice(letter + 1)}</span>
                     <div class="app-content-body-list-item-song">
                         <div class="app-content-body-list-item-song-avavtar">
                             <img src="${song.image}" alt="" class="app-content-body-list-item-song-avavtar-img">
@@ -463,6 +479,14 @@ const myApp = {
                         subOverlay = defaultOverlay;
                         subBottom  = defaultSubBottom;
                         subHeaderTitle.innerText = _this.listPlaylistName[2];
+                        if (_this.isPlaying) {
+                            if (_this.pagePlaylist !== 3) {
+                                playBtnHeader.classList.remove('playing');
+                            }
+                            else {
+                                playBtnHeader.classList.add('playing');
+                            }
+                        }
                         offsetYLarge = appContentBody[2].offsetTop + appContentBodyPlaybar[2].offsetHeight / 2;
                         offsetYMedium = headerContent[2].offsetHeight;
                         subOverlay.opacity = 0;
@@ -484,6 +508,14 @@ const myApp = {
                         subOverlay = defaultOverlay;
                         subBottom  = defaultSubBottom;
                         subHeaderTitle.innerText = _this.listPlaylistName[3];
+                        if (_this.isPlaying) {
+                            if (_this.pagePlaylist !== 4) {
+                                playBtnHeader.classList.remove('playing');
+                            }
+                            else {
+                                playBtnHeader.classList.add('playing');
+                            }
+                        }
                         offsetYLarge = appContentBody[3].offsetTop + appContentBodyPlaybar[3].offsetHeight / 2;
                         offsetYMedium = headerContent[3].offsetHeight;
                         subOverlay.opacity = 0;
@@ -505,6 +537,14 @@ const myApp = {
                         subOverlay = defaultOverlay;
                         subBottom  = defaultSubBottom;
                         subHeaderTitle.innerText = _this.listPlaylistName[4];
+                        if (_this.isPlaying) {
+                            if (_this.pagePlaylist !== 5) {
+                                playBtnHeader.classList.remove('playing');
+                            }
+                            else {
+                                playBtnHeader.classList.add('playing');
+                            }
+                        }
                         offsetYLarge = appContentBody[4].offsetTop + appContentBodyPlaybar[4].offsetHeight / 2;
                         offsetYMedium = headerContent[4].offsetHeight;
                         subOverlay.opacity = 0;
@@ -520,6 +560,151 @@ const myApp = {
                         [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
                         [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
                         break;
+                    case 11:
+                        isPlaylistPage = true;
+                        isSearchPage = false;
+                        subOverlay = defaultOverlay;
+                        subBottom  = defaultSubBottom;
+                        subHeaderTitle.innerText = _this.listPlaylistName[5];
+                        if (_this.isPlaying) {
+                            if (_this.pagePlaylist !== 6) {
+                                playBtnHeader.classList.remove('playing');
+                            }
+                            else {
+                                playBtnHeader.classList.add('playing');
+                            }
+                        }
+                        offsetYLarge = appContentBody[5].offsetTop + appContentBodyPlaybar[5].offsetHeight / 2;
+                        offsetYMedium = headerContent[5].offsetHeight;
+                        subOverlay.opacity = 0;
+                        subOverlay.backgroundColor = 'rgb(248, 152, 32)';
+                        subBottom.opacity = 0;
+                        if (documentWidth < 1024) {
+                            subBottom.display = 'none';
+                        }
+                        else {
+                            subBottom.display = 'flex';
+                        }
+                        _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
+                        [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                        [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        break;
+                    case 12:
+                        isPlaylistPage = true;
+                        isSearchPage = false;
+                        subOverlay = defaultOverlay;
+                        subBottom  = defaultSubBottom;
+                        subHeaderTitle.innerText = _this.listPlaylistName[6];
+                        if (_this.isPlaying) {
+                            if (_this.pagePlaylist !== 7) {
+                                playBtnHeader.classList.remove('playing');
+                            }
+                            else {
+                                playBtnHeader.classList.add('playing');
+                            }
+                        }
+                        offsetYLarge = appContentBody[6].offsetTop + appContentBodyPlaybar[6].offsetHeight / 2;
+                        offsetYMedium = headerContent[6].offsetHeight;
+                        subOverlay.opacity = 0;
+                        subOverlay.backgroundColor = 'rgb(184, 176, 136)';
+                        subBottom.opacity = 0;
+                        if (documentWidth < 1024) {
+                            subBottom.display = 'none';
+                        }
+                        else {
+                            subBottom.display = 'flex';
+                        }
+                        _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
+                        [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                        [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        break;
+                    case 13:
+                        isPlaylistPage = true;
+                        isSearchPage = false;
+                        subOverlay = defaultOverlay;
+                        subBottom  = defaultSubBottom;
+                        subHeaderTitle.innerText = _this.listPlaylistName[7];
+                        if (_this.isPlaying) {
+                            if (_this.pagePlaylist !== 8) {
+                                playBtnHeader.classList.remove('playing');
+                            }
+                            else {
+                                playBtnHeader.classList.add('playing');
+                            }
+                        }
+                        offsetYLarge = appContentBody[7].offsetTop + appContentBodyPlaybar[7].offsetHeight / 2;
+                        offsetYMedium = headerContent[7].offsetHeight;
+                        subOverlay.opacity = 0;
+                        subOverlay.backgroundColor = 'rgb(40, 120, 168)';
+                        subBottom.opacity = 0;
+                        if (documentWidth < 1024) {
+                            subBottom.display = 'none';
+                        }
+                        else {
+                            subBottom.display = 'flex';
+                        }
+                        _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
+                        [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                        [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        break;
+                    case 14:
+                        isPlaylistPage = true;
+                        isSearchPage = false;
+                        subOverlay = defaultOverlay;
+                        subBottom  = defaultSubBottom;
+                        subHeaderTitle.innerText = _this.listPlaylistName[8];
+                        if (_this.isPlaying) {
+                            if (_this.pagePlaylist !== 9) {
+                                playBtnHeader.classList.remove('playing');
+                            }
+                            else {
+                                playBtnHeader.classList.add('playing');
+                            }
+                        }
+                        offsetYLarge = appContentBody[8].offsetTop + appContentBodyPlaybar[8].offsetHeight / 2;
+                        offsetYMedium = headerContent[8].offsetHeight;
+                        subOverlay.opacity = 0;
+                        subOverlay.backgroundColor = 'rgb(168, 72, 56)';
+                        subBottom.opacity = 0;
+                        if (documentWidth < 1024) {
+                            subBottom.display = 'none';
+                        }
+                        else {
+                            subBottom.display = 'flex';
+                        }
+                        _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
+                        [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                        [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        break;
+                    case 15:
+                        isPlaylistPage = true;
+                        isSearchPage = false;
+                        subOverlay = defaultOverlay;
+                        subBottom  = defaultSubBottom;
+                        subHeaderTitle.innerText = _this.listPlaylistName[9];
+                        if (_this.isPlaying) {
+                            if (_this.pagePlaylist !== 10) {
+                                playBtnHeader.classList.remove('playing');
+                            }
+                            else {
+                                playBtnHeader.classList.add('playing');
+                            }
+                        }
+                        offsetYLarge = appContentBody[9].offsetTop + appContentBodyPlaybar[9].offsetHeight / 2;
+                        offsetYMedium = headerContent[9].offsetHeight;
+                        subOverlay.opacity = 0;
+                        subOverlay.backgroundColor = 'rgb(192, 224, 112)';
+                        subBottom.opacity = 0;
+                        if (documentWidth < 1024) {
+                            subBottom.display = 'none';
+                        }
+                        else {
+                            subBottom.display = 'flex';
+                        }
+                        _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
+                        [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                        [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        break
                     default:
                 }
             }
@@ -1026,12 +1211,15 @@ const myApp = {
     },
 
     checkPage: function(idPage) {
-        let numPage = Number(this.currentSong.id.slice(0,1))
+        let letter = this.currentSong.id.indexOf('_')
+        let numPage = Number(this.currentSong.id.slice(0,letter))
+        console.log(numPage)
         return idPage === numPage ? true : false;
     },
 
     getPage: function() {
-        return Number(this.currentSong.id.slice(0,1));
+        let letter = this.currentSong.id.indexOf('_')
+        return Number(this.currentSong.id.slice(0,letter));
     },
 
     secondToTime: function(value) {
@@ -1186,7 +1374,8 @@ const myApp = {
             newIndex = Math.floor(Math.random() * this.listSongs[this.currentIndex.page - 1].length);     
         } while (newIndex === this.currentIndex.index)
 
-        newID = Number(this.listPlaylist[this.currentIndex.page - 1][newIndex].id.slice(2));
+        let letter = this.listPlaylist[this.currentIndex.page - 1][newIndex].id.indexOf('_');
+        newID = Number(this.listPlaylist[this.currentIndex.page - 1][newIndex].id.slice(letter + 1));
         isPlayed = this.songsPlayed.find(value => newID === value)
 
         if (!isPlayed) {
