@@ -6,9 +6,9 @@ let playlist10 = [
     'Spotify',
     {
         id: '10_1',
-        name: 'Dịu Dàng Em Đến',
-        artist: 'ERIK',
-        album: 'Dịu Dàng Em Đến',
+        name: 'Đi Về Nhà',
+        artist: 'Đen, JustaTee',
+        album: 'Đi Về Nhà',
         path: './assets/music/mp3/playlist9/song_1.mp3',
         image: './assets/music/img/playlist9/song_1.jpg',
         imageLarge: './assets/music/img_big/playlist9/song_1.jpg',
