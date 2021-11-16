@@ -383,11 +383,6 @@
     margin-bottom: 6px;
 }
 
-.app-play-bar-song-name:hover {
-    animation: sliderText 5s linear infinite;
-    -webkit-animation: sliderText 5s linear infinite;
-} 
-
 .app-play-bar-song-author:hover,
 .app-play-bar-song-name:hover {
     text-decoration: underline;

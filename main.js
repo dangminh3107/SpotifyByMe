@@ -977,22 +977,33 @@ const myApp = {
                     progressModal.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + progressPercent + '%, #d3d3d3 ' + progressPercent + '%, #d3d3d3 100%)'
                     
                     if (document.documentElement.clientWidth >= 740 && document.documentElement.clientWidth < 1024) {
-                        if (_this.checkLength(playbarSongName[0].innerText)) {
-                            playbarSongName[0].style.transform = 'translate(100%)'
-                            playbarSongName[0].style.animation = 'sliderTextMedium 6s linear infinite'
+                        let songInfoWidth = playbarSongInfo.clientWidth;
+                        let widthText = _this.getWidthText(playbarSongName[0].innerText, getComputedStyle(playbarSongName[0]).font)
+                        let widthTextAuthor = _this.getWidthText(playbarAuthor[0].innerText, getComputedStyle(playbarAuthor[0]).font)
+                        if ((widthText > songInfoWidth) || (widthTextAuthor > songInfoWidth)) {
+                            if (widthText > songInfoWidth) {
+                                playbarSongName[0].style.transform = `translate(${songInfoWidth}px)`
+                                document.documentElement.style.setProperty('--width-2', `-${widthText}px`)
+                                playbarSongName[0].style.animation = 'sliderTextMedium 6s linear infinite'
+                            }
+                            if (widthTextAuthor > songInfoWidth) {
+                                playbarAuthor[0].style.transform = `translate(${songInfoWidth}px)`
+                                document.documentElement.style.setProperty('--width-3', `-${widthTextAuthor}px`)
+                                playbarAuthor[0].style.animation = 'sliderTextMediumAuthor 6s linear infinite'
+                            }
                         }
                         else {
-                            playbarSongName[0].style.transform = 'unset'
-                            playbarSongName[0].style.animation = 'unset'
+                            playbarSongName[0].style.transform = 'unset';
+                            playbarSongName[0].style.animation = 'unset';
+                            playbarAuthor[0].style.transform = 'unset';
+                            playbarAuthor[0].style.animation = 'unset';
                         }
-                        if (_this.checkLength(playbarAuthor[0].innerText)) {
-                            playbarAuthor[0].style.transform = 'translate(100%)'
-                            playbarAuthor[0].style.animation = 'sliderTextMedium 6s linear infinite'
-                        }
-                        else {
-                            playbarAuthor[0].style.transform = 'unset'
-                            playbarAuthor[0].style.animation = 'unset'
-                        }
+                    }
+                    else {
+                        playbarSongName[0].style.transform = 'unset';
+                        playbarSongName[0].style.animation = 'unset';
+                        playbarAuthor[0].style.transform = 'unset';
+                        playbarAuthor[0].style.animation = 'unset';
                     }
                 }
             }
@@ -1009,33 +1020,32 @@ const myApp = {
         }
 
         //Name song follow width
-        playbarSongName[1].onmouseover = function() {
-            if (document.documentElement.clientWidth > 1023) {
-                let x = getComputedStyle(playbarSongName[1]).font
-                console.log(_this.getWidthText(playbarSongName[1].innerText, x))
-                document.documentElement.style.setProperty('--song-info-width', '50%')
-                if (_this.checkLength(playbarSongName[1].innerText)) {
-                    playbarSongName[1].style.animation = 'sliderText 6s linear infinite'
-                }
-                else {
-                    playbarSongName[1].style.transform = 'unset'
-                    playbarSongName[1].style.animation = 'unset'
-                }
+        playbarSongName[1].onmouseover = function () {
+            let songInfoWidth = playbarSongInfo.clientWidth;
+            let widthText = _this.getWidthText(playbarSongName[1].innerText, getComputedStyle(playbarSongName[1]).font)
+            let widthTranslate = Math.abs(songInfoWidth - widthText - 100);
+            if (widthText > (songInfoWidth - 95)) {
+                document.documentElement.style.setProperty('--width-1', `${widthTranslate}px`)
+                playbarSongName[1].style.animation = `sliderText ${widthTranslate / 10}s linear infinite`
+            }
+            else {
+                playbarSongName[1].style.transform = 'unset'
+                playbarSongName[1].style.animation = 'unset'
             }
         }
 
         playbarSongName[1].onmouseout = function () {
-            if (document.documentElement.clientWidth > 1023) {
-                playbarSongName[1].style.transform = 'unset'
-                playbarSongName[1].style.animation = 'unset'
-                playbarAuthor[1].style.transform = 'unset'
-                playbarAuthor[1].style.animation = 'unset'
-            }
+            playbarSongName[1].style.transform = 'unset'
+            playbarSongName[1].style.animation = 'unset'
         }
 
-        playbarAuthor[1].onmouseover = function() {
-            if (_this.checkLength(playbarAuthor[1].innerText)) {
-                playbarAuthor[1].style.animation = 'sliderText 6s linear infinite'
+        playbarAuthor[1].onmouseover = function () {
+            let songInfoWidth = playbarSongInfo.clientWidth;
+            let widthText = _this.getWidthText(playbarAuthor[1].innerText, getComputedStyle(playbarAuthor[1]).font)
+            let widthTranslate = Math.abs(songInfoWidth - widthText - 100);
+            if (widthText > (songInfoWidth - 95)) {
+                document.documentElement.style.setProperty('--width-1', `${widthTranslate}px`)
+                playbarAuthor[1].style.animation = `sliderText ${widthTranslate / 10}s linear infinite`
             }
             else {
                 playbarAuthor[1].style.transform = 'unset'
@@ -1044,10 +1054,8 @@ const myApp = {
         }
 
         playbarAuthor[1].onmouseout = function() {
-            if (document.documentElement.clientWidth > 1023) {
-                playbarAuthor[1].style.transform = 'unset'
-                playbarAuthor[1].style.animation = 'unset'
-            }
+            playbarAuthor[1].style.transform = 'unset'
+            playbarAuthor[1].style.animation = 'unset'
         }
 
         //Pause song
@@ -1244,6 +1252,37 @@ const myApp = {
                 subHeaderOverlay.style.backgroundImage = 'linear-gradient(rgba(0, 0, 0, 0.6) 0, rgba(0, 0, 0, 0.6) 100%)';
             }
             else {
+
+                if (document.documentElement.clientWidth >= 740 && document.documentElement.clientWidth < 1024) {
+                    let songInfoWidth = playbarSongInfo.clientWidth;
+                    let widthText = _this.getWidthText(playbarSongName[0].innerText, getComputedStyle(playbarSongName[0]).font)
+                    let widthTextAuthor = _this.getWidthText(playbarAuthor[0].innerText, getComputedStyle(playbarAuthor[0]).font)
+                    if ((widthText > songInfoWidth) || (widthTextAuthor > songInfoWidth)) {
+                        if (widthText > songInfoWidth) {
+                            playbarSongName[0].style.transform = `translate(${songInfoWidth}px)`
+                            document.documentElement.style.setProperty('--width-2', `-${widthText}px`)
+                            playbarSongName[0].style.animation = 'sliderTextMedium 6s linear infinite'
+                        }
+                        if (widthTextAuthor > songInfoWidth) {
+                            playbarAuthor[0].style.transform = `translate(${songInfoWidth}px)`
+                            document.documentElement.style.setProperty('--width-3', `-${widthTextAuthor}px`)
+                            playbarAuthor[0].style.animation = 'sliderTextMediumAuthor 6s linear infinite'
+                        }
+                    }
+                    else {
+                        playbarSongName[0].style.transform = 'unset';
+                        playbarSongName[0].style.animation = 'unset';
+                        playbarAuthor[0].style.transform = 'unset';
+                        playbarAuthor[0].style.animation = 'unset';
+                    }
+                }
+                else {
+                    playbarSongName[0].style.transform = 'unset';
+                    playbarSongName[0].style.animation = 'unset';
+                    playbarAuthor[0].style.transform = 'unset';
+                    playbarAuthor[0].style.animation = 'unset';
+                }
+
                 if (pageIndex === 2) {
                     subHeaderOverlay.style.display = 'block';
                     btnNextSlider.style.display = 'none';
