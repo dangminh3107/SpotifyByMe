@@ -200,7 +200,13 @@
     .app-play-bar-song {
         flex-direction: column;
         width: 100%;
+        padding-right: 0;
     }
+
+    /* .app-play-bar-song-name {
+        transform: translate(100%);
+        animation: sliderTextMedium 5s linear infinite;
+    } */
     
     .app-play-bar.playing .app-play-bar-song {
         transform: none;

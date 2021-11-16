@@ -14,6 +14,7 @@
     --content-body-color: #121212;
     --playlist-height: 285px;
     --playbar-height: 90px;
+    --song-info-width: 10%;
 
     /* background: linear-gradient(120deg, rgba(18,18,18,1), rgba(18,18,18,1) 90%, rgba(18,18,18,0.9) 100%); */
 }
@@ -219,5 +220,23 @@ html {
     }
     to {
         transform: translateY(0);
+    }
+}
+
+@keyframes sliderText {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(var(--song-info-width))
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes sliderTextMedium {
+    to {
+        transform: translate(-270%);
     }
 }

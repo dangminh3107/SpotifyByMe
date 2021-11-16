@@ -21,6 +21,7 @@ const playBtnRandomPlaylist = $$('.btn-content-playbar-random')
 const playbar = $('.app-play-bar')
 const playbarModal = $('.song-modal-playbar')
 const playbarSongName = $$('.app-play-bar-song-name')
+const playbarDetails = $('.app-play-bar-song-details')
 const modalSongName = $('.song-modal-name')
 const playbarAuthor = $$('.app-play-bar-song-author')
 const modalAuthor = $('.song-modal-artist')
@@ -80,11 +81,11 @@ const namePlaylistModal = $('.song-play-list')
 const namePlaylistSidebar = Array.from($$('.my-playlist-item-link'));
 const libItemsHasPlaylist = Array.from($$('.app-content-header-body-item.lib-page[id]'));
 
-
 const sliderBox = $('.app-content-header-slider-group')
 const sliderListItem= $$('.app-content-header-search-slider-item')
 const btnNextSlider = $('.slider-control-right')
 const btnPrevSlider = $('.slider-control-left')
+const playbarSongInfo = $('.app-play-bar-song')
 
 let N = playListItem.length;
 let isPlaylistPage = false;
@@ -693,7 +694,7 @@ const myApp = {
                         offsetYLarge = appContentBody[9].offsetTop + appContentBodyPlaybar[9].offsetHeight / 2;
                         offsetYMedium = headerContent[9].offsetHeight;
                         subOverlay.opacity = 0;
-                        subOverlay.backgroundColor = 'rgb(192, 224, 112)';
+                        subOverlay.backgroundColor = 'rgb(136, 56, 232)';
                         subBottom.opacity = 0;
                         if (documentWidth < 1024) {
                             subBottom.display = 'none';
@@ -974,6 +975,25 @@ const myApp = {
                     progressBarMobile.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + progressPercent + '%, #d3d3d3 ' + progressPercent + '%, #d3d3d3 100%)'
                     progressModal.value = progressPercent;
                     progressModal.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + progressPercent + '%, #d3d3d3 ' + progressPercent + '%, #d3d3d3 100%)'
+                    
+                    if (document.documentElement.clientWidth >= 740 && document.documentElement.clientWidth < 1024) {
+                        if (_this.checkLength(playbarSongName[0].innerText)) {
+                            playbarSongName[0].style.transform = 'translate(100%)'
+                            playbarSongName[0].style.animation = 'sliderTextMedium 6s linear infinite'
+                        }
+                        else {
+                            playbarSongName[0].style.transform = 'unset'
+                            playbarSongName[0].style.animation = 'unset'
+                        }
+                        if (_this.checkLength(playbarAuthor[0].innerText)) {
+                            playbarAuthor[0].style.transform = 'translate(100%)'
+                            playbarAuthor[0].style.animation = 'sliderTextMedium 6s linear infinite'
+                        }
+                        else {
+                            playbarAuthor[0].style.transform = 'unset'
+                            playbarAuthor[0].style.animation = 'unset'
+                        }
+                    }
                 }
             }
             _this.isPlaying = true;
@@ -986,6 +1006,48 @@ const myApp = {
             })
             playBtnPlaylist[_this.pagePlaylist - 1].classList.add('playing')
             playBtnHeader.classList.add('playing')
+        }
+
+        //Name song follow width
+        playbarSongName[1].onmouseover = function() {
+            if (document.documentElement.clientWidth > 1023) {
+                let x = getComputedStyle(playbarSongName[1]).font
+                console.log(_this.getWidthText(playbarSongName[1].innerText, x))
+                document.documentElement.style.setProperty('--song-info-width', '50%')
+                if (_this.checkLength(playbarSongName[1].innerText)) {
+                    playbarSongName[1].style.animation = 'sliderText 6s linear infinite'
+                }
+                else {
+                    playbarSongName[1].style.transform = 'unset'
+                    playbarSongName[1].style.animation = 'unset'
+                }
+            }
+        }
+
+        playbarSongName[1].onmouseout = function () {
+            if (document.documentElement.clientWidth > 1023) {
+                playbarSongName[1].style.transform = 'unset'
+                playbarSongName[1].style.animation = 'unset'
+                playbarAuthor[1].style.transform = 'unset'
+                playbarAuthor[1].style.animation = 'unset'
+            }
+        }
+
+        playbarAuthor[1].onmouseover = function() {
+            if (_this.checkLength(playbarAuthor[1].innerText)) {
+                playbarAuthor[1].style.animation = 'sliderText 6s linear infinite'
+            }
+            else {
+                playbarAuthor[1].style.transform = 'unset'
+                playbarAuthor[1].style.animation = 'unset'
+            }
+        }
+
+        playbarAuthor[1].onmouseout = function() {
+            if (document.documentElement.clientWidth > 1023) {
+                playbarAuthor[1].style.transform = 'unset'
+                playbarAuthor[1].style.animation = 'unset'
+            }
         }
 
         //Pause song
@@ -1213,7 +1275,6 @@ const myApp = {
     checkPage: function(idPage) {
         let letter = this.currentSong.id.indexOf('_')
         let numPage = Number(this.currentSong.id.slice(0,letter))
-        console.log(numPage)
         return idPage === numPage ? true : false;
     },
 
@@ -1306,6 +1367,24 @@ const myApp = {
         return arr[index - 1].length + this.getPrevLength(arr, index - 1);
     },
 
+    getWidthText: function(text, font) {
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+
+        context.font = font || getComputedStyle(document.body).font;
+
+        return context.measureText(text).width;
+    },
+
+    checkLength: function(name) {
+        if (name.length*7.2 > 400) {
+            return true
+        }
+        else {
+            return false
+        }
+    },
+
     loadConfig: function() {
         this.volume = this.config.volume || 0.3;
         this.isVolumeOn = this.config.isVolumeOn;
@@ -1320,6 +1399,7 @@ const myApp = {
         this.reactHeart = this.config.reactHeart;
         this.pagePlaylist = this.config.pagePlaylist || 1;
         this.isReactedList = this.config.isReactedList || new Array(31).fill(false);
+        this.reactHeart = this.config.reactHeart || new Array(N).fill(false);
     },
 
     loadCurrentSong: function() {
@@ -1425,7 +1505,6 @@ const myApp = {
         this.setConfig('currentIndex', this.currentIndex)
         this.setActiveSong();
         this.loadCurrentSong()
-
         reactHeartBtn.forEach((item, index) => {
             item.classList.toggle('reacted', this.reactHeart[index]);
         })
@@ -1442,7 +1521,7 @@ const myApp = {
             timeStart.innerText = this.timeSongPlayed;
             timeStartModal.innerText = this.timeSongPlayed;
         }
-        
+
         volumeBar.value = this.volume*100;
         volumeBar.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + this.volume*100 + '%, #b3b3b3 ' + this.volume*100 + '%, #b3b3b3 100%)'
 

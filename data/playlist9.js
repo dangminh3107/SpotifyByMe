@@ -88,7 +88,7 @@ let playlist9 = [
         id: '9_9',
         name: 'Đường Tôi Chở Em Về',
         artist: 'buitruonglinh',
-        album: 'ường Tôi Chở Em Về',
+        album: 'Đường Tôi Chở Em Về',
         path: './assets/music/mp3/playlist9/song_9.mp3',
         image: './assets/music/img/playlist9/song_9.jpg',
         imageLarge: './assets/music/img_big/playlist9/song_9.jpg',
