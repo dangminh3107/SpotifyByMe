@@ -14,7 +14,7 @@
     --content-body-color: #121212;
     --playlist-height: 285px;
     --playbar-height: 90px;
-    --width-1: 10%;
+    --width-1: 10px;
     --width-2: 10px;
     --width-3: 10px;
 
@@ -229,11 +229,8 @@ html {
     0% {
         transform: translateX(0);
     }
-    25% {
+    50% {
         transform: translateX(calc(-1 * var(--width-1)))
-    }
-    85% {
-        transform: translateX(calc(var(--width-1) / 2))
     }
     100% {
         transform: translateX(0);
@@ -249,5 +246,23 @@ html {
 @keyframes sliderTextMediumAuthor {
     to {
         transform: translate(var(--width-3));
+    }
+}
+
+@keyframes imageThumbCollapse {
+    from {
+        width: 60px;
+    }
+    to {
+        width: 0;
+    }
+}
+
+@keyframes imageThumbExpand {
+    from {
+        width: 0;
+    }
+    to {
+        width: 60px;
     }
 }

@@ -112,6 +112,10 @@
         flex: 0 0 25%;
         max-width: 25%;
     }
+
+    .app-play-bar-song {
+        overflow: hidden;
+    }
 }
 
 @media (max-width: 63.9375em) {
@@ -142,6 +146,10 @@
 
     .app-content-header-lib-box-1-group {
         margin-left: 100px;
+    }
+
+    .app-play-bar-song-details-group {
+        padding: 0;
     }
 }
 
@@ -225,7 +233,7 @@
         display: none;
     }
 
-    .app-play-bar-song-details {
+    .app-play-bar-song-details-group {
         margin-top: 20px;
     }
 
@@ -237,7 +245,7 @@
         cursor: pointer;
     }
 
-    .app-play-bar-song-thumb-group ~ .app-play-bar-song-details {
+    .app-play-bar-song-thumb-group ~ .app-play-bar-song-details-group {
         display: none;
     }
 
@@ -248,7 +256,7 @@
     }
 
     .app-play-bar-control .control {
-        margin: 0 0 10px 0;
+        margin: 30px 0 10px 0;
         flex-wrap: wrap;
     }
 
@@ -977,6 +985,19 @@
 
     .app-content-body-list-item-number {
         width: 10%;
+    }
+
+    .app-play-bar-song-details-group {
+        width: calc(100% - 66px);
+    }
+
+    .app-play-bar-song.l-4 {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .app-play-bar-song-react {
+        padding-right: 2px;
     }
 }
 

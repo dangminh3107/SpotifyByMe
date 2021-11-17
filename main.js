@@ -45,6 +45,7 @@ const repeatBtn = $('.btn-repeat')
 const repeatBtnModal = $('.btn-repeat-modal')
 const reactHeartBtn = $$('.app-content-body-react-album')
 const btnViewImgThumb = $('.app-play-bar-song-view')
+const btnHideImgThumb = $('.app-install-image-song-icon-down')
 const imgViewLarge = $('.app-install')
 const imgViewBox = $('.app-install-image')
 const iconViewImgThumbUp = $('.app-play-bar-song-view-icon-up')
@@ -80,6 +81,7 @@ const namePlaylist = Array.from($$('.app-content-header-name'));
 const namePlaylistModal = $('.song-play-list')
 const namePlaylistSidebar = Array.from($$('.my-playlist-item-link'));
 const libItemsHasPlaylist = Array.from($$('.app-content-header-body-item.lib-page[id]'));
+const listReactSongPlaybar = Array.from($$('.app-play-bar-song-react'))
 
 const sliderBox = $('.app-content-header-slider-group')
 const sliderListItem= $$('.app-content-header-search-slider-item')
@@ -976,35 +978,7 @@ const myApp = {
                     progressModal.value = progressPercent;
                     progressModal.style.background = 'linear-gradient(to right, #5ced4d, #5ced4d ' + progressPercent + '%, #d3d3d3 ' + progressPercent + '%, #d3d3d3 100%)'
                     
-                    if (document.documentElement.clientWidth >= 740 && document.documentElement.clientWidth < 1024) {
-                        let songInfoWidth = playbarSongInfo.clientWidth;
-                        let widthText = _this.getWidthText(playbarSongName[0].innerText, getComputedStyle(playbarSongName[0]).font)
-                        let widthTextAuthor = _this.getWidthText(playbarAuthor[0].innerText, getComputedStyle(playbarAuthor[0]).font)
-                        if ((widthText > songInfoWidth) || (widthTextAuthor > songInfoWidth)) {
-                            if (widthText > songInfoWidth) {
-                                playbarSongName[0].style.transform = `translate(${songInfoWidth}px)`
-                                document.documentElement.style.setProperty('--width-2', `-${widthText}px`)
-                                playbarSongName[0].style.animation = 'sliderTextMedium 6s linear infinite'
-                            }
-                            if (widthTextAuthor > songInfoWidth) {
-                                playbarAuthor[0].style.transform = `translate(${songInfoWidth}px)`
-                                document.documentElement.style.setProperty('--width-3', `-${widthTextAuthor}px`)
-                                playbarAuthor[0].style.animation = 'sliderTextMediumAuthor 6s linear infinite'
-                            }
-                        }
-                        else {
-                            playbarSongName[0].style.transform = 'unset';
-                            playbarSongName[0].style.animation = 'unset';
-                            playbarAuthor[0].style.transform = 'unset';
-                            playbarAuthor[0].style.animation = 'unset';
-                        }
-                    }
-                    else {
-                        playbarSongName[0].style.transform = 'unset';
-                        playbarSongName[0].style.animation = 'unset';
-                        playbarAuthor[0].style.transform = 'unset';
-                        playbarAuthor[0].style.animation = 'unset';
-                    }
+                    _this.setNameSongAnimation(document.documentElement.clientWidth)
                 }
             }
             _this.isPlaying = true;
@@ -1023,14 +997,27 @@ const myApp = {
         playbarSongName[1].onmouseover = function () {
             let songInfoWidth = playbarSongInfo.clientWidth;
             let widthText = _this.getWidthText(playbarSongName[1].innerText, getComputedStyle(playbarSongName[1]).font)
-            let widthTranslate = Math.abs(songInfoWidth - widthText - 100);
-            if (widthText > (songInfoWidth - 95)) {
-                document.documentElement.style.setProperty('--width-1', `${widthTranslate}px`)
-                playbarSongName[1].style.animation = `sliderText ${widthTranslate / 10}s linear infinite`
+            let widthTranslate = Math.abs(songInfoWidth - widthText - 131);
+            let isImgThumbView = imgViewLarge.classList.contains('enable');
+            if (isImgThumbView) {
+                if (widthText > songInfoWidth - 71) {
+                    document.documentElement.style.setProperty('--width-1', `${widthTranslate}px`)
+                    playbarSongName[1].style.animation = `sliderText ${widthTranslate / 10}s linear infinite`
+                }
+                else {
+                    playbarSongName[1].style.transform = 'unset'
+                    playbarSongName[1].style.animation = 'unset'
+                }
             }
             else {
-                playbarSongName[1].style.transform = 'unset'
-                playbarSongName[1].style.animation = 'unset'
+                if (widthText > songInfoWidth - 131) {
+                    document.documentElement.style.setProperty('--width-1', `${widthTranslate}px`)
+                    playbarSongName[1].style.animation = `sliderText ${widthTranslate / 10}s linear infinite`
+                }
+                else {
+                    playbarSongName[1].style.transform = 'unset'
+                    playbarSongName[1].style.animation = 'unset'
+                }
             }
         }
 
@@ -1042,14 +1029,27 @@ const myApp = {
         playbarAuthor[1].onmouseover = function () {
             let songInfoWidth = playbarSongInfo.clientWidth;
             let widthText = _this.getWidthText(playbarAuthor[1].innerText, getComputedStyle(playbarAuthor[1]).font)
-            let widthTranslate = Math.abs(songInfoWidth - widthText - 100);
-            if (widthText > (songInfoWidth - 95)) {
-                document.documentElement.style.setProperty('--width-1', `${widthTranslate}px`)
-                playbarAuthor[1].style.animation = `sliderText ${widthTranslate / 10}s linear infinite`
+            let widthTranslate = Math.abs(songInfoWidth - widthText - 131);
+            let isImgThumbView = imgViewLarge.classList.contains('enable');
+            if (isImgThumbView) {
+                if (widthText > (songInfoWidth - 71)) {
+                    document.documentElement.style.setProperty('--width-1', `${widthTranslate}px`)
+                    playbarAuthor[1].style.animation = `sliderText ${widthTranslate / 10}s linear infinite`
+                }
+                else {
+                    playbarAuthor[1].style.transform = 'unset'
+                    playbarAuthor[1].style.animation = 'unset'
+                }
             }
             else {
-                playbarAuthor[1].style.transform = 'unset'
-                playbarAuthor[1].style.animation = 'unset'
+                if (widthText > (songInfoWidth - 131)) {
+                    document.documentElement.style.setProperty('--width-1', `${widthTranslate}px`)
+                    playbarAuthor[1].style.animation = `sliderText ${widthTranslate / 10}s linear infinite`
+                }
+                else {
+                    playbarAuthor[1].style.transform = 'unset'
+                    playbarAuthor[1].style.animation = 'unset'
+                }
             }
         }
 
@@ -1136,9 +1136,16 @@ const myApp = {
                 const option = e.target.closest('.app-content-body-list-item-more')
                 if (songNode || reactSong || option) {
                     if (reactSong) {
+                        let temp = _this.getIndexSong();
+                        console.log(temp);
                         let id = _this.getPrevLength(_this.listPlaylist, page.id - 6) + Number(songNodeIncludeActive.dataset.index);
                         _this.isReactedList[id] = !_this.isReactedList[id];
                         _this.reactList[id].classList.toggle('reacted', _this.isReactedList[id]);
+                        if (temp === id) {
+                            listReactSongPlaybar.forEach(item => {
+                                item.classList.toggle('reacted');
+                            })
+                        }
                         _this.setConfig('isReactedList', _this.isReactedList);
 
                     }
@@ -1187,17 +1194,17 @@ const myApp = {
             }
         })
 
-        //Button view on image song thumb
+        //Button view image song thumb
         btnViewImgThumb.onclick = function() {
-            imgViewLarge.classList.toggle('enable');
-            if (imgViewLarge.classList.contains('enable')) {
-                iconViewImgThumbUp.style.display = 'none';
-                iconViewImgThumbDown.style.display = 'block';
-            }
-            else {
-                iconViewImgThumbUp.style.display = 'block';
-                iconViewImgThumbDown.style.display = 'none';
-            }
+            thumbImage.classList.add('active')
+            imgViewLarge.classList.add('enable');
+            thumbImage.style.animation = 'imageThumbCollapse 0.3s linear forwards'
+        }
+        //Button hide image song thumb
+        btnHideImgThumb.onclick = function() {
+            thumbImage.classList.remove('active')
+            imgViewLarge.classList.remove('enable');
+            thumbImage.style.animation = 'imageThumbExpand 0.3s linear forwards'
         }
 
         //Modal Song
@@ -1223,6 +1230,25 @@ const myApp = {
             playListItem[_this.currentIndex.page - 1].closest('.my-playlist-item').click();
         }
 
+        listReactSongPlaybar.forEach((item, index) => {
+            item.onclick = function() {
+                item.classList.toggle('reacted');
+                listReactSongPlaybar.forEach((val, idx) => {
+                    if (idx !== index) {
+                        val.classList.toggle('reacted');
+                    }
+                })
+                let curSong = _this.getSong()
+                let letter = curSong.id.indexOf('_');
+                let page = Number(curSong.id.slice(0,letter))
+                let songIndex = Number(curSong.id.slice(letter + 1))
+                let id = _this.getPrevLength(_this.listPlaylist, page - 1) + songIndex - 1;
+                _this.isReactedList[id] = !_this.isReactedList[id];
+                _this.reactList[id].classList.toggle('reacted', _this.isReactedList[id]);
+                _this.setConfig('isReactedList', _this.isReactedList);
+            }
+        })
+
         window.onresize = function(e) {
             if (slideIndex > 1) {
                 sliderListItem.forEach((item) => {
@@ -1230,6 +1256,9 @@ const myApp = {
                 })
                 btnPrevSlider.style.display = 'none';
             }
+
+            _this.setNameSongAnimation(document.documentElement.clientWidth)
+
             if (document.documentElement.clientWidth > 1023) {
                 if (pageIndex === 2) {
                     subHeaderTitle.style.display = 'none';
@@ -1250,39 +1279,12 @@ const myApp = {
                 })
                 imgHeader[_this.pagePlaylist - 1].style.transform = `scale(1)`;
                 subHeaderOverlay.style.backgroundImage = 'linear-gradient(rgba(0, 0, 0, 0.6) 0, rgba(0, 0, 0, 0.6) 100%)';
+                playbarSongName[1].style.transform = 'translate(0)';
+                playbarSongName[1].style.animation = 'unset';
+                playbarAuthor[1].style.transform = 'translate(0)';
+                playbarAuthor[1].style.animation = 'unset';
             }
             else {
-
-                if (document.documentElement.clientWidth >= 740 && document.documentElement.clientWidth < 1024) {
-                    let songInfoWidth = playbarSongInfo.clientWidth;
-                    let widthText = _this.getWidthText(playbarSongName[0].innerText, getComputedStyle(playbarSongName[0]).font)
-                    let widthTextAuthor = _this.getWidthText(playbarAuthor[0].innerText, getComputedStyle(playbarAuthor[0]).font)
-                    if ((widthText > songInfoWidth) || (widthTextAuthor > songInfoWidth)) {
-                        if (widthText > songInfoWidth) {
-                            playbarSongName[0].style.transform = `translate(${songInfoWidth}px)`
-                            document.documentElement.style.setProperty('--width-2', `-${widthText}px`)
-                            playbarSongName[0].style.animation = 'sliderTextMedium 6s linear infinite'
-                        }
-                        if (widthTextAuthor > songInfoWidth) {
-                            playbarAuthor[0].style.transform = `translate(${songInfoWidth}px)`
-                            document.documentElement.style.setProperty('--width-3', `-${widthTextAuthor}px`)
-                            playbarAuthor[0].style.animation = 'sliderTextMediumAuthor 6s linear infinite'
-                        }
-                    }
-                    else {
-                        playbarSongName[0].style.transform = 'unset';
-                        playbarSongName[0].style.animation = 'unset';
-                        playbarAuthor[0].style.transform = 'unset';
-                        playbarAuthor[0].style.animation = 'unset';
-                    }
-                }
-                else {
-                    playbarSongName[0].style.transform = 'unset';
-                    playbarSongName[0].style.animation = 'unset';
-                    playbarAuthor[0].style.transform = 'unset';
-                    playbarAuthor[0].style.animation = 'unset';
-                }
-
                 if (pageIndex === 2) {
                     subHeaderOverlay.style.display = 'block';
                     btnNextSlider.style.display = 'none';
@@ -1309,6 +1311,72 @@ const myApp = {
                 })
             }
         }
+    },
+
+    setNameSongAnimation: function(widthScreen) {
+        if (widthScreen < 740) {
+            let songInfoWidth = playbarSongInfo.clientWidth;
+            let widthText = this.getWidthText(playbarSongName[1].innerText, getComputedStyle(playbarSongName[1]).font)
+            let widthTextAuthor = this.getWidthText(playbarAuthor[1].innerText, getComputedStyle(playbarAuthor[1]).font)
+            if ((widthText > songInfoWidth - 100) || (widthTextAuthor > songInfoWidth - 100)) {
+                if (widthText > songInfoWidth - 100) {
+                    playbarSongName[1].style.transform = `translate(${songInfoWidth}px)`
+                    document.documentElement.style.setProperty('--width-2', `-${widthText}px`)
+                    playbarSongName[1].style.animation = 'sliderTextMedium 6s linear infinite'
+                }
+                if (widthTextAuthor > songInfoWidth - 100) {
+                    playbarAuthor[1].style.transform = `translate(${songInfoWidth}px)`
+                    document.documentElement.style.setProperty('--width-3', `-${widthTextAuthor}px`)
+                    playbarAuthor[1].style.animation = 'sliderTextMediumAuthor 6s linear infinite'
+                }
+            }
+            else {
+                playbarSongName[1].style.transform = 'unset';
+                playbarSongName[1].style.animation = 'unset';
+                playbarAuthor[1].style.transform = 'unset';
+                playbarAuthor[1].style.animation = 'unset';
+            }
+        } 
+        else if (widthScreen < 1024) {
+            let songInfoWidth = playbarSongInfo.clientWidth;
+            let widthText = this.getWidthText(playbarSongName[0].innerText, getComputedStyle(playbarSongName[0]).font)
+            let widthTextAuthor = this.getWidthText(playbarAuthor[0].innerText, getComputedStyle(playbarAuthor[0]).font)
+            if ((widthText > songInfoWidth) || (widthTextAuthor > songInfoWidth)) {
+                if (widthText > songInfoWidth) {
+                    playbarSongName[0].style.transform = `translate(${songInfoWidth}px)`
+                    document.documentElement.style.setProperty('--width-2', `-${widthText}px`)
+                    playbarSongName[0].style.animation = 'sliderTextMedium 6s linear infinite'
+                }
+                if (widthTextAuthor > songInfoWidth) {
+                    playbarAuthor[0].style.transform = `translate(${songInfoWidth}px)`
+                    document.documentElement.style.setProperty('--width-3', `-${widthTextAuthor}px`)
+                    playbarAuthor[0].style.animation = 'sliderTextMediumAuthor 6s linear infinite'
+                }
+            }
+            else {
+                playbarSongName[0].style.transform = 'unset';
+                playbarSongName[0].style.animation = 'unset';
+                playbarAuthor[0].style.transform = 'unset';
+                playbarAuthor[0].style.animation = 'unset';
+            }
+        }
+        else {
+            playbarSongName[0].style.transform = 'unset';
+            playbarSongName[0].style.animation = 'unset';
+            playbarAuthor[0].style.transform = 'unset';
+            playbarAuthor[0].style.animation = 'unset';
+        }
+    },
+
+    getSong: function() {
+        return this.currentSong;
+    },
+    getIndexSong: function() {
+        let curSong = this.getSong()
+        let letter = curSong.id.indexOf('_');
+        let songPage = Number(curSong.id.slice(0,letter))
+        let songIndex = Number(curSong.id.slice(letter + 1))
+        return this.getPrevLength(this.listPlaylist, songPage - 1) + songIndex - 1;
     },
 
     checkPage: function(idPage) {
@@ -1546,6 +1614,11 @@ const myApp = {
         this.loadCurrentSong()
         reactHeartBtn.forEach((item, index) => {
             item.classList.toggle('reacted', this.reactHeart[index]);
+        })
+
+        let temp = this.getIndexSong();
+        listReactSongPlaybar.forEach(item => {
+            item.classList.toggle('reacted', this.isReactedList[temp]);
         })
 
         randomBtn.classList.toggle('active', this.isRandom)

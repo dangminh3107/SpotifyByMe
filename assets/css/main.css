@@ -216,6 +216,7 @@
 
 .app-install-image-song {
     width: 100%;
+    position: relative;
 }
 
 .app-install-image {
@@ -267,7 +268,6 @@
     align-items: center;
     flex-wrap: wrap;
     z-index: 1;
-    padding: 0 24px;
 }
 
 .app-play-bar-container {
@@ -287,8 +287,6 @@
     display: flex;
     align-items: center;
     will-change: transform;
-    overflow: hidden;
-    padding-right: 20px;
 }
 
 .app-play-bar-song-thumb-group-mobile-tablet {
@@ -314,6 +312,24 @@
     cursor: pointer;
 }
 
+.app-install-image-song-icon-down {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    z-index: 1;
+    background-color: rgba(61, 61, 61, 0.7);
+    padding: 6px;
+    border-radius: 50%;
+    top: 0;
+    right: 0;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.app-play-bar-song-thumb.active .app-play-bar-song-view {
+    display: none;
+}
+
 .app-play-bar-song-view:hover {
     display: block;
 }
@@ -327,10 +343,6 @@
     font-size: 1.4rem;
     color: rgb(180, 167, 167);
     vertical-align: baseline;
-}
-
-.app-play-bar-song-view-icon-down {
-    display: none;
 }
 
 .app-play-bar-song-thumb-mobile {
@@ -348,7 +360,7 @@
 .app-play-bar-song-thumb {
     width: 60px;
     height: 60px;
-    margin-right: 15px;
+    margin: 0 9px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -364,9 +376,17 @@
     will-change: transform, opacity;
 }
 
-.app-play-bar-song-details {
-    color: var(--white-color);
+.app-play-bar-song-details-group {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    padding-right: 20px;
+}
+
+.app-play-bar-song-details  {
+    display: flex;
+    color: var(--white-color);
     flex-direction: column;
     font-size: 1.2rem;
     line-height: 1.2rem;
@@ -374,6 +394,33 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+.app-play-bar-song-react {
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    font-size: 1.8rem;
+    color: var(--white-color);
+    height: 100%;
+    cursor: pointer;
+}
+
+.app-play-bar-song-react.reacted .icon-heart-playbar-empty {
+    display: none;
+}
+
+.app-play-bar-song-react.reacted .icon-heart-playbar-fill {
+    color: var(--primary-color);
+    display: block;
+}
+.app-play-bar-song-react .icon-heart-playbar-empty {
+    display: block;
+}
+
+.app-play-bar-song-react .icon-heart-playbar-fill {
+    display: none;
+}
+
 
 
 .app-play-bar-song-name {
@@ -1402,6 +1449,10 @@
     width: 100%;
 }
 
+.app-play-bar-control.l-4 {
+    padding: 0 10px;
+}
+
 .app-play-bar-control-modal {
     width: 100%;
 }
@@ -1435,6 +1486,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: 50px;
+    align-items: center;
 }
 
 .song-modal-content-info {
