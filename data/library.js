@@ -25,6 +25,31 @@ let lib1 = [
         description: 'Bella Poarch, Đông Nhi, Ed Sheeran and more'
     },
     { 
+        image: './assets/img/playlist/playlist6.jpg',
+        title: 'Thiên Hạ Nghe Gì',
+        description: 'Những gì mà người bên cạnh bạn đang nghe. Ảnh bìa: Taylor Swift'
+    },
+    { 
+        image: './assets/img/playlist/playlist7.jpg',
+        title: 'Anh Hào Nhạc Việt',
+        description: 'Những nghệ sĩ nam góp phần rạng rỡ cho V-Pop. Ảnh bìa: Đen'
+    },
+    { 
+        image: './assets/img/playlist/playlist8.jpg',
+        title: 'League of Legends Official Playlist',
+        description: 'The Official League of Legends playlist celebrating the launch of the Arcane Original Soundtrack.'
+    },
+    { 
+        image: './assets/img/playlist/playlist9.jpg',
+        title: 'V-Pop Không Thể Thiếu',
+        description: 'V-Pop đã đơm hoa trên những khúc ca này. Ảnh bìa: Vũ.'
+    },
+    { 
+        image: './assets/img/playlist/playlist10.jpg',
+        title: 'Hip-hop Việt',
+        description: 'Dòng chảy của rap Việt luôn cuồn cuộn với các tên tuổi Đen, Da LAB, Binz...'
+    },
+    { 
         image: './assets/img/lib_page/img_1.jpg',
         title: 'League of Legends Official Playlist',
         description: 'The official LoL Esports playlist for Worlds 2021, getting you ready for every make or break moment.'

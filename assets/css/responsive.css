@@ -999,10 +999,126 @@
     .app-play-bar-song-react {
         padding-right: 2px;
     }
+
+    .app-content-sub-header-lib-contain {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .app-content-sub-header {
+        display: flex;
+        justify-content: center;
+    }
+
+    .app-content-sub-header-lib-group,
+    .app-content-sub-header-search-group {
+        margin-left: 0;
+    }
+
+    .app-menu-item[id="2"] {
+        margin-right: -20px;
+    }
+
+    .app-menu-item[id="3"] {
+        margin-right: -10px;
+    }
 }
 
 @media (max-width: 41.1875em) {
     .song-modal-content {
         min-width: unset;
+    }
+}
+
+
+@media (min-width: 17.5625em) and (max-width: 20em) {
+    .app-content-sub-header-search-box {
+        width: unset;
+    }
+
+    .app-content-sub-header-lib-item {
+        padding: 5px;
+    }
+
+    .app-content-header-body-item-heading {
+        font-size: 1.6rem;
+    }
+
+    .app-content-header-body-item-header {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .app-content-header-body-item-heading {
+        white-space: nowrap;
+    }
+
+    .app-content-header-body-item-sub-heading-description {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .app-content-header-body-item-sub-heading-view-all {
+        font-size: 1rem;
+    }
+
+    .app-content-header-container-item-title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 1rem;
+    }
+
+    .app-content-header-search-slider-item-title,
+    .app-search-body-item-title,
+    .app-menu-item-title {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 17.5em) {
+    .app-content-sub-header-search-box {
+        width: unset;
+    }
+
+    .app-content-sub-header-lib-item {
+        padding: 5px;
+    }
+
+    .app-content-header-body-item-heading {
+        font-size: 1.6rem;
+    }
+
+    .app-content-header-body-item-header {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .app-content-header-body-item-heading {
+        white-space: nowrap;
+    }
+
+    .app-content-header-body-item-sub-heading-description {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .app-content-header-body-item-sub-heading-view-all {
+        font-size: 1rem;
+    }
+
+    .app-content-header-container-item-title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 1rem;
+    }
+
+    .app-content-header-search-slider-item-title,
+    .app-search-body-item-title,
+    .app-menu-item-title {
+        font-size: 1rem;
     }
 }

@@ -185,12 +185,14 @@
     line-height: 3rem;
     margin-top: 15px;
     font-weight: bold;
+    text-align: center;
 }
 
 .podcast-content-sub-heading {
     font-size: 1.8rem;
     line-height: 1.8rem;
     margin: 10px 0;
+    text-align: center;
 }
 
 .podcast-content-button {

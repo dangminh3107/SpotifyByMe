@@ -443,9 +443,16 @@ const myApp = {
                         else {
                             subBottom.display = 'flex';
                         }
-                        _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
-                        [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
-                        [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        if (documentWidth < 1024) {
+                            _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'none'], 
+                            [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                            [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        }
+                        else {
+                            _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
+                            [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                            [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        }
                         break;
                     case 7:
                         isPlaylistPage = true;
@@ -472,9 +479,16 @@ const myApp = {
                         else {
                             subBottom.display = 'flex';
                         }
-                        _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
-                        [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
-                        [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        if (documentWidth < 1024) {
+                            _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'none'], 
+                            [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                            [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        }
+                        else {
+                            _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
+                            [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                            [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        }
                         break;
                     case 8:
                         isPlaylistPage = true;
@@ -501,9 +515,16 @@ const myApp = {
                         else {
                             subBottom.display = 'flex';
                         }
-                        _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
-                        [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
-                        [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        if (documentWidth < 1024) {
+                            _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'none'], 
+                            [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                            [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        }
+                        else {
+                            _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
+                            [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                            [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        }
                         break;
                     case 9:
                         isPlaylistPage = true;
@@ -530,9 +551,16 @@ const myApp = {
                         else {
                             subBottom.display = 'flex';
                         }
-                        _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
-                        [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
-                        [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        if (documentWidth < 1024) {
+                            _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'none'], 
+                            [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                            [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        }
+                        else {
+                            _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
+                            [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                            [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        }
                         break;
                     case 10:
                         isPlaylistPage = true;
@@ -559,9 +587,16 @@ const myApp = {
                         else {
                             subBottom.display = 'flex';
                         }
-                        _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
-                        [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
-                        [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        if (documentWidth < 1024) {
+                            _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'none'], 
+                            [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                            [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        }
+                        else {
+                            _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
+                            [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                            [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        }
                         break;
                     case 11:
                         isPlaylistPage = true;
@@ -588,9 +623,16 @@ const myApp = {
                         else {
                             subBottom.display = 'flex';
                         }
-                        _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
-                        [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
-                        [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        if (documentWidth < 1024) {
+                            _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'none'], 
+                            [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                            [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        }
+                        else {
+                            _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
+                            [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                            [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        }
                         break;
                     case 12:
                         isPlaylistPage = true;
@@ -617,9 +659,16 @@ const myApp = {
                         else {
                             subBottom.display = 'flex';
                         }
-                        _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
-                        [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
-                        [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        if (documentWidth < 1024) {
+                            _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'none'], 
+                            [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                            [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        }
+                        else {
+                            _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
+                            [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                            [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        }
                         break;
                     case 13:
                         isPlaylistPage = true;
@@ -646,9 +695,16 @@ const myApp = {
                         else {
                             subBottom.display = 'flex';
                         }
-                        _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
-                        [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
-                        [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        if (documentWidth < 1024) {
+                            _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'none'], 
+                            [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                            [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        }
+                        else {
+                            _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
+                            [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                            [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        }
                         break;
                     case 14:
                         isPlaylistPage = true;
@@ -675,9 +731,16 @@ const myApp = {
                         else {
                             subBottom.display = 'flex';
                         }
-                        _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
-                        [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
-                        [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        if (documentWidth < 1024) {
+                            _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'none'], 
+                            [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                            [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        }
+                        else {
+                            _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
+                            [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                            [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        }
                         break;
                     case 15:
                         isPlaylistPage = true;
@@ -704,9 +767,16 @@ const myApp = {
                         else {
                             subBottom.display = 'flex';
                         }
-                        _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
-                        [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
-                        [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        if (documentWidth < 1024) {
+                            _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'none'], 
+                            [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                            [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        }
+                        else {
+                            _this.setHeader([settingHome, 'none'], [libHeader, 'none'], [headerSearch, 'none'], [subHeaderTop, 'flex'], 
+                            [subHeaderOverlay, subOverlay], [subHeaderTitle, 'none'], [subHeaderBottom, subBottom], 
+                            [playBtnHeader, 'none'], [playBtnRandomHeader, 'none']);
+                        }
                         break
                     default:
                 }
@@ -991,6 +1061,18 @@ const myApp = {
             })
             playBtnPlaylist[_this.pagePlaylist - 1].classList.add('playing')
             playBtnHeader.classList.add('playing')
+
+            let songIdx = _this.getIndexSong();
+            if (_this.isReactedList[songIdx]) {
+                listReactSongPlaybar.forEach(item => {
+                    item.classList.add('reacted');
+                })
+            }
+            else {
+                listReactSongPlaybar.forEach(item => {
+                    item.classList.remove('reacted');
+                })
+            }
         }
 
         //Name song follow width
@@ -1414,7 +1496,13 @@ const myApp = {
                 subHeaderBottom.style.opacity = appContentSrollTop >= offsetYLarge ? 1 : 0;
             }
             else if (clientWidth < 1023) {
-                subHeaderTop.style.padding = '23px 0';
+                if (appContentSrollTop >= 70) {
+                    subHeaderTop.style.display = 'flex';
+                    subHeaderTop.style.padding = '23px 0';
+                }
+                else {
+                    subHeaderTop.style.display = 'none';
+                }
                 if (appContentSrollTop >= offsetYMedium) {
                     subHeaderTitle.style.display = 'block'
                     playBtnRandomPlaylist.forEach(item => {
