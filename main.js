@@ -153,23 +153,22 @@ const myApp = {
         },
         {
             songs: JSON.parse(localStorage.getItem(PLAYLIST5_STORAGE)) || {}
+        },
+        {
+            songs: JSON.parse(localStorage.getItem(PLAYLIST6_STORAGE)) || {}
+        },
+        {
+            songs: JSON.parse(localStorage.getItem(PLAYLIST7_STORAGE)) || {}
+        },
+        {
+            songs: JSON.parse(localStorage.getItem(PLAYLIST8_STORAGE)) || {}
+        },
+        {
+            songs: JSON.parse(localStorage.getItem(PLAYLIST9_STORAGE)) || {}
+        },
+        {
+            songs: JSON.parse(localStorage.getItem(PLAYLIST10_STORAGE)) || {}
         }
-        // ,
-        // {
-        //     songs: JSON.parse(localStorage.getItem(PLAYLIST6_STORAGE)) || {}
-        // },
-        // {
-        //     songs: JSON.parse(localStorage.getItem(PLAYLIST7_STORAGE)) || {}
-        // },
-        // {
-        //     songs: JSON.parse(localStorage.getItem(PLAYLIST8_STORAGE)) || {}
-        // },
-        // {
-        //     songs: JSON.parse(localStorage.getItem(PLAYLIST9_STORAGE)) || {}
-        // },
-        // {
-        //     songs: JSON.parse(localStorage.getItem(PLAYLIST10_STORAGE)) || {}
-        // }
     ],
     setConfig: function(key, value) {
         this.config[key] = value;
