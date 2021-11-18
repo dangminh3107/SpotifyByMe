@@ -103,107 +103,108 @@ let playlist1 = [
         image: './assets/music/img/playlist1/song_10.jpg',
         imageLarge: './assets/music/img_big/playlist1/song_10.jpg',
         timeTotal: ''
-    },
-    {
-        id: '1_11',
-        name: 'Vacation',
-        artist: 'Dirty Heads',
-        album: 'SWIM TEAM',
-        path: './assets/music/mp3/playlist1/song_11.mp3',
-        image: './assets/music/img/playlist1/song_11.jpg',
-        imageLarge: './assets/music/img_big/playlist1/song_11.jpg',
-        timeTotal: ''
-    },
-    {
-        id: '1_12',
-        name: 'ily (i love you baby) (feat. Emilee)',
-        artist: 'Surf Mesa, Emilee',
-        album: 'ily (i love you baby) (feat. Emilee)',
-        path: './assets/music/mp3/playlist1/song_12.mp3',
-        image: './assets/music/img/playlist1/song_12.jpg',
-        imageLarge: './assets/music/img_big/playlist1/song_12.jpg',
-        timeTotal: ''
-    },
-    {
-        id: '1_13',
-        name: 'Say So',
-        artist: 'Doja Cat',
-        album: 'Hot Pink',
-        path: './assets/music/mp3/playlist1/song_13.mp3',
-        image: './assets/music/img/playlist1/song_13.jpg',
-        imageLarge: './assets/music/img_big/playlist1/song_13.jpg',
-        timeTotal: ''
-    },
-    {
-        id: '1_14',
-        name: 'We\'re Good',
-        artist: 'Dua Lipa',
-        album: 'Future Nostalgia (The Moonlight Edition)',
-        path: './assets/music/mp3/playlist1/song_14.mp3',
-        image: './assets/music/img/playlist1/song_14.jpg',
-        imageLarge: './assets/music/img_big/playlist1/song_14.jpg',
-        timeTotal: ''
-    },
-    {
-        id: '1_15',
-        name: 'End of Time',
-        artist: 'K-391, Alan Walker, Ahrix',
-        album: 'End of Time',
-        path: './assets/music/mp3/playlist1/song_15.mp3',
-        image: './assets/music/img/playlist1/song_15.jpg',
-        imageLarge: './assets/music/img_big/playlist1/song_15.jpg',
-        timeTotal: ''
-    },
-    {
-        id: '1_16',
-        name: 'Don\'t Cry For Me (with Jason Derulo)',
-        artist: 'Alok, Martin Jensin, Jason Derulo',
-        album: 'Don\'t Cry For Me (with Jason Derulo',
-        path: './assets/music/mp3/playlist1/song_16.mp3',
-        image: './assets/music/img/playlist1/song_16.jpg',
-        imageLarge: './assets/music/img_big/playlist1/song_16.jpg',
-        timeTotal: ''
-    },
-    {
-        id: '1_17',
-        name: 'Prisoner (feat. Dua Lipa)',
-        artist: 'Miley Cyrus, Dua Lipa',
-        album: 'Plastic Hearts',
-        path: './assets/music/mp3/playlist1/song_17.mp3',
-        image: './assets/music/img/playlist1/song_17.jpg',
-        imageLarge: './assets/music/img_big/playlist1/song_17.jpg',
-        timeTotal: ''
-    },
-    {
-        id: '1_18',
-        name: 'Married In Vegas - Matoma Remix',
-        artist: 'The Vamps, Matoma',
-        album: 'Married In Vegas (Matoma Remix)',
-        path: './assets/music/mp3/playlist1/song_18.mp3',
-        image: './assets/music/img/playlist1/song_18.jpg',
-        imageLarge: './assets/music/img_big/playlist1/song_18.jpg',
-        timeTotal: ''
-    },
-    {
-        id: '1_19',
-        name: 'Maze',
-        artist: 'Mike Perry, Mangoo, Wanja Janeva',
-        album: 'Maze',
-        path: './assets/music/mp3/playlist1/song_19.mp3',
-        image: './assets/music/img/playlist1/song_19.jpg',
-        imageLarge: './assets/music/img_big/playlist1/song_19.jpg',
-        timeTotal: ''
-    },
-    {
-        id: '1_20',
-        name: 'Far Away From Home (feat. Leony)',
-        artist: 'Sam Feldt, VIZE, Leony',
-        album: 'Far Away From Home (feat. Leony',
-        path: './assets/music/mp3/playlist1/song_20.mp3',
-        image: './assets/music/img/playlist1/song_20.jpg',
-        imageLarge: './assets/music/img_big/playlist1/song_20.jpg',
-        timeTotal: ''
     }
+    // ,
+    // {
+    //     id: '1_11',
+    //     name: 'Vacation',
+    //     artist: 'Dirty Heads',
+    //     album: 'SWIM TEAM',
+    //     path: './assets/music/mp3/playlist1/song_11.mp3',
+    //     image: './assets/music/img/playlist1/song_11.jpg',
+    //     imageLarge: './assets/music/img_big/playlist1/song_11.jpg',
+    //     timeTotal: ''
+    // },
+    // {
+    //     id: '1_12',
+    //     name: 'ily (i love you baby) (feat. Emilee)',
+    //     artist: 'Surf Mesa, Emilee',
+    //     album: 'ily (i love you baby) (feat. Emilee)',
+    //     path: './assets/music/mp3/playlist1/song_12.mp3',
+    //     image: './assets/music/img/playlist1/song_12.jpg',
+    //     imageLarge: './assets/music/img_big/playlist1/song_12.jpg',
+    //     timeTotal: ''
+    // },
+    // {
+    //     id: '1_13',
+    //     name: 'Say So',
+    //     artist: 'Doja Cat',
+    //     album: 'Hot Pink',
+    //     path: './assets/music/mp3/playlist1/song_13.mp3',
+    //     image: './assets/music/img/playlist1/song_13.jpg',
+    //     imageLarge: './assets/music/img_big/playlist1/song_13.jpg',
+    //     timeTotal: ''
+    // },
+    // {
+    //     id: '1_14',
+    //     name: 'We\'re Good',
+    //     artist: 'Dua Lipa',
+    //     album: 'Future Nostalgia (The Moonlight Edition)',
+    //     path: './assets/music/mp3/playlist1/song_14.mp3',
+    //     image: './assets/music/img/playlist1/song_14.jpg',
+    //     imageLarge: './assets/music/img_big/playlist1/song_14.jpg',
+    //     timeTotal: ''
+    // },
+    // {
+    //     id: '1_15',
+    //     name: 'End of Time',
+    //     artist: 'K-391, Alan Walker, Ahrix',
+    //     album: 'End of Time',
+    //     path: './assets/music/mp3/playlist1/song_15.mp3',
+    //     image: './assets/music/img/playlist1/song_15.jpg',
+    //     imageLarge: './assets/music/img_big/playlist1/song_15.jpg',
+    //     timeTotal: ''
+    // },
+    // {
+    //     id: '1_16',
+    //     name: 'Don\'t Cry For Me (with Jason Derulo)',
+    //     artist: 'Alok, Martin Jensin, Jason Derulo',
+    //     album: 'Don\'t Cry For Me (with Jason Derulo',
+    //     path: './assets/music/mp3/playlist1/song_16.mp3',
+    //     image: './assets/music/img/playlist1/song_16.jpg',
+    //     imageLarge: './assets/music/img_big/playlist1/song_16.jpg',
+    //     timeTotal: ''
+    // },
+    // {
+    //     id: '1_17',
+    //     name: 'Prisoner (feat. Dua Lipa)',
+    //     artist: 'Miley Cyrus, Dua Lipa',
+    //     album: 'Plastic Hearts',
+    //     path: './assets/music/mp3/playlist1/song_17.mp3',
+    //     image: './assets/music/img/playlist1/song_17.jpg',
+    //     imageLarge: './assets/music/img_big/playlist1/song_17.jpg',
+    //     timeTotal: ''
+    // },
+    // {
+    //     id: '1_18',
+    //     name: 'Married In Vegas - Matoma Remix',
+    //     artist: 'The Vamps, Matoma',
+    //     album: 'Married In Vegas (Matoma Remix)',
+    //     path: './assets/music/mp3/playlist1/song_18.mp3',
+    //     image: './assets/music/img/playlist1/song_18.jpg',
+    //     imageLarge: './assets/music/img_big/playlist1/song_18.jpg',
+    //     timeTotal: ''
+    // },
+    // {
+    //     id: '1_19',
+    //     name: 'Maze',
+    //     artist: 'Mike Perry, Mangoo, Wanja Janeva',
+    //     album: 'Maze',
+    //     path: './assets/music/mp3/playlist1/song_19.mp3',
+    //     image: './assets/music/img/playlist1/song_19.jpg',
+    //     imageLarge: './assets/music/img_big/playlist1/song_19.jpg',
+    //     timeTotal: ''
+    // },
+    // {
+    //     id: '1_20',
+    //     name: 'Far Away From Home (feat. Leony)',
+    //     artist: 'Sam Feldt, VIZE, Leony',
+    //     album: 'Far Away From Home (feat. Leony',
+    //     path: './assets/music/mp3/playlist1/song_20.mp3',
+    //     image: './assets/music/img/playlist1/song_20.jpg',
+    //     imageLarge: './assets/music/img_big/playlist1/song_20.jpg',
+    //     timeTotal: ''
+    // }
 ]
 
 function pLoad([a,b,c,d,e,...res]){
